@@ -2,11 +2,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-## Source my shell-agnostic profile
-if [[ -f $HOME/.profile ]]; then
-    source $HOME/.profile
-fi
-
 ## Bash prompt
 #PS1='[\u@\h \W]\$ '
 if [[ ${EUID} == 0 ]] ; then
@@ -31,4 +26,14 @@ shopt -s dotglob
 # Use bash-completion (if available)
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
+fi
+
+
+################################################################################
+## SHELL AGNOSTIC PERSONAL PROFILE
+################################################################################
+
+## Source my shell-agnostic profile
+if [[ -f $HOME/.profile ]]; then
+    source $HOME/.profile
 fi
