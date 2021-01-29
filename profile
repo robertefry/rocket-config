@@ -31,6 +31,12 @@ function mkcd()
     mkdir $1 && cd $1
 }
 
+## Suppress 'Permission denied' errors when using 'find'
+function find()
+{
+    /usr/bin/find "$@" 2>&1 | grep -v "Permission denied"
+}
+
 ## Extract an archive
 function extract()
 {
