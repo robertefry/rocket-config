@@ -31,10 +31,18 @@ function mkcd()
     mkdir $1 && cd $1
 }
 
-## Suppress 'Permission denied' errors when using 'find'
+## Suppress and count 'Permission denied' errors when using 'find'
 function find()
 {
-    /usr/bin/find "$@" 2>&1 | grep -v "Permission denied"
+    TMPFILE=/tmp/find-$(date +'%y%m%d%H%M%S%N')
+
+    /usr/bin/find "$@" 2> $TMPFILE
+
+    COUNT=$(cat $TMPFILE | grep "Permission denied" | wc -l)
+    if [[ $COUNT -ne 0 ]]; then
+        echo Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors
+    fi
+    rm $TMPFILE
 }
 
 ## Extract an archive
