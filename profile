@@ -18,6 +18,9 @@ alias cp="cp -i"
 ## Use 'less' in place of 'more'
 alias more=less
 
+## Use 'vscodium' inplaceof 'code' if available
+command -v vscodium &> /dev/null && alias code=vscodium
+
 ## Listing commands
 alias ls="ls --color --group-directories-first --indicator-style=slash"
 alias l="ls -lh"
