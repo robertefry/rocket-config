@@ -40,7 +40,7 @@ function find()
 
     COUNT=$(cat $TMPFILE | grep "Permission denied" | wc -l)
     if [[ $COUNT -ne 0 ]]; then
-        echo Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors
+        echo -e '\e[31m'Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors
     fi
     rm $TMPFILE
 }
