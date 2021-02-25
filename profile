@@ -15,6 +15,9 @@ export VISUAL=/usr/bin/gedit
 ## Confirm before overwriting something
 alias cp="cp -i"
 
+## Show total progress in rsync
+alias rsync="rsync --info=progress2"
+
 ## Use 'less' in place of 'more'
 alias more=less
 
@@ -37,7 +40,11 @@ function mkcd()
 ## Suppress and count 'Permission denied' errors when using 'find'
 function find()
 {
-    TMPFILE=/tmp/find-$(date +'%y%m%d%H%M%S%N')
+    TMPFILE=$(mktemp)
+    if [[ $? -ne 0 ]]; then
+        echo "'\e[31m'Failed to allocate tempfile for error suppression"
+        exit -1
+    fi
 
     /usr/bin/find "$@" 2> $TMPFILE
 
