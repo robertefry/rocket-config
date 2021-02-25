@@ -7,6 +7,9 @@
 export EDITOR=/usr/bin/nano
 export VISUAL=/usr/bin/gedit
 
+## Use MangoHUD (Vulcan Only)
+export MANGOHUD=1
+
 
 ################################################################################
 ## ALIASES & FUNCTIONS
