@@ -41,6 +41,7 @@ function mkcd()
 }
 
 ## Suppress and count 'Permission denied' errors when using 'find'
+## Don't search in ".snapshots" directories
 function find()
 {
     TMPFILE=$(mktemp)
@@ -49,7 +50,7 @@ function find()
         exit -1
     fi
 
-    /usr/bin/find "$@" 2> $TMPFILE
+    /usr/bin/find -not -path "*.snapshots*" "$@" 2> $TMPFILE
 
     COUNT=$(cat $TMPFILE | grep "Permission denied" | wc -l)
     if [[ $COUNT -ne 0 ]]; then
