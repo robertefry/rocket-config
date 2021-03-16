@@ -18,6 +18,9 @@ export MANGOHUD=1
 ## Confirm before overwriting something
 alias cp="cp -i"
 
+## Make parent directories with `mkdir`
+alias mkdir="mkdir -p"
+
 ## Show total progress in rsync
 alias rsync="rsync --info=progress2"
 
