@@ -7,8 +7,9 @@
 export EDITOR=/usr/bin/nano
 export VISUAL=/usr/bin/gedit
 
-## Use MangoHUD (Vulcan Only)
+## Use MangoHUD (Vulcan/OpenGL)
 export MANGOHUD=1
+export MANGOHUD_DLSYM=1
 
 # Add $HOME/.local/bin to the path
 if [ -d "$HOME/.local/bin" ]; then
