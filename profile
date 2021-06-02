@@ -10,6 +10,11 @@ export VISUAL=/usr/bin/gedit
 ## Use MangoHUD (Vulcan Only)
 export MANGOHUD=1
 
+# Add $HOME/.local/bin to the path
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 ################################################################################
 ## ALIASES & FUNCTIONS
