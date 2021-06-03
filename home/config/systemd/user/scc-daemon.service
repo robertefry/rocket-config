@@ -1,0 +1,11 @@
+[Unit]
+Description=Start scc-daemon on login
+
+[Service]
+ExecStart=/usr/bin/scc-daemon start
+ExecStop=/usr/bin/scc-daemon stop
+RemainAfterExit=yes
+PIDFile=$HOME/.config/scc/daemon.pid
+
+[Install]
+WantedBy=multiuser.target
