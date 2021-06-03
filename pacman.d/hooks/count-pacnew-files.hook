@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Searching for pacnew files
+When = PostTransaction
+Exec = /etc/pacman.d/scripts/count-pacnew-files.sh
