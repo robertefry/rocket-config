@@ -1,6 +1,16 @@
 [user]
 	email = robert.e.fry@protonmail.com
 	name = Robert Fry
-
+	signingkey = robert.e.fry@protonmail.com
+[credential]
+	username = robert.e.fry@protonmail.com
 [core]
 	editor = nano
+[stash]
+	showIncludeUntracked = true
+[commit]
+	gpgsign = true
+[rebase]
+	autoStash = true
+[pull]
+	rebase = true
