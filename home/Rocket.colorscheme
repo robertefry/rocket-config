@@ -71,22 +71,22 @@ Color=90,170,210
 Color=109,206,255
 
 [Color7]
-Color=224,248,255
+Color=169,187,192
 
 [Color7Faint]
-Color=99,104,109
+Color=130,137,143
 
 [Color7Intense]
-Color=224,248,255
+Color=169,187,192
 
 [Foreground]
-Color=224,248,255
+Color=197,219,224
 
 [ForegroundFaint]
-Color=224,248,255
+Color=197,219,224
 
 [ForegroundIntense]
-Color=224,248,255
+Color=197,219,224
 
 [General]
 Blur=true
