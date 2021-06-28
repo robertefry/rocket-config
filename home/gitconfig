@@ -1,7 +1,7 @@
 [user]
 	email = robert.e.fry@protonmail.com
 	name = Robert Fry
-	signingkey = robert.e.fry@protonmail.com
+#	signingkey = robert.e.fry@protonmail.com
 [credential]
 	username = robert.e.fry@protonmail.com
 [core]
@@ -9,7 +9,7 @@
 [stash]
 	showIncludeUntracked = true
 [commit]
-	gpgsign = true
+#	gpgsign = true
 [rebase]
 	autoStash = true
 [pull]
