@@ -1,11 +1,13 @@
 [user]
 	email = robert.e.fry@protonmail.com
-	name = Robert Fry
+	name = Robert E Fry
 #	signingkey = robert.e.fry@protonmail.com
 [credential]
 	username = robert.e.fry@protonmail.com
 [core]
 	editor = nano
+[init]
+	defaultBranch = master
 [stash]
 	showIncludeUntracked = true
 [commit]
@@ -15,8 +17,4 @@
 [pull]
 	rebase = true
 [alias]
-    stash-untracked = "!f() {    \
-        git stash;               \
-        git stash -u;            \
-        git stash pop stash@{1}; \
-    }; f"
+    stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"
