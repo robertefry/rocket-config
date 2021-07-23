@@ -96,4 +96,5 @@
     "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
     "sync.removeExtensions": false,
     "sync.syncExtensions": false,
+    "open-in-browser.default": "firefox",
 }
