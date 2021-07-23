@@ -12,7 +12,7 @@ export MANGOHUD=1
 export MANGOHUD_DLSYM=1
 
 ## Disable vcpkg telemetry
-export VCPKG_DISABLE_METRICS
+export VCPKG_DISABLE_METRICS=1
 
 # Add $HOME/.local/bin to the path
 if [ -d "$HOME/.local/bin" ]; then
