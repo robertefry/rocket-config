@@ -11,6 +11,12 @@
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 120,
     },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.tabSize": 2
+    },
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#323232",
         "editor.background": "#222222",
