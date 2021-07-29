@@ -12,10 +12,19 @@
         "editor.wordWrapColumn": 120,
     },
     "[html]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
     },
     "[css]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
+    },
+    "[php]": {
+        "editor.tabSize": 2,
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
     },
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#323232",
@@ -27,6 +36,11 @@
         "*.fwd": "cpp"
     },
     "latex-workshop.view.pdf.viewer": "tab",
+    "workbench.editor.untitled.hint": "hidden",
+    "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
+    "sync.removeExtensions": false,
+    "sync.syncExtensions": true,
+    "browser-preview.startUrl": "https://duckduckgo.com",
     "cSpell.userWords": [
         "CMAKE",
         "Cayley",
@@ -100,10 +114,4 @@
         "totient",
         "vsync"
     ],
-    "todo-tree.tree.showScanModeButton": false,
-    "workbench.editor.untitled.hint": "hidden",
-    "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
-    "sync.removeExtensions": false,
-    "sync.syncExtensions": false,
-    "open-in-browser.default": "firefox",
 }
