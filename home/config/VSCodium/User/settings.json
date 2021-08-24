@@ -1,5 +1,7 @@
 {
     "files.enableTrash": false,
+    "workbench.colorTheme": "FlatUI Dark",
+    "C_Cpp.autoAddFileAssociations": false,
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
@@ -35,8 +37,6 @@
         "editorRuler.foreground": "#323232",
         "editor.background": "#222222",
     },
-    "workbench.colorTheme": "FlatUI Dark",
-    "C_Cpp.autoAddFileAssociations": false,
     "files.associations": {
         "*.fwd": "cpp"
     },
@@ -45,7 +45,7 @@
     "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
     "sync.removeExtensions": false,
     "sync.syncExtensions": true,
-    "browser-preview.startUrl": "https://duckduckgo.com",
+    "browser-preview.startUrl": "https://searx.robertfry.xyz",
     "cSpell.userWords": [
         "CMAKE",
         "Cayley",
@@ -121,4 +121,5 @@
         "totient",
         "vsync"
     ],
+    "terminal.integrated.fontFamily": "'Fira Code'",
 }
