@@ -1,3 +1,3 @@
 ## What exactly is rocket-config-git
-It's just a collection of config and rc files I use on my Linux computer.
+My collection of config files I use on my Linux computers.
 Feel free to peruse at your pleasure :)
