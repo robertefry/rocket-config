@@ -4,7 +4,7 @@
 #	signingkey = robert.e.fry@protonmail.com
 [credential]
 	username = robert.e.fry@protonmail.com
-	helper = cache
+	helper = libsecret
 [core]
 	editor = nano
 [init]
