@@ -1,0 +1,225 @@
+
+\usepackage{xparse}
+
+\usepackage{blindtext}
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{tkz-euclide}
+\usetikzlibrary{positioning}
+\usetikzlibrary{angles,quotes}
+\usetikzlibrary{shapes.geometric,arrows}
+
+\usepackage{mathtools}
+\usepackage{stackrel}
+\usepackage{units}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{stmaryrd}
+
+
+% ------------------------------------------------------------------------------
+%   PREAMBLE
+% ------------------------------------------------------------------------------
+
+% ~ Programming ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Switch Implementation
+\usepackage{xifthen}
+\newcommand{\ifeq}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
+\newcommand{\ifneq}[3]{\ifthenelse{\equal{#1}{#2}}{}{#3}}
+\newcommand{\xcase}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
+\NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
+
+% ~ Page Formatting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Breaks
+\newcommand{\xbreakpage}{\mbox{}\newpage}
+\newcommand{\xbreakparg}{\mbox{}\par}
+\newcommand{\xbreakline}{\mbox{}\newline}
+
+% Force GoodBreak Between Sections
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\goodbreak}
+\newcommand{\subsectionbreak}{\goodbreak}
+\newcommand{\subsubsectionbreak}{\goodbreak}
+
+% ~ Command Macros ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Math Enclosures
+\NewDocumentCommand{\xenclose}{O{0}mmm}
+{%
+    \begin{switch}{#1}%
+        \xcase{0}{ \left#2 #4 \right#3 }%
+        \xcase{1}{ \bigl#2 #4 \bigr#3 }%
+        \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
+        \xcase{3}{ \biggl#2 #4 \biggr#3 }%
+        \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
+    \end{switch}%
+}
+\NewDocumentCommand{\xgroup}{O{0}mm}
+{%
+    \begin{switch}{#2}%
+        \xcase{ }{ \xenclose[#1]{}{}{#3} }%
+        \xcase{p}{ \xenclose[#1]{(}{)}{#3} }%
+        \xcase{b}{ \xenclose[#1]{[}{]}{#3} }%
+        \xcase{B}{ \xenclose[#1]{\{}{\}}{#3} }%
+        \xcase{c}{ \xenclose[#1]{\langle}{\rangle}{#3} }%
+        \xcase{f}{ \xenclose[#1]{\lfloor}{\rfloor}{#3} }%
+        \xcase{F}{ \xenclose[#1]{\lceil}{\rceil}{#3} }%
+        \xcase{r}{ \xenclose[#1]{\lfloor}{\rceil}{#3} }%
+        \xcase{v}{ \xenclose[#1]{|}{|}{#3} }%
+        \xcase{V}{ \xenclose[#1]{\Vert}{\Vert}{#3} }%
+    \end{switch}
+}
+\NewDocumentCommand{\xleft}  {O{0}mm}{ \xenclose[#1]{#2}{.}{#3} }
+\NewDocumentCommand{\xright} {O{0}mm}{ \xenclose[#1]{.}{#2}{#3} }
+
+% Math Named Enclosures
+\NewDocumentCommand{\xparen} {O{0}m} { \xgroup[#1]{p}{#2} }
+\NewDocumentCommand{\xbrack} {O{0}m} { \xgroup[#1]{b}{#2} }
+\NewDocumentCommand{\xbrace} {O{0}m} { \xgroup[#1]{B}{#2} }
+\NewDocumentCommand{\xchevn} {O{0}m} { \xgroup[#1]{c}{#2} }
+\NewDocumentCommand{\xfloor} {O{0}m} { \xgroup[#1]{f}{#2} }
+\NewDocumentCommand{\xceil}  {O{0}m} { \xgroup[#1]{F}{#2} }
+\NewDocumentCommand{\xround} {O{0}m} { \xgroup[#1]{r}{#2} }
+\NewDocumentCommand{\xabs}   {O{0}m} { \xgroup[#1]{v}{#2} }
+\NewDocumentCommand{\xnorm}  {O{0}m} { \xgroup[#1]{V}{#2} }
+\NewDocumentCommand{\xfunc}  {O{0}mm}{ #2\xparen[#1]{#3} }
+\NewDocumentCommand{\xtrans} {O{0}mm}{ #2\xbrace[#1]{#3} }
+\NewDocumentCommand{\xajoin} {O{0}mm}{ #2\xbrack[#1]{#3} }
+\NewDocumentCommand{\xmat}   {O{p}m} { \begin{#1matrix} #2 \end{#1matrix} }
+\NewDocumentCommand{\xary}   {O{p}mm}{ \xgroup{#1}{ \begin{array}{#2}#3\end{array} } }
+
+% Math Macros
+\NewDocumentCommand{\xdivs}{}{ \;\big\vert\; }
+\NewDocumentCommand{\xlet}{}{ \mbox{Let}\quad }
+\NewDocumentCommand{\xqlet}{}{ \mbox{Let}\qquad }
+\NewDocumentCommand{\gmat}{mm}{ \mbox{Mat}_{#1} \xparen{#2} }
+
+% Math Symbols
+\NewDocumentCommand{\nmapsto}{}{\;\cancel{\mapsto}\;}
+\NewDocumentCommand{\nequiv}{}{\;\cancel{\equiv}\;}
+
+% Checkbox Macro
+\NewDocumentCommand{\checkbox}{m}
+{%
+    \makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$#1$}%
+}
+
+% ~ Environment Blocks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Exercise Blocks
+\usepackage{exercise}
+\BeforeBeginEnvironment{Exercise}{ \xbreakpage{} }
+\BeforeBeginEnvironment{Exercise}{ \setlength{\parindent}{0em}\setlength{\parskip}{2pt} }
+\BeforeBeginEnvironment{Answer}{ \setlength{\parindent}{0em}\setlength{\parskip}{2pt} }
+
+% Centered Multiline Enumeration
+\usepackage[inline]{enumitem}
+\BeforeBeginEnvironment{enumerate*}{\begin{center}}
+\AfterEndEnvironment{enumerate*}{\end{center}}
+
+% Math Theorem Environments
+\newtheorem{mathenvcounter}{Counter}[subsection]
+\NewDocumentCommand{\DefineMathEnvironment}{mm}
+{%
+    \newtheoremstyle{theoremstyle}%
+        {\topsep}{\topsep}%
+        {\itshape}{}%
+        {\bfseries}{}%
+        {\newline}{}%
+    \theoremstyle{theoremstyle}%
+    \newtheorem{#1}[mathenvcounter]{#2}%
+    \AfterEndEnvironment{#1}{\goodbreak}%
+}
+\DefineMathEnvironment{definition}{Definition}
+\DefineMathEnvironment{axiom}{Axiom}
+\DefineMathEnvironment{postulate}{Postulate}
+\DefineMathEnvironment{lemma}{Lemma}
+\DefineMathEnvironment{theorem}{Theorem}
+\DefineMathEnvironment{corollary}{Corollary}
+
+% Title Block Environment
+\NewDocumentEnvironment{titleblock}{O{}D<>{0em}}
+{%
+    \begin{center}%
+    \begin{minipage}[t]{\linewidth-#2}%
+    \ifneq{#1}{}{ \textbf{#1}\vspace{0.33\baselineskip}\xbreakline{} }%
+}{%
+    \end{minipage}%
+    \end{center}%
+}
+
+% Math Block Environments
+\NewDocumentEnvironment{mathblock}{O{}D<>{0em}}
+{%
+    \begin{center}%
+    \begin{minipage}[t]{\linewidth-#2}%
+    \ifneq{#1}{}{ \textit{\underline{#1:}}\hspace{\parindent} }%
+}{%
+    \end{minipage}%
+    \end{center}%
+}
+\NewDocumentEnvironment{claim}{D<>{0em}}    { \begin{mathblock}[Claim]<#1> }    { \end{mathblock} }
+\NewDocumentEnvironment{condition}{D<>{0em}}{ \begin{mathblock}[Condition]<#1> }{ \end{mathblock} }
+\NewDocumentEnvironment{case}{D<>{0em}}     { \begin{mathblock}[Case]<#1> }     { \end{mathblock} }
+\NewDocumentEnvironment{remark}{D<>{0em}}   { \begin{mathblock}[Remark]<#1> }   { \end{mathblock} }
+\NewDocumentEnvironment{example}{D<>{0em}}  { \begin{mathblock}[Example]<#1> }  { \end{mathblock} }
+\NewDocumentEnvironment{note}{D<>{0em}}     { \begin{mathblock}[Note]<#1> }     { \end{mathblock} }
+\NewDocumentEnvironment{notice}{D<>{0em}}   { \begin{mathblock}[Notice]<#1> }   { \end{mathblock} }
+
+% ~ Tikz Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\tikzstyle{flow_startstop} = [rectangle,rounded corners,
+    minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_inout} = [trapezium,trapezium left angle=70,trapezium right angle=110,
+    minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_process} = [rectangle
+    minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_decision} = [diamond
+    minimum width=3cm,minimum height=1cm,text centered,draw=black]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{process} = [rectangle,minimum width=3cm,minimum height=1cm,text centered,draw=black]
+
+% ~ Source Code Commands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{sourcecodepro}
+\definecolor{codecolor_keyword}{rgb}{0.500,0.000,0.125}
+\definecolor{codecolor_comment}{rgb}{0.500,0.500,0.500}
+\definecolor{codecolor_strings}{rgb}{0.000,0.500,0.250}
+
+\lstdefinelanguage{PlainText}{
+}
+\lstset{
+    basicstyle=\scriptsize{}\ttfamily{},
+    keywordstyle=\color{codecolor_keyword},
+    commentstyle=\color{codecolor_comment},
+    stringstyle=\color{codecolor_strings},
+    numbers=left,
+    numberstyle=\tiny{},
+    tabsize=4,
+    breakatwhitespace=false,
+    breaklines=true,
+    showtabs=false,
+    tabsize=4,
+}
+
+\NewDocumentEnvironment{sourcecode}{O{Source Code}}
+{%
+\begin{tcolorbox}[sharp corners,title=#1]%
+    \begin{quote}%
+}{%
+    \end{quote}%
+\end{tcolorbox}%
+}
