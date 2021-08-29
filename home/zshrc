@@ -160,7 +160,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 ################################################################################
-## SHELL AGNOSTIC PERSONAL PROFILE
+## SHELL AGNOSTIC PROFILE
 ################################################################################
 
 ## Source my shell-agnostic profile
