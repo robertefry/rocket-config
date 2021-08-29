@@ -19,6 +19,7 @@ if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+
 ################################################################################
 ## XDG DIRECTORY STRUCTURE
 ################################################################################
@@ -41,6 +42,7 @@ export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
 
 # mplayer
 export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+
 
 ################################################################################
 ## ALIASES & FUNCTIONS
@@ -129,6 +131,7 @@ function colours()
         echo
     done
 }
+
 
 ################################################################################
 ## STARTUP PROGRAMS
