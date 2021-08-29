@@ -1,16 +1,5 @@
 
 ################################################################################
-## STARTUP PROGRAMS
-################################################################################
-
-## Start gnome keyring
-if [ -n "$DESKTOP_SESSION" ]; then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-fi
-
-
-################################################################################
 ## ENVIRONMENT VARIABLES
 ################################################################################
 
@@ -29,7 +18,6 @@ export VCPKG_DISABLE_METRICS=1
 if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
 
 ################################################################################
 ## ALIASES & FUNCTIONS
@@ -118,3 +106,13 @@ function colours()
         echo
     done
 }
+
+################################################################################
+## STARTUP PROGRAMS
+################################################################################
+
+## Start gnome keyring
+if [ -n "$DESKTOP_SESSION" ]; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
