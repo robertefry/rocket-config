@@ -20,6 +20,29 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 ################################################################################
+## XDG DIRECTORY STRUCTURE
+################################################################################
+
+# XDG home directories
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+
+# gnupg
+export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
+
+# ICEauthority
+export ICEAUTHORITY=$XDG_CACHE_HOME/ICEauthority
+
+# less
+export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
+export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+
+# mplayer
+export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+
+################################################################################
 ## ALIASES & FUNCTIONS
 ################################################################################
 
