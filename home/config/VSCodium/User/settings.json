@@ -1,7 +1,15 @@
 {
-    "files.enableTrash": false,
     "workbench.colorTheme": "FlatUI Dark",
-    "C_Cpp.autoAddFileAssociations": false,
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#323232",
+        "editor.background": "#222222",
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "files.enableTrash": false,
+    "files.associations": {
+        "*.fwd": "cpp"
+    },
+    "terminal.integrated.fontFamily": "'Fira Code'",
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
@@ -33,18 +41,11 @@
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 120,
     },
-    "workbench.colorCustomizations": {
-        "editorRuler.foreground": "#323232",
-        "editor.background": "#222222",
-    },
-    "files.associations": {
-        "*.fwd": "cpp"
-    },
-    "latex-workshop.view.pdf.viewer": "tab",
-    "workbench.editor.untitled.hint": "hidden",
+    "C_Cpp.autoAddFileAssociations": false,
     "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
     "sync.removeExtensions": false,
     "sync.syncExtensions": true,
+    "latex-workshop.view.pdf.viewer": "tab",
     "browser-preview.startUrl": "https://searx.robertfry.xyz",
     "cSpell.userWords": [
         "CMAKE",
@@ -119,7 +120,6 @@
         "surjectivity",
         "sympy",
         "totient",
-        "vsync"
+        "vsync",
     ],
-    "terminal.integrated.fontFamily": "'Fira Code'",
 }
