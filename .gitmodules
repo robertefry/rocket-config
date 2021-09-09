@@ -1,0 +1,27 @@
+[submodule "themes/icons/flatery"]
+	path = themes/icons/flatery
+	url = https://github.com/cbrnix/Flatery
+[submodule "themes/icons/fluent"]
+	path = themes/icons/fluent
+	url = https://github.com/vinceliuice/Fluent-icon-theme
+[submodule "themes/icons/tela"]
+	path = themes/icons/tela
+	url = https://github.com/vinceliuice/Tela-icon-theme
+[submodule "themes/plasma/materia-kde"]
+	path = themes/plasma/materia-kde
+	url = https://github.com/PapirusDevelopmentTeam/materia-kde
+[submodule "themes/plasma/qogir-kde"]
+	path = themes/plasma/qogir-kde
+	url = https://github.com/vinceliuice/Qogir-kde
+[submodule "themes/plasma/layan-kde"]
+	path = themes/plasma/layan-kde
+	url = https://github.com/vinceliuice/Layan-kde
+[submodule "themes/plasma/aritim-dark"]
+	path = themes/plasma/aritim-dark
+	url = https://github.com/Mrcuve0/Aritim-Dark
+[submodule "themes/plasma/midnight-kde"]
+	path = themes/plasma/midnight-kde
+	url = https://github.com/Rokin05/midnight-kde
+[submodule "themes/plasma/arc-kde"]
+	path = themes/plasma/arc-kde
+	url = https://github.com/PapirusDevelopmentTeam/arc-kde
