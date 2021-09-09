@@ -62,6 +62,7 @@ fi
 
 ## Confirm before overwriting something
 alias cp="cp -i"
+alias mv="mv -i"
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
