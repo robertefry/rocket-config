@@ -25,3 +25,9 @@
 [submodule "themes/plasma/arc-kde"]
 	path = themes/plasma/arc-kde
 	url = https://github.com/PapirusDevelopmentTeam/arc-kde
+[submodule "themes/gtk/fluent-gtk"]
+	path = themes/gtk/fluent-gtk
+	url = https://github.com/vinceliuice/Fluent-gtk-theme
+[submodule "themes/gtk/yaru-gtk"]
+	path = themes/gtk/yaru-gtk
+	url = https://github.com/Jannomag/Yaru-Colors
