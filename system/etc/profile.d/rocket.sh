@@ -53,7 +53,7 @@ alias mkdir="mkdir -p"
 alias rsync="rsync --info=progress2"
 
 ## Show total progress with dd
-alias dd="dd status=progress"
+#alias dd="dd status=progress"
 
 ## Use 'less' in place of 'more'
 alias more=less
