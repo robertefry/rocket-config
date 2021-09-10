@@ -81,17 +81,17 @@ alias ls="ls --color --group-directories-first --indicator-style=slash"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
-function ldot() {( cd $1 && ls --group-directories-first -lAhd .* )}
+function ldot ( cd $1 && ls --group-directories-first -lAhd .* )
 
 ## Make a directory and cd into it
-function mkcd()
+function mkcd
 {
     mkdir $1 && cd $1
 }
 
 ## Suppress and count 'Permission denied' errors when using 'find'
 ## Don't search in ".snapshots" directories
-function find()
+function find
 {
     TMPFILE=$(mktemp)
     if [[ $? -ne 0 ]]; then
@@ -109,7 +109,7 @@ function find()
 }
 
 ## Extract an archive
-function extract()
+function extract
 {
     if [[ -f $1 ]]; then
         case $1 in
@@ -133,7 +133,7 @@ function extract()
 alias ex=extract
 
 ## Print colours
-function colours()
+function colours
 {
     for j in {4,10};
     do
