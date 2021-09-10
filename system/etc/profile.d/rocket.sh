@@ -71,6 +71,16 @@ function mkcd
     mkdir $1 && cd $1
 }
 
+## Change default `lsblk` columns
+function lsblk
+{
+    if [ $# -ne 0 ]; then
+        "$(which lsblk)" $@
+    else
+        "$(which lsblk)" -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
+    fi
+}
+
 ## Suppress and count 'Permission denied' errors when using 'find'
 ## Don't search in ".snapshots" directories
 function find
