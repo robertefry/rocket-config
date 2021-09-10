@@ -31,3 +31,6 @@
 [submodule "themes/gtk/yaru-gtk"]
 	path = themes/gtk/yaru-gtk
 	url = https://github.com/Jannomag/Yaru-Colors
+[submodule "themes/grub/vinceliuice"]
+	path = themes/grub/vinceliuice
+	url = https://github.com/vinceliuice/grub2-themes
