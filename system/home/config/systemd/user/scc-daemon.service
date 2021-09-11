@@ -8,4 +8,4 @@ RemainAfterExit=yes
 PIDFile=$HOME/.config/scc/daemon.pid
 
 [Install]
-WantedBy=multiuser.target
+WantedBy=multi-user.target
