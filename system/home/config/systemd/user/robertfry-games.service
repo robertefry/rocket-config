@@ -1,0 +1,11 @@
+[Unit]
+Description=Mount robertfry-games.iso loopback from Titan Games
+ConditionPathExists=/media/titan.saturn.local/games/robertfry-games.iso
+
+[Service]
+ExecStart=/home/robertfry/.config/systemd/user/robertfry-games.sh mount
+ExecStop=/home/robertfry/.config/systemd/user/robertfry-games.sh umount
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

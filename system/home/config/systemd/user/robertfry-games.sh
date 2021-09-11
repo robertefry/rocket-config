@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file="/media/titan.saturn.local/games/robertfry-steam.iso"
+file="/media/titan.saturn.local/games/robertfry-games.iso"
 
 function err
 {
