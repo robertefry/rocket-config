@@ -8,4 +8,4 @@ ExecStop=/home/robertfry/.config/systemd/user/robertfry-games.sh umount
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
