@@ -65,6 +65,11 @@ alias ll="ls -lAh"
 alias la="ls -lah"
 function ldot ( cd $1 && ls --group-directories-first -lAhd .* )
 
+## Capture the output of a command
+function cap { tee /tmp/capture-$UID.out; }
+function ret { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
+function clearcap { rm /tmp/capture-$UID.out; }
+
 ## Make a directory and cd into it
 function mkcd
 {
