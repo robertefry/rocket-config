@@ -6,6 +6,7 @@ ConditionPathExists=/media/titan.saturn.local/games/robertfry-games.iso
 ExecStart=/home/robertfry/.config/systemd/user/robertfry-games.sh %h mount
 ExecStop=/home/robertfry/.config/systemd/user/robertfry-games.sh %h umount
 RemainAfterExit=yes
+TimeoutStopSec=30
 
 [Install]
 WantedBy=default.target
