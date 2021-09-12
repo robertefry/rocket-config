@@ -1,52 +1,40 @@
-#!/bin/bash
+#!/bin/sh
+
+# !! THIS SCRIPT MUST BE CONTROLLED BY THE SYSTEMD SERVICE !! #
+# !!     this is to avoid multiple overwriting mounts     !! #
+
+HOME=$1
+command=$2
 
 file="/media/titan.saturn.local/games/robertfry-games.iso"
-
-function err
-{
-    case $1 in
-        1) echo "ERROR: No matching block device found."   ;;
-        2) echo "ERROR: Block device already defined."     ;;
-    esac
-    exit -1
-}
-
-function find_block_device
-{
-    block_device=$(losetup -a | grep $file | sed 's/: .*$//')
-}
+cache_device="$HOME/.cache/robertfry-games.device"
 
 function device_setup
 {
-    find_block_device
-    [ -z $block_device ] || err 2 && udisksctl loop-setup -f $file
+    local result=$(udisksctl loop-setup -f $file)
+    echo $result | sed 's/\(^.*as \|\.$\)//g' > $cache_device
+    echo "Mapped file $file at $(cat $cache_device)"
 }
 
 function device_delete
 {
-    find_block_device
-    [ -n $block_device ] || err 1 && udisksctl loop-delete -b $block_device
+    udisksctl loop-delete -b $(cat $cache_device)
+    echo "Unmapped file $file at $(cat $cache_device)"
+    rm $cache_device
 }
 
 function device_mount
 {
-    find_block_device
-    [ -n $block_device ] || err 1 && udisksctl mount -b $block_device
+    udisksctl mount -b $(cat $cache_device)
 }
 
 function device_umount
 {
-    find_block_device
-    [ -n $block_device ] || err 1 && udisksctl unmount -b $block_device
+    udisksctl unmount -b $(cat $cache_device)
 }
 
 
-if [ "$1" = "mount" ];
-then
-    device_setup; device_mount
-fi
-
-if [ "$1" = "umount" ];
-then
-    device_umount; device_delete
-fi
+case "$command" in
+    "mount")  device_setup && device_mount ;;
+    "umount") device_umount && device_delete ;;
+esac
