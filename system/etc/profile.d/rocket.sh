@@ -79,10 +79,11 @@ function mkcd
 ## Change default `lsblk` columns
 function lsblk
 {
-    if [ $# -ne 0 ]; then
+    if echo "$*" | grep -Eq "(\s|^)-";
+    then
         "$(which lsblk)" $@
     else
-        "$(which lsblk)" -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
+        "$(which lsblk)" $@ -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
     fi
 }
 
