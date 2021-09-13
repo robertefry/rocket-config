@@ -9,15 +9,13 @@
     "files.associations": {
         "*.fwd": "cpp"
     },
-    "terminal.integrated.fontFamily": "'Fira Code'",
     "editor.fontSize": 15,
-    "editor.fontFamily": "'Fira Code'",
+    "editor.fontFamily": "'Jetbrains Mono' 'Fira Code'",
     "editor.fontLigatures": true,
     "editor.rulers": [80,120,130],
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.renderWhitespace": "selection",
     "[markdown]": {
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 80,
@@ -42,9 +40,6 @@
         "editor.wordWrapColumn": 120,
     },
     "C_Cpp.autoAddFileAssociations": false,
-    "sync.gist": "bca05eb080d8bbab04b719c9dbd19dfc",
-    "sync.removeExtensions": false,
-    "sync.syncExtensions": true,
     "latex-workshop.view.pdf.viewer": "tab",
     "browser-preview.startUrl": "https://searx.robertfry.xyz",
     "cSpell.userWords": [
