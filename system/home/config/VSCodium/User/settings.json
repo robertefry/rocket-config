@@ -10,7 +10,7 @@
         "*.fwd": "cpp"
     },
     "editor.fontSize": 15,
-    "editor.fontFamily": "'Jetbrains Mono' 'Fira Code'",
+    "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.rulers": [80,120,130],
     "editor.tabSize": 4,
