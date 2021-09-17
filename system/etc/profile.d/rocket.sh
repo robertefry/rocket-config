@@ -13,6 +13,15 @@ export VCPKG_DISABLE_METRICS=1
 # Add $HOME/.local/bin to the path
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
+# Use the fcitx input method framework
+if command -v fcitx $> /dev/null
+then
+    export SDL_IM_MODULE=fcitx
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS='@im=fcitx'
+fi
+
 
 ################################################################################
 ## XDG DIRECTORY STRUCTURE
