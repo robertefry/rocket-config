@@ -167,3 +167,9 @@ function colours
         echo
     done
 }
+
+## Print my public IP address
+function ippub
+{
+    echo $(curl ifconfig.me 2> /dev/null)
+}
