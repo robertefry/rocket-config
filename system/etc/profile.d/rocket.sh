@@ -27,15 +27,21 @@ fi
 ## TERMINAL PROMPT
 ################################################################################
 
-_FMT0="\[$(tput sgr0)\]"
-[ ${EUID} = 0 ] && _FMT1="\[\033[38;5;1m\]\[$(tput bold)\]" || _FMT1="\[\033[38;5;6m\]\[$(tput bold)\]"
-[ ${EUID} = 0 ] && _FMT2="\[\033[38;5;3m\]\[$(tput bold)\]" || _FMT2="\[\033[38;5;4m\]\[$(tput bold)\]"
+PS1_FMT0="\e[0m"
+[ ${EUID} == 0 ] && PS1_FMT1="\e[0;1;31m"   || PS1_FMT1="\e[0;1;36m"
+[ ${EUID} == 0 ] && PS1_FMT2="\e[0;1;3;31m" || PS1_FMT2="\e[0;1;3;36m"
+[ ${EUID} == 0 ] && PS1_FMT3="\e[0;1;33m"   || PS1_FMT3="\e[0;1;34m"
 
-_GITX="\$(git status 2>/dev/null | grep 'On branch' | sed 's/On branch / ${_FMT1}(${_FMT2}/m' | sed 's/$/${_FMT1})/m')"
-command -v git $> /dev/null && _GIT=${_GITX}
+function PS1_git_info
+{
+    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
+    then
+        local _BRANCH="$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
+        echo -en " ${PS1_FMT1}(${PS1_FMT3}${_BRANCH}${PS1_FMT1})"
+    fi
+}
 
-export PS1="${_FMT1}[\u@\H ${_FMT0}\W${_FMT1}]${_GIT}\\$ ${_FMT0}"
-unset {_FMT0,_FMT1,_FMT2,_GIT,_GITX}
+PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\h \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\$(PS1_git_info)\\$ \[$(tput sgr0)\]"
 
 
 ################################################################################
