@@ -69,6 +69,7 @@ export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
 ## Confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
+alias rm="rm -i"
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
