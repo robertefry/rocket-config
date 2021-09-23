@@ -34,7 +34,7 @@ _FMT0="\[$(tput sgr0)\]"
 _GITX="\$(git status 2>/dev/null | grep 'On branch' | sed 's/On branch / ${_FMT1}(${_FMT2}/m' | sed 's/$/${_FMT1})/m')"
 command -v git $> /dev/null && _GIT=${_GITX}
 
-export PS1="${_FMT1}[\u@\h ${_FMT0}\W${_FMT1}]${_GIT}\\$ ${_FMT0}"
+export PS1="${_FMT1}[\u@\H ${_FMT0}\W${_FMT1}]${_GIT}\\$ ${_FMT0}"
 unset {_FMT0,_FMT1,_FMT2,_GIT,_GITX}
 
 
