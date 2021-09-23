@@ -165,10 +165,10 @@ set softwrap
 
 ## Use the end of the title bar for some state flags: I = auto-indenting,
 ## M = mark, L = hard-wrapping long lines, R = recording, S = soft-wrapping.
-# set stateflags
+set stateflags
 
 ## Allow nano to be suspended (with ^Z by default).
-# set suspendable
+set suspendable
 ## (The old form of this option, 'set suspend', is deprecated.)
 
 ## Use this tab size instead of the default; it must be greater than 0.
@@ -268,8 +268,10 @@ include "/usr/share/nano/*.nanorc"
 ## For quickly uppercasing or lowercasing the word under the cursor.
 ## (These effectively do a Ctrl+Right followed by a Shift+Ctrl+Left,
 ## and then pipe the selected text through a sed command.)
-#bind Sh-M-U "Oc[1;6D|sed 's/.*/\U&/'" main
-#bind Sh-M-L "Oc[1;6D|sed 's/.*/\L&/'" main
+#bind Sh-M-U "Oc[1;6D|sed 's/.*/\U&/'
+" main
+#bind Sh-M-L "Oc[1;6D|sed 's/.*/\L&/'
+" main
 
 ## If you would like nano to have keybindings that are more "usual",
 ## such as ^O for Open, ^F for Find, ^H for Help, and ^Q for Quit,
