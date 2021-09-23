@@ -41,7 +41,7 @@ function PS1_git_info
     fi
 }
 
-PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\h \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\$(PS1_git_info)\\$ \[$(tput sgr0)\]"
+PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\$(PS1_git_info)\\$ \[$(tput sgr0)\]"
 
 
 ################################################################################
