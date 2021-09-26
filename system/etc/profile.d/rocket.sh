@@ -3,6 +3,10 @@
 ## ENVIRONMENT VARIABLES
 ################################################################################
 
+## DBUS Session
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"/run/user/$UID"}
+export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNTIME_DIR/bus"}
+
 ## Default editors
 export EDITOR=/usr/bin/nano
 export VISUAL=/usr/bin/gedit
