@@ -13,22 +13,22 @@ function __install
 function install_system_shells
 {
     printf "Installing system shells...\n"
-    sudo __install 644 {system,}/etc/bash.bashrc
-    sudo __install 644 {system,}/etc/profile.d/rocket.sh
+    __install 644 {system,}/etc/bash.bashrc
+    __install 644 {system,}/etc/profile.d/rocket.sh
 }
 
 function install_system_editors
 {
     printf "Installing system editors...\n"
-    sudo __install 644 {system,}/etc/nanorc
+    __install 644 {system,}/etc/nanorc
 }
 
 function install_system_pacman
 {
     printf "Installing system pacman configuration...\n"
-    sudo __install 644 {system,}/etc/pacman.d/hooks/count-pacnew-files.hook
-    sudo __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
-    sudo __install 644 {system,}/etc/pacman.conf
+    __install 644 {system,}/etc/pacman.d/hooks/count-pacnew-files.hook
+    __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
+    __install 644 {system,}/etc/pacman.conf
 }
 
 function list_system_manual_install
@@ -110,8 +110,9 @@ function install_home
 
 function print_help
 {
-    printf "./install.sh %s\n" "system(_shells|_editors|_pacman)?"
-    printf "./install.sh %s\n" "home(_shells|_git|_tex|_code|_konsole)?"
+    printf "%s\n" "Install each component of my config files..."
+    printf "\t%s\n" "sudo ./install.sh system(_shells|_editors|_pacman)?"
+    printf "\t%s\n" "./install.sh home(_shells|_git|_tex|_code|_konsole)?"
 }
 
 ################################################################################
