@@ -23,6 +23,16 @@ function install_system_editors
     __install 644 {system,}/etc/nanorc
 }
 
+function install_system_skel
+{
+    printf "Installing system skel...\n"
+    __install 644 {system,}/etc/skel/.bash_login
+    __install 644 {system,}/etc/skel/.bash_logout
+    __install 644 {system,}/etc/skel/.bash_profile
+    __install 644 {system,}/etc/skel/.bashrc
+    __install 644 {system,}/etc/skel/.profile
+}
+
 function install_system_pacman
 {
     printf "Installing system pacman configuration...\n"
@@ -41,6 +51,7 @@ function install_system
 {
     install_system_shells
     install_system_editors
+    install_system_skel
     install_system_pacman
     list_system_manual_install
     printf "System components installed!\n"
@@ -53,24 +64,29 @@ function install_system
 function install_home_shells
 {
     printf "Installing home shells...\n"
-    __install 644 {system/home/,~/.}profile
-    __install 644 {system/home/,~/.}bash_login
-    __install 644 {system/home/,~/.}bash_logout
-    __install 644 {system/home/,~/.}bash_profile
-    __install 644 {system/home/,~/.}bashrc
-    __install 644 {system/home/,~/.}zshrc
+    __install 644 {system/home/,~/}.profile
+}
+
+function install_home_skel
+{
+    printf "Installing home skel...\n"
+    __install 644 {system/etc/skel/,~/}.bash_login
+    __install 644 {system/etc/skel/,~/}.bash_logout
+    __install 644 {system/etc/skel/,~/}.bash_profile
+    __install 644 {system/etc/skel/,~/}.bashrc
+    __install 644 {system/etc/skel/,~/}.profile
 }
 
 function install_home_git
 {
     printf "Installing home git...\n"
-    __install 644 {system/home/,~/.}gitconfig
+    __install 644 {system/home/,~/}.gitconfig
 }
 
 function install_home_tex
 {
     printf "Installing home tex_common...\n"
-    __install 644 {system/home/,~/.}tex_common
+    __install 644 {system/home/,~/}.tex_common
 }
 
 function install_home_code
@@ -96,6 +112,7 @@ function list_home_manual_install
 function install_home
 {
     install_home_shells
+    install_home_skel
     install_home_git
     install_home_tex
     install_home_code
@@ -111,7 +128,7 @@ function install_home
 function print_help
 {
     printf "%s\n" "Install each component of my config files..."
-    printf "\t%s\n" "sudo ./install.sh system(_shells|_editors|_pacman)?"
+    printf "\t%s\n" "sudo ./install.sh system(_shells|_editors|_skel|_pacman)?"
     printf "\t%s\n" "./install.sh home(_shells|_git|_tex|_code|_konsole)?"
 }
 

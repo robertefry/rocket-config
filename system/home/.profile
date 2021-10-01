@@ -1,6 +1,6 @@
 
-## Source the global profile.d/rocket.sh to update any changes
-[ -f /etc/profile.d/rocket.sh ] && . /etc/profile.d/rocket.sh
+## Source the system profile
+[ -f /etc/profile ] && . /etc/profile
 
 ## Use MangoHUD (Vulcan/OpenGL)
 export MANGOHUD=1
