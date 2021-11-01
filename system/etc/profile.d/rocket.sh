@@ -98,7 +98,7 @@ alias ls="ls --color --group-directories-first --indicator-style=slash"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
-function ldot ( cd $1 && ls --group-directories-first -lAhd .* )
+function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
 
 ## Capture the output of a command
 function cap { tee /tmp/capture-$UID.out; }
