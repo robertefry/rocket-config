@@ -76,6 +76,9 @@ export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
 ## ALIASES & FUNCTIONS
 ################################################################################
 
+## Quit the terminal
+alias q="exit"
+
 ## Confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
