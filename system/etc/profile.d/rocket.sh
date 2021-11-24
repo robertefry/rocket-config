@@ -182,6 +182,15 @@ function colours
     done
 }
 
+## Drop into a temp environment
+function mktmp
+{(
+    TMPDIR=$(mktemp -d)
+    cd $TMPDIR
+    $SHELL
+    rm -drf $TMPDIR
+)}
+
 ## Print my public IP address
 function ippub
 {
