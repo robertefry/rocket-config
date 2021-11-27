@@ -41,19 +41,12 @@ function install_system_pacman
     __install 644 {system,}/etc/pacman.conf
 }
 
-function list_system_manual_install
-{
-    printf "System components that require manuall installation are...\n"
-    printf " -> %s\n" "/etc/default/grub"
-}
-
 function install_system
 {
     install_system_shells
     install_system_editors
     install_system_skel
     install_system_pacman
-    list_system_manual_install
     printf "System components installed!\n"
 }
 
@@ -64,60 +57,25 @@ function install_system
 function install_home_shells
 {
     printf "Installing home shells...\n"
+    __install 644 {system/home/,~/}.bash_login
+    __install 644 {system/home/,~/}.bash_logout
+    __install 644 {system/home/,~/}.bash_profile
+    __install 644 {system/home/,~/}.bashrc
     __install 644 {system/home/,~/}.profile
-}
-
-function install_home_skel
-{
-    printf "Installing home skel...\n"
-    __install 644 {system/etc/skel/,~/}.bash_login
-    __install 644 {system/etc/skel/,~/}.bash_logout
-    __install 644 {system/etc/skel/,~/}.bash_profile
-    __install 644 {system/etc/skel/,~/}.bashrc
-    __install 644 {system/etc/skel/,~/}.profile
-}
-
-function install_home_git
-{
-    printf "Installing home git...\n"
     __install 644 {system/home/,~/}.gitconfig
 }
 
-function install_home_tex
+function install_home_desktop
 {
-    printf "Installing home tex_common...\n"
-    __install 644 {system/home/,~/}.tex_common
-}
-
-function install_home_code
-{
-    printf "Installing home code settings...\n"
-    __install 644 {system/home/,~/.}config/VSCodium/User/settings.json
-}
-
-function install_home_konsole
-{
-    printf "Installing home konsole configurations...\n"
-    __install 644 {system/home/,~/.}local/share/konsole/Rocket.colorscheme
-}
-
-function list_home_manual_install
-{
-    printf "Home components that require manuall installation are...\n"
-    printf " -> %s\n" ".config/systemd/user/robertfry-games.service"
-    printf " -> %s\n" ".config/systemd/user/robertfry-games.sh"
-    printf " -> %s\n" ".config/systemd/user/scc-daemon.service"
+    printf "Installing home desktop settings...\n"
+    __install 644 {system/home/,~/}.config/VSCodium/User/settings.json
+    __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
 }
 
 function install_home
 {
     install_home_shells
-    install_home_skel
-    install_home_git
-    install_home_tex
-    install_home_code
-    install_home_konsole
-    list_home_manual_install
+    install_home_desktop
     printf "Home components installed!\n"
 }
 
@@ -127,9 +85,11 @@ function install_home
 
 function print_help
 {
-    printf "%s\n" "Install each component of my config files..."
-    printf "\t%s\n" "sudo ./install.sh system(_shells|_editors|_skel|_pacman)?"
-    printf "\t%s\n" "./install.sh home(_shells|_git|_tex|_code|_konsole)?"
+    printf "%s\n" "Install components of my config files"
+    printf "%s\n" "    Usage: ./install.sh [components]"
+    printf "%s\n" "[components]"
+    printf "%s\n" "    system system_shells system_editors system_skel system_pacman"
+    printf "%s\n" "    home home_shells home_desktop"
 }
 
 ################################################################################
@@ -138,5 +98,5 @@ function print_help
 
 for name in "$@";
 do
-    install_$name 2>/dev/null || print_help
+    install_$name || print_help
 done
