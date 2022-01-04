@@ -36,16 +36,30 @@ PS1_FMT0="\e[0m"
 [ ${EUID} = 0 ] && PS1_FMT2="\e[0;1;3;31m" || PS1_FMT2="\e[0;1;3;36m"
 [ ${EUID} = 0 ] && PS1_FMT3="\e[0;1;33m"   || PS1_FMT3="\e[0;1;34m"
 
+function PS1_git_pre
+{
+    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
+    then
+        echo -en " ("
+    fi
+}
+function PS1_git_post
+{
+    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
+    then
+        echo -en ")"
+    fi
+}
 function PS1_git_info
 {
     if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
     then
-        local _BRANCH="$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
-        echo -en " ${PS1_FMT1}(${PS1_FMT3}${_BRANCH}${PS1_FMT1})"
+        git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
     fi
 }
 
-PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\$(PS1_git_info)\\$ \[$(tput sgr0)\]"
+export PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\
+\[${PS1_FMT1}\]\$(PS1_git_pre)\[${PS1_FMT3}\]\$(PS1_git_info)\[${PS1_FMT1}\]\$(PS1_git_post)\\$ \[\$(tput sgr0)\]"
 
 
 ################################################################################
