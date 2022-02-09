@@ -13,3 +13,10 @@ then
     alias code=vscodium
     export VISUAL=$(which vscodium)
 fi
+
+## Youtube Downloader
+if command -v yt-dlp &> /dev/null; then
+    alias ytdl=yt-dlp
+elif command -v youtube-dl &> /dev/null; then
+    alias ytdl=youtube-dl
+fi
