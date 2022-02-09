@@ -1,14 +1,20 @@
 {
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  VsCode Configuration Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
     "workbench.colorTheme": "FlatUI Dark",
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#323232",
         "editor.background": "#222222",
     },
     "workbench.editor.untitled.hint": "hidden",
+
     "files.enableTrash": false,
     "files.associations": {
         "*.fwd": "cpp"
     },
+
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
@@ -16,11 +22,20 @@
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
+
+    "[shellscript]": {
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
+    },
     "[markdown]": {
         "editor.wordWrap": "wordWrapColumn",
-        "editor.wordWrapColumn": 80,
+        "editor.wordWrapColumn": 120,
     },
     "[tex]": {
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
+    },
+    "[latex]": {
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 120,
     },
@@ -39,16 +54,73 @@
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 120,
     },
-    "C_Cpp.autoAddFileAssociations": false,
-    "latex-workshop.view.pdf.viewer": "tab",
+
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+
     "browser-preview.startUrl": "https://searx.robertfry.xyz",
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  Language Speciffic Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    // C/C++
+    "C_Cpp.autoAddFileAssociations": false,
+
+    // LaTeX
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.magic.args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+    ],
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  Spell-Check Dictionary Definitions
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
     "cSpell.userWords": [
-        "CMAKE",
+        "abelian",
+        "alph",
+        "automagically",
+        "automorphic",
+        "bijective",
+        "bijectivity",
         "Cayley",
+        "ciphertext",
+        "CMAKE",
+        "codomain",
+        "coeffs",
+        "commutability",
+        "constexpr",
+        "convolutional",
+        "coprime",
+        "coprimes",
+        "covec",
         "Covector",
         "Covectors",
+        "cryptosystem",
         "Cryptosystem",
+        "cryptosystems",
         "Cryptosystems",
+        "desynchronize",
+        "eigen",
+        "epimorphism",
         "GLbitfield",
         "GLboolean",
         "GLbyte",
@@ -56,6 +128,7 @@
         "GLdouble",
         "GLenum",
         "GLfloat",
+        "glfw",
         "GLint",
         "GLint64",
         "GLshort",
@@ -65,37 +138,8 @@
         "GLuint64",
         "GLushort",
         "GLvoid",
-        "IMGUI",
-        "Monoid",
-        "Monoids",
-        "Morphism",
-        "Morphisms",
-        "OPENGL",
-        "Semigroup",
-        "Semigroups",
-        "Subring",
-        "Subrings",
-        "Trinomial",
-        "Trinomials",
-        "Viktor",
-        "Wwindow",
-        "abelian",
-        "automagically",
-        "bijective",
-        "bijectivity",
-        "ciphertext",
-        "coeffs",
-        "commutability",
-        "constexpr",
-        "convolutional",
-        "coprime",
-        "coprimes",
-        "covec",
-        "cryptosystem",
-        "cryptosystems",
-        "desynchronize",
-        "glfw",
         "groupoid",
+        "IMGUI",
         "injective",
         "injectivity",
         "invertibility",
@@ -104,17 +148,37 @@
         "ivisitor",
         "keypair",
         "keypairs",
+        "Maclaurin",
+        "monic",
+        "Monoid",
+        "Monoids",
+        "monomorphism",
+        "Morphism",
+        "Morphisms",
+        "Noetherian",
+        "nonumber",
         "numpy",
+        "OPENGL",
         "ostr",
         "prepend",
         "prepended",
         "primality",
         "repr",
         "robertfry",
+        "Semigroup",
+        "Semigroups",
         "struct",
+        "Subring",
+        "Subrings",
+        "surjective",
         "surjectivity",
         "sympy",
         "totient",
+        "Trinomial",
+        "Trinomials",
+        "Viktor",
         "vsync",
+        "Wwindow"
     ],
+
 }
