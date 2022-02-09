@@ -1,11 +1,21 @@
 #!/bin/bash
 
-count=$(find /etc -name "*\.pacnew" | wc -l)
+declare -a found_files
 
-if [[ $? == 0 ]]; then
-    if [[ $count != 0 ]]; then
-        echo " -> Found $count pacnew file(s) in /etc/"
+for file in "$(find /{etc,usr}/ -iname '*.pacnew' 2>/dev/null)"
+do
+    if [ -n "$file" ];
+    then
+        found_files+=( "$file" )
     fi
-else
-    echo "Failed to count the number of pacnew files"
+done
+
+if [ "${#found_files[@]}" -gt 0 ]
+then
+    printf "\e[0;33mwarning:\e[0m found %s pacnew file(s) in '/{etc,usr}/'\n" "${#found_files[@]}"
+
+    for file in ${found_files[@]}
+    do
+        printf " -> %s \n" "$file"
+    done
 fi
