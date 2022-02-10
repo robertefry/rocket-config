@@ -1,3 +1,4 @@
+#!/bin/bash
 
 function __install
 {
@@ -15,6 +16,7 @@ function install_system_shells
     printf "Installing system shells...\n"
     __install 644 {system,}/etc/bash.bashrc
     __install 644 {system,}/etc/profile.d/rocket.sh
+    __install 644 {system,}/etc/profile.d/fftools.sh
 }
 
 function install_system_editors
@@ -35,10 +37,10 @@ function install_system_skel
 
 function install_system_pacman
 {
-    printf "Installing system pacman configuration...\n"
+    printf "Installing system pacman...\n"
+    __install 644 {system,}/etc/pacman.conf
     __install 644 {system,}/etc/pacman.d/hooks/count-pacnew-files.hook
     __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
-    __install 644 {system,}/etc/pacman.conf
 }
 
 function install_system
@@ -54,29 +56,63 @@ function install_system
 ## HOME COMPONENTS
 ################################################################################
 
+system/home/.local/share/konsole/Rocket.colorscheme
+
 function install_home_shells
 {
     printf "Installing home shells...\n"
-    __install 644 {system/home/,~/}.bash_login
-    __install 644 {system/home/,~/}.bash_logout
-    __install 644 {system/home/,~/}.bash_profile
-    __install 644 {system/home/,~/}.bashrc
-    __install 644 {system/home/,~/}.profile
-    __install 644 {system/home/,~/}.gitconfig
+    __install 644 {system/home,~}/.bash_login
+    __install 644 {system/home,~}/.bash_logout
+    __install 644 {system/home,~}/.bash_profile
+    __install 644 {system/home,~}/.bashrc
+    __install 644 {system/home,~}/.profile
 }
 
-function install_home_desktop
+function install_home_git
 {
-    printf "Installing home desktop settings...\n"
-    __install 644 {system/home/,~/}.config/VSCodium/User/settings.json
-    __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
+    printf "Installing home git...\n"
+    __install 644 {system/home,~}/.gitconfig
 }
 
 function install_home
 {
     install_home_shells
-    install_home_desktop
+    install_home_git
     printf "Home components installed!\n"
+}
+
+################################################################################
+## HOME EXTRA COMPONENTS
+################################################################################
+
+function install_home_code
+{
+    printf "Installing home code...\n"
+    __install 644 {system/home,~}/.config/VSCodium/User/settings.json
+}
+
+function install_home_game
+{
+    printf "Installing home game...\n"
+    __install 644 {system/home,~}/.config/systemd/user/scc-daemon.service
+}
+
+function install_home_extra
+{
+    install_home_code
+    install_home_game
+    printf "Home (Extra) components installed!\n"
+}
+
+################################################################################
+## HOME DESKTOP COMPONENTS
+################################################################################
+
+function install_home_desktop_kde
+{
+    printf "Installing home desktop KDE...\n"
+    __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
+    printf "Home (Desktop KDE) components installed!\n"
 }
 
 ################################################################################
@@ -88,8 +124,11 @@ function print_help
     printf "%s\n" "Install components of my config files"
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
-    printf "%s\n" "    system system_shells system_editors system_skel system_pacman"
-    printf "%s\n" "    home home_shells home_desktop"
+    printf "%s\n" "    system: ........ shells editors skel pacman"
+    printf "%s\n" "    home: .......... shells git"
+    printf "%s\n" "    home_extra: .... code game"
+    printf "%s\n" "    home_desktop: .. kde"
+    printf "%s\n" "Optionally install an entire component category."
 }
 
 ################################################################################
