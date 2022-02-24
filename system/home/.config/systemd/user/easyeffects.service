@@ -1,0 +1,9 @@
+[Unit]
+Description=Start EasyEffects
+
+[Service]
+ExecStart=/usr/bin/easyeffects --gapplication-service
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
