@@ -156,7 +156,7 @@ function find
 
     COUNT=$(cat $TMPFILE | grep "Permission denied" | wc -l)
     if [ $COUNT -ne 0 ]; then
-        echo -e '\e[31m'Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors
+        echo -e '\e[31m'Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors >&2
     fi
     rm $TMPFILE
 }
