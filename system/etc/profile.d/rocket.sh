@@ -98,8 +98,30 @@ alias cp="cp -i"
 alias mv="mv -i"
 # alias rm="rm -i"
 
+## Listing commands
+alias ls="ls --color --group-directories-first --indicator-style=slash"
+alias l="ls -lh"
+alias ll="ls -lAh"
+alias la="ls -lah"
+function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
+
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
+
+## Make a directory and cd into it
+function mkcd
+{
+    mkdir $1 && cd $1
+}
+
+## Drop into a temp environment
+function mktmp
+{(
+    TMPDIR=$(mktemp -d)
+    cd $TMPDIR
+    $SHELL
+    rm -drf $TMPDIR
+)}
 
 ## Show total progress in rsync
 alias rsync="rsync --info=progress2"
@@ -110,23 +132,10 @@ alias rsync="rsync --info=progress2"
 ## Use 'less' in place of 'more'
 alias more=less
 
-## Listing commands
-alias ls="ls --color --group-directories-first --indicator-style=slash"
-alias l="ls -lh"
-alias ll="ls -lAh"
-alias la="ls -lah"
-function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
-
 ## Capture the output of a command
 function cap { tee /tmp/capture-$UID.out; }
 function ret { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
 function clearcap { rm /tmp/capture-$UID.out; }
-
-## Make a directory and cd into it
-function mkcd
-{
-    mkdir $1 && cd $1
-}
 
 ## Change default `lsblk` columns
 function lsblk
@@ -195,15 +204,6 @@ function colours
         echo
     done
 }
-
-## Drop into a temp environment
-function mktmp
-{(
-    TMPDIR=$(mktemp -d)
-    cd $TMPDIR
-    $SHELL
-    rm -drf $TMPDIR
-)}
 
 ## Print my public IP address
 function ippub
