@@ -29,6 +29,28 @@ then
     export XMODIFIERS='@im=fcitx'
 fi
 
+################################################################################
+## XDG DIRECTORY STRUCTURE
+################################################################################
+
+# XDG home directories
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+
+# gnupg
+export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
+
+# ICEauthority
+export ICEAUTHORITY=$XDG_CACHE_HOME/ICEauthority
+
+# less
+export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
+export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+
+# mplayer
+export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
 
 ################################################################################
 ## TERMINAL PROMPT
@@ -63,31 +85,6 @@ function PS1_git_info
 
 export PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\
 \[${PS1_FMT1}\]\$(PS1_git_pre)\[${PS1_FMT3}\]\$(PS1_git_info)\[${PS1_FMT1}\]\$(PS1_git_post)\\$ \[\$(tput sgr0)\]"
-
-
-################################################################################
-## XDG DIRECTORY STRUCTURE
-################################################################################
-
-# XDG home directories
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
-
-# gnupg
-export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
-
-# ICEauthority
-export ICEAUTHORITY=$XDG_CACHE_HOME/ICEauthority
-
-# less
-export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
-export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
-
-# mplayer
-export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
-
 
 ################################################################################
 ## ALIASES & FUNCTIONS
