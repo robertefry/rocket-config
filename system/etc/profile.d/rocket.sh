@@ -99,11 +99,14 @@ alias mv="mv -i"
 # alias rm="rm -i"
 
 ## Listing commands
-alias ls="ls --color --group-directories-first --indicator-style=slash"
+alias ls="ls --color=auto --group-directories-first --indicator-style=slash"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
 function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
+
+## Grep
+alias grep="grep --color=auto"
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
