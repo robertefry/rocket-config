@@ -94,9 +94,8 @@ export PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\
 alias q="exit"
 
 ## Confirm before overwriting something
-alias cp="cp -i"
-alias mv="mv -i"
-# alias rm="rm -i"
+alias cp="cp --interactive --recursive"
+alias mv="mv --interactive"
 
 ## Listing commands
 alias ls="ls --color=auto --group-directories-first --indicator-style=slash"
