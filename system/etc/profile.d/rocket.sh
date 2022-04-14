@@ -21,11 +21,11 @@ export VCPKG_DISABLE_METRICS=1
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
 # Use the fcitx input method framework
-if command -v fcitx $> /dev/null
+if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
 then
-    export SDL_IM_MODULE=fcitx
     export GTK_IM_MODULE=fcitx
     export QT_IM_MODULE=fcitx
+    export SDL_IM_MODULE=fcitx
     export XMODIFIERS='@im=fcitx'
 fi
 
