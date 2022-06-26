@@ -97,6 +97,8 @@
     //  Spell-Check Dictionary Definitions
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+    "cSpell.language": "en-GB",
+
     "cSpell.userWords": [
         "abelian",
         "alph",
