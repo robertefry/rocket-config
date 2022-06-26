@@ -24,6 +24,8 @@
     "editor.detectIndentation": false,
     "editor.bracketPairColorization.enabled": false,
 
+    "window.zoomLevel": 1,
+
     "[shellscript]": {
         "editor.wordWrap": "wordWrapColumn",
         "editor.wordWrapColumn": 120,
