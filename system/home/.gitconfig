@@ -1,10 +1,15 @@
 [user]
-	email = robert.e.fry@protonmail.com
+	email = inbox@robertfry.xyz
 	name = Robert E Fry
-#	signingkey = robert.e.fry@protonmail.com
+#	signingkey = inbox@robertfry.xyz
 [credential]
-	username = robert.e.fry@protonmail.com
+	username = inbox@robertfry.xyz
 	helper = libsecret
+[sendemail]
+    smtpUser = inbox
+    smtpServer = mail.robertfry.xyz
+    smtpServerPort = 465
+    smtpEncryption = ssl
 [core]
 	editor = nano
 [init]
@@ -13,9 +18,17 @@
 	showIncludeUntracked = true
 [commit]
 #	gpgsign = true
-[rebase]
-	autoStash = true
 [pull]
 	rebase = true
+[rebase]
+	autoStash = true
+[merge]
+	autoStash = true
+	ff = false
 [alias]
     stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

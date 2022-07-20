@@ -14,6 +14,9 @@ export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNT
 export EDITOR=/usr/bin/nano
 export VISUAL=/usr/bin/gedit
 
+## Libvirt
+export LIBVIRT_DEFAULT_URI="qemu:///user"
+
 ## Disable vcpkg telemetry
 export VCPKG_DISABLE_METRICS=1
 
@@ -211,4 +214,10 @@ function colours
 function ippub
 {
     echo $(curl ifconfig.me 2> /dev/null)
+}
+
+## Stamp the time and date
+function stamp
+{
+    echo $(date +"%y%m%d-%H%M%S")
 }

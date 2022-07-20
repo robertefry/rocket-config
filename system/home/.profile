@@ -20,3 +20,12 @@ if command -v yt-dlp &> /dev/null; then
 elif command -v youtube-dl &> /dev/null; then
     alias ytdl=youtube-dl
 fi
+
+## OpenGL Variables
+__GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
+
+## List Steam Games and IDs
+function steamapps
+{
+    find $1 -maxdepth 1 -type f -name '*.acf' -exec awk -F '"' '/"appid|name/{ printf $4 "|" } END { print "" }' {} \; | column -t -s '|' | sort -k 2
+}
