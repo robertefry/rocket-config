@@ -56,8 +56,6 @@ function install_system
 ## HOME COMPONENTS
 ################################################################################
 
-system/home/.local/share/konsole/Rocket.colorscheme
-
 function install_home_shells
 {
     printf "Installing home shells...\n"
@@ -85,22 +83,15 @@ function install_home
 ## HOME EXTRA COMPONENTS
 ################################################################################
 
-function install_home_code
+function install_home-extra_code
 {
     printf "Installing home code...\n"
     __install 644 {system/home,~}/.config/VSCodium/User/settings.json
 }
 
-function install_home_game
+function install_home-extra
 {
-    printf "Installing home game...\n"
-    __install 644 {system/home,~}/.config/systemd/user/scc-daemon.service
-}
-
-function install_home_extra
-{
-    install_home_code
-    install_home_game
+    install_home-extra_code
     printf "Home (Extra) components installed!\n"
 }
 
@@ -108,11 +99,17 @@ function install_home_extra
 ## HOME DESKTOP COMPONENTS
 ################################################################################
 
-function install_home_desktop_kde
+function install_home-desktop_kde
 {
     printf "Installing home desktop KDE...\n"
     __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
     printf "Home (Desktop KDE) components installed!\n"
+}
+
+function install_home-desktop
+{
+    install_home-desktop_kde
+    printf "Home (Desktop) components installed!\n"
 }
 
 ################################################################################
@@ -126,8 +123,8 @@ function print_help
     printf "%s\n" "[components]"
     printf "%s\n" "    system: ........ shells editors skel pacman"
     printf "%s\n" "    home: .......... shells git"
-    printf "%s\n" "    home_extra: .... code game"
-    printf "%s\n" "    home_desktop: .. kde"
+    printf "%s\n" "    home-extra: .... code"
+    printf "%s\n" "    home-desktop: .. kde"
     printf "%s\n" "Optionally install an entire component category."
 }
 
