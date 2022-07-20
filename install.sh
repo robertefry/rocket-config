@@ -132,6 +132,13 @@ function print_help
 ## MAIN
 ################################################################################
 
+if [ $# -le 0 ]
+then
+    printf "No arguments supplied, printing the help message.\n"
+    print_help
+    exit 0
+fi
+
 for name in "$@";
 do
     install_$name || print_help
