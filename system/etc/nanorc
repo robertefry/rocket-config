@@ -56,7 +56,7 @@ set brackets ""')>]}"
 ## Set the target width for automatic hard-wrapping and for justifying
 ## paragraphs.  If the specified value is 0 or less, the wrapping point
 ## will be the terminal's width minus this number.
-# set fill -8
+set fill 80
 
 ## Draw a vertical stripe at the given column, to help judge text width.
 ## (This option does not have a default value.)
