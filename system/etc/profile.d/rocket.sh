@@ -63,34 +63,33 @@ export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 ################################################################################
 
 PS1_FMT0="\e[0m"
-[ ${EUID} = 0 ] && PS1_FMT1="\e[0;1;31m"   || PS1_FMT1="\e[0;1;36m"
-[ ${EUID} = 0 ] && PS1_FMT2="\e[0;1;3;31m" || PS1_FMT2="\e[0;1;3;36m"
-[ ${EUID} = 0 ] && PS1_FMT3="\e[0;1;33m"   || PS1_FMT3="\e[0;1;34m"
+[ $EUID = 0 ] && PS1_FMT1="\e[0;1;31m"     || PS1_FMT1="\e[0;1;36m"
+[ $EUID = 0 ] && PS1_FMT2="\e[0;1;3;31m"   || PS1_FMT2="\e[0;1;3;36m"
+[ $EUID = 0 ] && PS1_FMT3="\e[0;1;33m"     || PS1_FMT3="\e[0;1;34m"
+PS1_ERR="\e[0;1;3;31m"
 
-function PS1_git_pre
+function PS1_prompt_command
 {
-    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
-    then
-        echo -en " ("
-    fi
-}
-function PS1_git_post
-{
-    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
-    then
-        echo -en ")"
-    fi
-}
-function PS1_git_info
-{
-    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
-    then
-        git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-    fi
-}
+    printf -v EXIT '%02x' $?    # 2-digit hex
 
-export PS1="\[${PS1_FMT1}\][\[${PS1_FMT2}\]\u\[${PS1_FMT1}\]@\H \[${PS1_FMT0}\]\W\[${PS1_FMT1}\]]\
-\[${PS1_FMT1}\]\$(PS1_git_pre)\[${PS1_FMT3}\]\$(PS1_git_info)\[${PS1_FMT1}\]\$(PS1_git_post)\\$ \[\$(tput sgr0)\]"
+    PS1="\[$PS1_FMT1\][\[$PS1_FMT2\]\u\[$PS1_FMT1\]@\H \[$PS1_FMT0\]\W\[$PS1_FMT1\]]"
+
+    ## Append Git information
+    if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
+    then
+        local branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+        PS1="$PS1 \[$PS1_FMT1\](\[$PS1_FMT3\]$branch\[$PS1_FMT1\])"
+    fi
+
+    ## Prepend return value (if nonzero)
+    if [ $EXIT != "00" ]
+    then
+        PS1="\[$PS1_ERR\]$EXIT $PS1"
+    fi
+
+    export PS1="$PS1\[$PS1_FMT1\]\\$ \[\$(tput sgr0)\]"
+}
+export PROMPT_COMMAND=PS1_prompt_command
 
 ################################################################################
 ## ALIASES & FUNCTIONS
