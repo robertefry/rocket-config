@@ -1,7 +1,4 @@
 
-shopt -s dotglob
-shopt -s globstar
-
 ################################################################################
 ## ENVIRONMENT VARIABLES
 ################################################################################
@@ -14,14 +11,14 @@ export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNT
 export EDITOR=/usr/bin/nano
 export VISUAL=/usr/bin/gedit
 
+# Add $HOME/.local/bin to the path
+[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+
 ## Libvirt
 export LIBVIRT_DEFAULT_URI="qemu:///user"
 
 ## Disable vcpkg telemetry
 export VCPKG_DISABLE_METRICS=1
-
-# Add $HOME/.local/bin to the path
-[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
 # Use the fcitx input method framework
 if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
@@ -32,28 +29,34 @@ then
     export XMODIFIERS='@im=fcitx'
 fi
 
+## OpenGL Variables
+export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
+
+## JRE Runtime Options
+export JDK_JAVA_OPTIONS='$JDK_JAVA_OPTIONS -Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
 ################################################################################
 ## XDG DIRECTORY STRUCTURE
 ################################################################################
 
 # XDG home directories
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # gnupg
-export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # ICEauthority
-export ICEAUTHORITY=$XDG_CACHE_HOME/ICEauthority
+export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
 
 # less
-export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
-export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+export LESSHISTFILE="$XDG_CONFIG_HOME/less/history"
+export LESSKEY="$XDG_CONFIG_HOME/less/keys"
 
 # mplayer
-export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 
 ################################################################################
 ## TERMINAL PROMPT
@@ -99,6 +102,7 @@ alias q="exit"
 ## Confirm before overwriting something
 alias cp="cp --interactive --recursive"
 alias mv="mv --interactive"
+alias rm="rm"
 
 ## Listing commands
 alias ls="ls --color=auto --group-directories-first --indicator-style=slash"
@@ -106,9 +110,6 @@ alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
 function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
-
-## Grep
-alias grep="grep --color=auto"
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
@@ -128,30 +129,8 @@ function mktmp
     rm -drf $TMPDIR
 )}
 
-## Show total progress in rsync
-alias rsync="rsync --info=progress2"
-
-## Show total progress with dd
-#alias dd="dd status=progress"
-
-## Use 'less' in place of 'more'
-alias more=less
-
-## Capture the output of a command
-function cap { tee /tmp/capture-$UID.out; }
-function ret { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
-function clearcap { rm /tmp/capture-$UID.out; }
-
-## Change default `lsblk` columns
-function lsblk
-{
-    if echo "$*" | grep -Eq "(\s|^)-";
-    then
-        "$(which lsblk)" $@
-    else
-        "$(which lsblk)" $@ -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
-    fi
-}
+## Grep
+alias grep="grep --color=auto"
 
 ## Suppress and count 'Permission denied' errors when using 'find'
 ## Don't search in ".snapshots" directories
@@ -170,6 +149,25 @@ function find
         echo -e '\e[31m'Suppressed $(cat $TMPFILE | grep "Permission denied" | wc -l) permission errors >&2
     fi
     rm $TMPFILE
+}
+
+## Use 'less' inplaceof 'more'
+alias more=less
+
+## Capture the output of a command
+function cap { tee /tmp/capture-$UID.out; }
+function ret { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
+function rmcap { rm /tmp/capture-$UID.out; }
+
+## Change default `lsblk` columns
+function lsblk
+{
+    if echo "$*" | grep -Eq "(\s|^)-";
+    then
+        "$(which lsblk)" $@
+    else
+        "$(which lsblk)" $@ -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
+    fi
 }
 
 ## Extract an archive
@@ -197,18 +195,8 @@ function extract
 }
 alias ex=extract
 
-## Print colours
-function colours
-{
-    for j in {4,10};
-    do
-        for c in ${j}{0..7};
-        do
-            echo -ne "\e[${c}m   \e[m"
-        done
-        echo
-    done
-}
+## Show total progress in rsync
+alias rsync="rsync --info=progress2"
 
 ## Print my public IP address
 function ippub
@@ -220,4 +208,17 @@ function ippub
 function stamp
 {
     echo $(date +"%y%m%d-%H%M%S")
+}
+
+## Print colours
+function colours
+{
+    for j in {4,10};
+    do
+        for c in ${j}{0..7};
+        do
+            echo -ne "\e[${c}m   \e[m"
+        done
+        echo
+    done
 }
