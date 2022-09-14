@@ -63,10 +63,10 @@ export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 ################################################################################
 
 PS1_FMT0="\e[0m"
-[ $EUID = 0 ] && PS1_FMT1="\e[0;1;31m"     || PS1_FMT1="\e[0;1;36m"
-[ $EUID = 0 ] && PS1_FMT2="\e[0;1;3;31m"   || PS1_FMT2="\e[0;1;3;36m"
-[ $EUID = 0 ] && PS1_FMT3="\e[0;1;33m"     || PS1_FMT3="\e[0;1;34m"
-PS1_ERR="\e[0;1;3;31m"
+[ $EUID = 0 ] && PS1_FMT1="\e[0;1;31m"    || PS1_FMT1="\e[0;1;36m"
+[ $EUID = 0 ] && PS1_FMT2="\e[0;1;3;31m"  || PS1_FMT2="\e[0;1;3;36m"
+[ $EUID = 0 ] && PS1_FMT3="\e[0;1;33m"    || PS1_FMT3="\e[0;1;34m"
+[ $EUID = 0 ] && PS1_ERR="\e[0;1;3;33m"   || PS1_ERR="\e[0;1;3;31m"
 
 function PS1_prompt_command
 {
