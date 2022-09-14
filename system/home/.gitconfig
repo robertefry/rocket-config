@@ -27,6 +27,7 @@
 	ff = false
 [alias]
     stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"
+	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Initial commit}\");};f"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
