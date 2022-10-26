@@ -66,16 +66,17 @@ function install_home_shells
     __install 644 {system/home,~}/.profile
 }
 
-function install_home_git
+function install_home_software
 {
-    printf "Installing home git...\n"
+    printf "Installing home software...\n"
     __install 644 {system/home,~}/.gitconfig
+    __install 644 {system/home,~}/.clang-tidy
 }
 
 function install_home
 {
     install_home_shells
-    install_home_git
+    install_home_software
     printf "Home components installed!\n"
 }
 
@@ -122,7 +123,7 @@ function print_help
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
     printf "%s\n" "    system: ........ shells editors skel pacman"
-    printf "%s\n" "    home: .......... shells git"
+    printf "%s\n" "    home: .......... shells software"
     printf "%s\n" "    home-extra: .... code"
     printf "%s\n" "    home-desktop: .. kde"
     printf "%s\n" "Optionally install an entire component category."

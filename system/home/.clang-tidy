@@ -1,0 +1,33 @@
+#https://clang.llvm.org/extra/clang-tidy/checks/list.html
+Checks: '-*,
+    cppcoreguidelines-*,
+      -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+    hicpp-*,
+      -hicpp-no-array-decay,
+    modernize-*,
+      -modernize-use-trailing-return-type,
+      -modernize-use-nodiscard,
+    bugprone-*,
+    clang-analyzer-*,
+    cert-*,
+      -cert-oop54-cpp,
+    misc-*,
+    concurrency-*,
+    performance-*,
+    portability-*,
+    readability-*,
+      -readability-identifier-length,
+
+    -*-avoid-c-arrays,
+    -*-no-malloc,
+    -*-owning-memory,
+    -*-signed-bitwise,
+    -*-implicit-bool-conversion,
+
+    -*-braces-around-statements,
+    -*-named-parameter,
+    -*-redundant-access-specifiers,
+  '
+WarningsAsErrors:  ''
+HeaderFilterRegex: ''
+FormatStyle:       'file'
