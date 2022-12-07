@@ -12,6 +12,7 @@
     smtpEncryption = ssl
 [core]
 	editor = nano
+	excludesFile = ~/.gitignore
 [init]
 	defaultBranch = master
 [stash]

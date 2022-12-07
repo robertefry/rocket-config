@@ -1,14 +1,20 @@
-#https://clang.llvm.org/extra/clang-tidy/checks/list.html
+# https://clang.llvm.org/extra/clang-tidy/checks/list.html
 Checks: '-*,
     cppcoreguidelines-*,
+      -cppcoreguidelines-avoid-c-arrays,
+      -cppcoreguidelines-no-malloc,
+      -cppcoreguidelines-owning-memory,
       -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
     hicpp-*,
+      -hicpp-avoid-c-arrays,
+      -hicpp-braces-around-statements,
       -hicpp-no-array-decay,
+      -hicpp-no-malloc,
+      -hicpp-signed-bitwise,
     modernize-*,
+      -modernize-avoid-c-arrays,
       -modernize-use-trailing-return-type,
-      -modernize-use-nodiscard,
     bugprone-*,
-    clang-analyzer-*,
     cert-*,
       -cert-oop54-cpp,
     misc-*,
@@ -16,18 +22,26 @@ Checks: '-*,
     performance-*,
     portability-*,
     readability-*,
+      -readability-braces-around-statements,
       -readability-identifier-length,
+      -readability-implicit-bool-conversion,
+      -readability-redundant-access-specifiers,
+    clang-analyzer-*,
 
-    -*-avoid-c-arrays,
-    -*-no-malloc,
-    -*-owning-memory,
-    -*-signed-bitwise,
-    -*-implicit-bool-conversion,
+    llvm-header-guard,
+    llvm-include-order,
+    llvm-namespace-comment,
 
-    -*-braces-around-statements,
-    -*-named-parameter,
-    -*-redundant-access-specifiers,
+    google-explicit-constructor,
+    google-global-names-in-headers,
+    google-runtime-int,
   '
-WarningsAsErrors:  ''
-HeaderFilterRegex: ''
-FormatStyle:       'file'
+CheckOptions:
+  - key:    cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor
+    value:  'true'
+  - key:    hicpp-special-member-functions.AllowSoleDefaultDtor
+    value:  'true'
+
+WarningsAsErrors:   ''
+HeaderFilterRegex:  '.'
+FormatStyle:        'file'

@@ -70,6 +70,7 @@ function install_home_software
 {
     printf "Installing home software...\n"
     __install 644 {system/home,~}/.gitconfig
+    __install 644 {system/home,~}/.gitignore
     __install 644 {system/home,~}/.clang-tidy
 }
 
