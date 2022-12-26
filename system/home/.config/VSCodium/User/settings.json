@@ -41,7 +41,9 @@
 
     "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
+    "gitlens.graph.showRemoteNames": true,
     "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": false,
 
     "cmake.configureOnOpen": true,
 
