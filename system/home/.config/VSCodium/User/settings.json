@@ -25,14 +25,7 @@
         "*.fwd": "cpp",
     },
 
-    "[tex]": {
-        "editor.tabSize": 2,
-    },
-    "[latex]": {
-        "editor.tabSize": 2,
-        "editor.wordWrapColumn": 100,
-    },
-    "[bib]": {
+    "[tex,latex,bibtex]": {
         "editor.tabSize": 2,
         "editor.wordWrapColumn": 80,
     },
