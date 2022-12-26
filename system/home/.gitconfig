@@ -1,7 +1,7 @@
 [user]
 	email = inbox@robertfry.xyz
-	name = Robert E Fry
-#	signingkey = inbox@robertfry.xyz
+	name = Robert Fry
+	signingkey = inbox@robertfry.xyz
 [credential]
 	username = inbox@robertfry.xyz
 	helper = libsecret
@@ -18,7 +18,7 @@
 [stash]
 	showIncludeUntracked = true
 [commit]
-#	gpgsign = true
+	gpgsign = true
 [pull]
 	rebase = true
 [rebase]
