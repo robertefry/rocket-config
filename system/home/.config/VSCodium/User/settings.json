@@ -29,16 +29,10 @@
         "editor.tabSize": 2,
         "editor.wordWrapColumn": 80,
     },
-    "[xml]": {
+    "[xml,html]": {
         "editor.tabSize": 2,
     },
-    "[html]": {
-        "editor.tabSize": 2,
-    },
-    "[css]": {
-        "editor.tabSize": 2,
-    },
-    "[php]": {
+    "[php,html,css]": {
         "editor.tabSize": 2,
     },
 
