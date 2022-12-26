@@ -25,6 +25,9 @@
         "*.fwd": "cpp",
     },
 
+    "[cmake]": {
+        "editor.tabSize": 2,
+    },
     "[tex,latex,bibtex]": {
         "editor.tabSize": 2,
         "editor.wordWrapColumn": 80,
@@ -45,16 +48,19 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
 
-    "cmake.configureOnOpen": true,
-
     "browser-preview.startUrl": "https://searx.robertfry.xyz",
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Language Specific Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+    // CMake
+    "cmake.configureOnOpen": true,
+    "cmake.buildDirectory": "${workspaceFolder}/.build",
+
     // C/C++
     "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "C_Cpp.autoAddFileAssociations": false,
 
     // LaTeX
