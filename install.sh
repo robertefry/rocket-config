@@ -64,6 +64,7 @@ function install_home_shells
     __install 644 {system/home,~}/.bash_profile
     __install 644 {system/home,~}/.bashrc
     __install 644 {system/home,~}/.profile
+    __install 644 {system/home,~}/.pythonrc
 }
 
 function install_home_software

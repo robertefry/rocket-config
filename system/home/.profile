@@ -7,6 +7,13 @@ export MANGOHUD=1
 export MANGOHUD_DLSYM=1
 export ENABLE_VKBASALT=1
 
+## Python
+if command -v python &> /dev/null
+then
+    alias py=python
+    export PYTHONSTARTUP=~/.pythonrc
+fi
+
 ## VSCodium
 if command -v vscodium &> /dev/null
 then
