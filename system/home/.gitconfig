@@ -1,36 +1,36 @@
 [user]
-	email = inbox@robertfry.xyz
-	name = Robert Fry
-	signingkey = inbox@robertfry.xyz
+    email = inbox@robertfry.xyz
+    name = Robert Fry
+    signingkey = inbox@robertfry.xyz
 [credential]
-	username = inbox@robertfry.xyz
-	helper = libsecret
+    username = inbox@robertfry.xyz
+    helper = libsecret
 [sendemail]
     smtpUser = inbox
     smtpServer = mail.robertfry.xyz
     smtpServerPort = 465
     smtpEncryption = ssl
 [core]
-	editor = nano
-	excludesFile = ~/.gitignore
+    editor = nano
+    excludesFile = ~/.gitignore
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [stash]
-	showIncludeUntracked = true
+    showIncludeUntracked = true
 [commit]
-	gpgsign = true
+    gpgsign = true
 [pull]
-	rebase = true
+    rebase = true
 [rebase]
-	autoStash = true
+    autoStash = true
 [merge]
-	autoStash = true
-	ff = false
+    autoStash = true
+    ff = false
 [alias]
     stash-untracked = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f"
-	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Initial commit}\");};f"
+    squash-all      = "!f() { git reset $(git commit-tree HEAD^{tree} -m \"${1:-Initial commit}\"); }; f"
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
