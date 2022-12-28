@@ -197,6 +197,12 @@ alias ex=extract
 ## Show total progress in rsync
 alias rsync="rsync --info=progress2"
 
+## Random password
+function rnpw
+{
+    strings /dev/urandom | grep -o '[[:alnum:]]' | head -n ${1:-32} | tr -d '\n' ; echo
+}
+
 ## Print my public IP address
 function ippub
 {
