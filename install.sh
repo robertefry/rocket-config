@@ -64,12 +64,12 @@ function install_home_shells
     __install 644 {system/home,~}/.bash_profile
     __install 644 {system/home,~}/.bashrc
     __install 644 {system/home,~}/.profile
-    __install 644 {system/home,~}/.pythonrc
 }
 
-function install_home_software
+function install_home_code
 {
-    printf "Installing home software...\n"
+    printf "Installing home code...\n"
+    __install 644 {system/home,~}/.pythonrc
     __install 644 {system/home,~}/.gitconfig
     __install 644 {system/home,~}/.gitignore
     __install 644 {system/home,~}/.clang-tidy
@@ -78,7 +78,7 @@ function install_home_software
 function install_home
 {
     install_home_shells
-    install_home_software
+    install_home_code
     printf "Home components installed!\n"
 }
 
