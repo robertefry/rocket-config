@@ -169,7 +169,7 @@ set softwrap
 
 ## Use the end of the title bar for some state flags: I = auto-indenting,
 ## M = mark, L = hard-wrapping long lines, R = recording, S = soft-wrapping.
-# set stateflags
+set stateflags
 
 ## Use this tab size instead of the default; it must be greater than 0.
 set tabsize 4
