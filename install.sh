@@ -3,7 +3,8 @@
 function __install
 {
     printf " -> installing %s... " "$3"
-    [ "${_arg_dryrun:-on}" == "off" ] && install -Dbm $1 $2 $3
+    [ "${_arg_backup:-on}" == "off" ] && _backup="" || _backup="-b"
+    [ "${_arg_dryrun:-on}" == "off" ] && install -D ${_backup} -m $1 $2 $3
     printf "Done!\n"
 }
 
@@ -123,8 +124,9 @@ Install components of my config files
     Usage: ./install.sh [args] [components]
 
 [args]
-    -d, --dryrun:   Only print what would be done (off by default)
-    -h, --help:     Print this help message
+    -d, --dryrun:       Only print what would be done           (off by default)
+    -B, --no-backup:    Don't make a backup of current files    (off by default)
+    -h, --help:         Print this help message
 
 [components]
     system: ........... shells skel
@@ -149,6 +151,7 @@ _arg_components=()
 
 # THE DEFAULTS INITIALIZATION - OPTIONALS
 _arg_dryrun="off"
+_arg_backup="on"
 
 function parse_commandline
 {
@@ -187,6 +190,17 @@ function parse_commandline
 				if test -n "$_next" -a "$_next" != "$_key"
 				then
 					{ begins_with_short_option "$_next" && shift && set -- "-d" "-${_next}" "$@"; } || die "The short option '$_key' can't be decomposed to ${_key:0:2} and -${_key:2}, because ${_key:0:2} doesn't accept a value and '-${_key:2:1}' doesn't correspond to a short option."
+				fi
+				;;
+            -B|--no-backup)
+				_arg_backup="off"
+				;;
+			-B*)
+				_arg_backup="off"
+				_next="${_key##-B}"
+				if test -n "$_next" -a "$_next" != "$_key"
+				then
+					{ begins_with_short_option "$_next" && shift && set -- "-B" "-${_next}" "$@"; } || die "The short option '$_key' can't be decomposed to ${_key:0:2} and -${_key:2}, because ${_key:0:2} doesn't accept a value and '-${_key:2:1}' doesn't correspond to a short option."
 				fi
 				;;
 			-h|--help)
@@ -237,11 +251,6 @@ parse_commandline "$@"
 ################################################################################
 ## MAIN
 ################################################################################
-
-if [ "${_arg_dryrun}" == "on" ]
-then
-    printf "%s\n" "Running in dryrun mode, only printing what would happen"
-fi
 
 for component in "${_arg_components[@]}"
 do
