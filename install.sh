@@ -83,7 +83,7 @@ function install_home
 }
 
 ################################################################################
-## HOME EXTRA COMPONENTS
+## HOME-EXTRA COMPONENTS
 ################################################################################
 
 function install_home-extra_code
@@ -99,7 +99,7 @@ function install_home-extra
 }
 
 ################################################################################
-## HOME DESKTOP COMPONENTS
+## HOME-DESKTOP COMPONENTS
 ################################################################################
 
 function install_home-desktop_kde
