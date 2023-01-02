@@ -125,7 +125,7 @@ function print_help
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
     printf "%s\n" "    system: ........ shells editors skel pacman"
-    printf "%s\n" "    home: .......... shells software"
+    printf "%s\n" "    home: .......... shells code"
     printf "%s\n" "    home-extra: .... code"
     printf "%s\n" "    home-desktop: .. kde"
     printf "%s\n" "Optionally install an entire component category."
