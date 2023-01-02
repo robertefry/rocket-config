@@ -29,9 +29,9 @@ function install_system_skel
     __install 644 {system,}/etc/skel/.profile
 }
 
-function install_system_editors
+function install_system-extra_editors
 {
-    printf "Installing system editors...\n"
+    printf "Installing system-extra editors...\n"
     __install 644 {system,}/etc/nanorc
 }
 
@@ -118,8 +118,8 @@ function print_help
     printf "%s\n" "Install components of my config files"
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
-    printf "%s\n" "    system: ........ shells skel editors"
-    printf "%s\n" "    system-extra: .. pacman"
+    printf "%s\n" "    system: ........ shells skel"
+    printf "%s\n" "    system-extra: .. editors pacman"
     printf "%s\n" "    home: .......... shells"
     printf "%s\n" "    home-extra: .... code"
     printf "%s\n" "    home-desktop: .. kde"
