@@ -1,8 +1,32 @@
-import os
 
-import numpy as np
-import scipy as sp
-import matplotlib.pyplot as plt
-from scipy.constants import *
+# OS
+try:
+    import os
+    clear = lambda:os.system("clear")
+except ImportError as err:
+    pass
 
-clear = lambda:os.system("clear")
+# NumPY
+try:
+    import numpy as np
+except ImportError as err:
+    pass
+
+# SciPY
+try:
+    import scipy as sp
+    from scipy.constants import *
+except ImportError as err:
+    pass
+
+# MatPlotLib
+try:
+    import matplotlib.pyplot as plt
+except ImportError as err:
+    pass
+
+# Units
+try:
+    from units import unit
+except ImportError as err:
+    pass
