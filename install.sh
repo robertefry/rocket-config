@@ -64,21 +64,14 @@ function install_home_shells
     __install 644 {system/home,~}/.bash_profile
     __install 644 {system/home,~}/.bashrc
     __install 644 {system/home,~}/.profile
-}
-
-function install_home_code
-{
-    printf "Installing home code...\n"
     __install 644 {system/home,~}/.pythonrc
     __install 644 {system/home,~}/.gitconfig
     __install 644 {system/home,~}/.gitignore
-    __install 644 {system/home,~}/.clang-tidy
 }
 
 function install_home
 {
     install_home_shells
-    install_home_code
     printf "Home components installed!\n"
 }
 
@@ -90,6 +83,7 @@ function install_home-extra_code
 {
     printf "Installing home code...\n"
     __install 644 {system/home,~}/.config/VSCodium/User/settings.json
+    __install 644 {system/home,~}/.clang-tidy
 }
 
 function install_home-extra
@@ -125,7 +119,7 @@ function print_help
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
     printf "%s\n" "    system: ........ shells editors skel pacman"
-    printf "%s\n" "    home: .......... shells code"
+    printf "%s\n" "    home: .......... shells"
     printf "%s\n" "    home-extra: .... code"
     printf "%s\n" "    home-desktop: .. kde"
     printf "%s\n" "Optionally install an entire component category."
