@@ -19,12 +19,6 @@ function install_system_shells
     __install 644 {system,}/etc/profile.d/fftools.sh
 }
 
-function install_system_editors
-{
-    printf "Installing system editors...\n"
-    __install 644 {system,}/etc/nanorc
-}
-
 function install_system_skel
 {
     printf "Installing system skel...\n"
@@ -35,9 +29,15 @@ function install_system_skel
     __install 644 {system,}/etc/skel/.profile
 }
 
-function install_system_pacman
+function install_system_editors
 {
-    printf "Installing system pacman...\n"
+    printf "Installing system editors...\n"
+    __install 644 {system,}/etc/nanorc
+}
+
+function install_system-extra_pacman
+{
+    printf "Installing system-extra pacman...\n"
     __install 644 {system,}/etc/pacman.conf
     __install 644 {system,}/etc/pacman.d/hooks/count-pacnew-files.hook
     __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
@@ -118,7 +118,8 @@ function print_help
     printf "%s\n" "Install components of my config files"
     printf "%s\n" "    Usage: ./install.sh [components]"
     printf "%s\n" "[components]"
-    printf "%s\n" "    system: ........ shells editors skel pacman"
+    printf "%s\n" "    system: ........ shells skel editors"
+    printf "%s\n" "    system-extra: .. pacman"
     printf "%s\n" "    home: .......... shells"
     printf "%s\n" "    home-extra: .... code"
     printf "%s\n" "    home-desktop: .. kde"
