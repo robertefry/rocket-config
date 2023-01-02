@@ -29,6 +29,16 @@ function install_system_skel
     __install 644 {system,}/etc/skel/.profile
 }
 
+function install_system
+{
+    install_system_shells
+    install_system_skel
+}
+
+################################################################################
+## SYSTEM-EXTRA COMPONENTS
+################################################################################
+
 function install_system-extra_editors
 {
     printf "Installing system-extra editors...\n"
@@ -43,12 +53,10 @@ function install_system-extra_pacman
     __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
 }
 
-function install_system
+function install_system-extra
 {
-    install_system_shells
-    install_system_editors
-    install_system_skel
-    install_system_pacman
+    install_system-extra_editors
+    install_system-extra_pacman
 }
 
 ################################################################################
