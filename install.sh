@@ -49,7 +49,6 @@ function install_system
     install_system_editors
     install_system_skel
     install_system_pacman
-    printf "System components installed!\n"
 }
 
 ################################################################################
@@ -72,7 +71,6 @@ function install_home_shells
 function install_home
 {
     install_home_shells
-    printf "Home components installed!\n"
 }
 
 ################################################################################
@@ -81,7 +79,7 @@ function install_home
 
 function install_home-extra_code
 {
-    printf "Installing home code...\n"
+    printf "Installing home-extra code...\n"
     __install 644 {system/home,~}/.config/VSCodium/User/settings.json
     __install 644 {system/home,~}/.clang-tidy
 }
@@ -89,7 +87,6 @@ function install_home-extra_code
 function install_home-extra
 {
     install_home-extra_code
-    printf "Home (Extra) components installed!\n"
 }
 
 ################################################################################
@@ -98,15 +95,13 @@ function install_home-extra
 
 function install_home-desktop_kde
 {
-    printf "Installing home desktop KDE...\n"
+    printf "Installing home-desktop KDE...\n"
     __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
-    printf "Home (Desktop KDE) components installed!\n"
 }
 
 function install_home-desktop
 {
     install_home-desktop_kde
-    printf "Home (Desktop) components installed!\n"
 }
 
 ################################################################################
