@@ -3,7 +3,7 @@
 function __install
 {
     printf " -> installing %s... " "$3"
-    install -Dbm $1 $2 $3
+    [ "${_arg_dryrun:-on}" == "off" ] && install -Dbm $1 $2 $3
     printf "Done!\n"
 }
 
@@ -115,29 +115,132 @@ function install_home-desktop
 
 function print_help
 {
-    printf "%s\n" "Install components of my config files"
-    printf "%s\n" "    Usage: ./install.sh [components]"
-    printf "%s\n" "[components]"
-    printf "%s\n" "    system: ........ shells skel"
-    printf "%s\n" "    system-extra: .. editors pacman"
-    printf "%s\n" "    home: .......... shells"
-    printf "%s\n" "    home-extra: .... code"
-    printf "%s\n" "    home-desktop: .. kde"
-    printf "%s\n" "Optionally install an entire component category."
+    printf "%s\n" "\
+Install components of my config files
+    Usage: ./install.sh [args] [components]
+
+[args]
+    -d, --dryrun:   Only print what would be done (off by default)
+    -h, --help:     Print this help message
+
+[components]
+    system: ........... shells skel
+    system-extra: ..... editors pacman
+    home: ............. shells
+    home-extra: ....... code
+    home-desktop: ..... kde
+
+Optionally install an entire component category.
+
+For example; to install the entire 'home' category, and only 'code' from the 'home-extra' category
+'$ ./install.sh home home-extra_code'
+    "
 }
+
+################################################################################
+## ARGUMENT PARSER
+################################################################################
+
+# THE DEFAULTS INITIALIZATION - POSITIONALS
+_arg_components=()
+
+# THE DEFAULTS INITIALIZATION - OPTIONALS
+_arg_dryrun="off"
+
+function parse_commandline
+{
+    die()
+    {
+        local _ret="${2:-1}"
+        printf "%s\n\n" "$1"
+        print_help
+        exit "${_ret}"
+    }
+
+    if [ $# -le 0 ]
+    then
+        die "No components given, printing the help message instead." 0
+    fi
+
+    begins_with_short_option()
+    {
+        local first_option all_short_options='dh'
+        first_option="${1:0:1}"
+        test "$all_short_options" = "${all_short_options/$first_option/}" && return 1 || return 0
+    }
+
+    local _positionals=()
+
+	while test $# -gt 0
+	do
+		local _key="$1"
+		case "$_key" in
+			-d|--dryrun)
+				_arg_dryrun="on"
+				;;
+			-d*)
+				_arg_dryrun="on"
+				_next="${_key##-d}"
+				if test -n "$_next" -a "$_next" != "$_key"
+				then
+					{ begins_with_short_option "$_next" && shift && set -- "-d" "-${_next}" "$@"; } || die "The short option '$_key' can't be decomposed to ${_key:0:2} and -${_key:2}, because ${_key:0:2} doesn't accept a value and '-${_key:2:1}' doesn't correspond to a short option."
+				fi
+				;;
+			-h|--help)
+				print_help
+				exit 0
+				;;
+			-h*)
+				print_help
+				exit 0
+				;;
+			-*)
+                die "The key '$_key' doesn't correspond to a short or long option."
+				;;
+			*)
+				_positionals+=("$1")
+				;;
+		esac
+		shift
+	done
+
+    assign_positional_args()
+    {
+        local _positional_name _shift_for=$1
+        _positional_names=""
+        _our_args=$((${#_positionals[@]} - 0))
+        for ((ii = 0; ii < _our_args; ii++))
+        do
+            _positional_names="$_positional_names _arg_components[$((ii + 0))]"
+        done
+
+        shift "$_shift_for"
+        for _positional_name in ${_positional_names}
+        do
+            test $# -gt 0 || break
+            eval "$_positional_name=\${1}" || die "Error during argument parsing, possibly an Argbash bug." 1
+            shift
+        done
+    }
+    assign_positional_args 1 "${_positionals[@]}"
+
+    for component in "${_arg_components[@]}"
+    do
+        [ "$(type -t install_$component)" == "function" ] || die "The component '$component' is not recognised."
+    done
+}
+parse_commandline "$@"
 
 ################################################################################
 ## MAIN
 ################################################################################
 
-if [ $# -le 0 ]
+if [ "${_arg_dryrun}" == "on" ]
 then
-    printf "No arguments supplied, printing the help message.\n"
-    print_help
-    exit 0
+    printf "%s\n" "Running in dryrun mode, only printing what would happen"
 fi
 
-for name in "$@";
+for component in "${_arg_components[@]}"
 do
-    install_$name || print_help
+    install_$component
 done
