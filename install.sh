@@ -88,8 +88,6 @@ function install_user_shells
     install_rocket_user # user_shells requries rocket_user
 
     printf "Installing user shells...\n"
-    __install 644 {user,~}/.bash_login
-    __install 644 {user,~}/.bash_logout
     __install 644 {user,~}/.bash_profile
     __install 644 {user,~}/.bashrc
     __install 644 {user,~}/.profile
