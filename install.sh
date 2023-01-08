@@ -9,15 +9,34 @@ function __install
 }
 
 ################################################################################
+## ROCKET COMPONENTS
+################################################################################
+
+function install_rocket_system
+{
+    printf "Installing rocket system...\n"
+    __install 644 {rocket,/etc/rocket-config}/profile.sh
+    __install 644 {rocket,/etc/rocket-config}/fftools.sh
+}
+
+function install_rocket_user
+{
+    printf "Installing rocket user...\n"
+    __install 644 {rocket,~/.config/rocket-config}/profile.sh
+    __install 644 {rocket,~/.config/rocket-config}/fftools.sh
+}
+
+################################################################################
 ## SYSTEM COMPONENTS
 ################################################################################
 
 function install_system_shells
 {
+    install_rocket_system # system_shells requires rocket_config
+
     printf "Installing system shells...\n"
     __install 644 {system,}/etc/bash.bashrc
-    __install 644 {system,}/etc/profile.d/rocket.sh
-    __install 644 {system,}/etc/profile.d/fftools.sh
+    __install 644 {system,}/etc/profile.d/rocket-config.sh
 }
 
 function install_system_skel
@@ -36,9 +55,9 @@ function install_system
     install_system_skel
 }
 
-################################################################################
-## SYSTEM-EXTRA COMPONENTS
-################################################################################
+#
+# system-extra
+#
 
 function install_system-extra_editors
 {
@@ -66,6 +85,8 @@ function install_system-extra
 
 function install_user_shells
 {
+    install_rocket_user # user_shells requries rocket_user
+
     printf "Installing user shells...\n"
     __install 644 {user,~}/.bash_login
     __install 644 {user,~}/.bash_logout
@@ -82,9 +103,9 @@ function install_user
     install_user_shells
 }
 
-################################################################################
-## USER-EXTRA COMPONENTS
-################################################################################
+#
+# user-extra
+#
 
 function install_user-extra_code
 {
@@ -98,9 +119,9 @@ function install_user-extra
     install_user-extra_code
 }
 
-################################################################################
-## USER-DESKTOP COMPONENTS
-################################################################################
+#
+# user-desktop
+#
 
 function install_user-desktop_kde
 {
@@ -129,6 +150,7 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
+    rocket: ........... system user
     system: ........... shells skel
     system-extra: ..... editors pacman
     user: ............. shells
