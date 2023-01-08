@@ -61,56 +61,56 @@ function install_system-extra
 }
 
 ################################################################################
-## HOME COMPONENTS
+## USER COMPONENTS
 ################################################################################
 
-function install_home_shells
+function install_user_shells
 {
-    printf "Installing home shells...\n"
-    __install 644 {system/home,~}/.bash_login
-    __install 644 {system/home,~}/.bash_logout
-    __install 644 {system/home,~}/.bash_profile
-    __install 644 {system/home,~}/.bashrc
-    __install 644 {system/home,~}/.profile
-    __install 644 {system/home,~}/.pythonrc
-    __install 644 {system/home,~}/.gitconfig
-    __install 644 {system/home,~}/.gitignore
+    printf "Installing user shells...\n"
+    __install 644 {user,~}/.bash_login
+    __install 644 {user,~}/.bash_logout
+    __install 644 {user,~}/.bash_profile
+    __install 644 {user,~}/.bashrc
+    __install 644 {user,~}/.profile
+    __install 644 {user,~}/.pythonrc
+    __install 644 {user,~}/.gitconfig
+    __install 644 {user,~}/.gitignore
 }
 
-function install_home
+function install_user
 {
-    install_home_shells
-}
-
-################################################################################
-## HOME-EXTRA COMPONENTS
-################################################################################
-
-function install_home-extra_code
-{
-    printf "Installing home-extra code...\n"
-    __install 644 {system/home,~}/.config/VSCodium/User/settings.json
-    __install 644 {system/home,~}/.clang-tidy
-}
-
-function install_home-extra
-{
-    install_home-extra_code
+    install_user_shells
 }
 
 ################################################################################
-## HOME-DESKTOP COMPONENTS
+## USER-EXTRA COMPONENTS
 ################################################################################
 
-function install_home-desktop_kde
+function install_user-extra_code
 {
-    printf "Installing home-desktop KDE...\n"
-    __install 644 {system/home/,~/}.local/share/konsole/Rocket.colorscheme
+    printf "Installing user-extra code...\n"
+    __install 644 {user,~}/.config/VSCodium/User/settings.json
+    __install 644 {user,~}/.clang-tidy
 }
 
-function install_home-desktop
+function install_user-extra
 {
-    install_home-desktop_kde
+    install_user-extra_code
+}
+
+################################################################################
+## USER-DESKTOP COMPONENTS
+################################################################################
+
+function install_user-desktop_kde
+{
+    printf "Installing user-desktop KDE...\n"
+    __install 644 {user/,~/}.local/share/konsole/Rocket.colorscheme
+}
+
+function install_user-desktop
+{
+    install_user-desktop_kde
 }
 
 ################################################################################
@@ -131,14 +131,14 @@ Install components of my config files
 [components]
     system: ........... shells skel
     system-extra: ..... editors pacman
-    home: ............. shells
-    home-extra: ....... code
-    home-desktop: ..... kde
+    user: ............. shells
+    user-extra: ....... code
+    user-desktop: ..... kde
 
 Optionally install an entire component category.
 
-For example; to install the entire 'home' category, and only 'code' from the 'home-extra' category
-'$ ./install.sh home home-extra_code'
+For example; to install the entire 'user' category, and only 'code' from the 'user-extra' category
+'$ ./install.sh user user-extra_code'
     "
 }
 
