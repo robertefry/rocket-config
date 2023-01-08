@@ -3,4 +3,4 @@
 [[ $- != *i* ]] && return
 
 ## Source the shell-agnostic profile
-[ -f $HOME/.profile ] && . $HOME/.profile
+[ -f ${HOME}/.profile ] && . ${HOME}/.profile
