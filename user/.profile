@@ -1,7 +1,4 @@
 
-## Source the system profile
-[ -r /etc/profile ] && . /etc/profile
-
 ## Source rocket
 ROCKET_CONFIG=~/.config/rocket-config
 [ -r ${ROCKET_CONFIG}/profile.sh ] && . ${ROCKET_CONFIG}/profile.sh
