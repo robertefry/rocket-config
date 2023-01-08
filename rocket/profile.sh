@@ -68,7 +68,7 @@ PS1_FMT0="\e[0m"
 [ $EUID = 0 ] && PS1_FMT3="\e[0;1;33m"    || PS1_FMT3="\e[0;1;34m"
 [ $EUID = 0 ] && PS1_ERR="\e[0;1;3;33m"   || PS1_ERR="\e[0;1;3;31m"
 
-function PS1_prompt_command
+PS1_prompt_command()
 {
     printf -v EXIT '%02x' $?    # 2-digit hex
 
@@ -108,19 +108,19 @@ alias ls="ls --color=auto --group-directories-first --indicator-style=slash"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
-function ldot {( cd $1 && ls --group-directories-first -lAhd .* )}
+ldot() {( cd $1 && ls --group-directories-first -lAhd .* )}
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
 
 ## Make a directory and cd into it
-function mkcd
+mkcd()
 {
     mkdir $1 && cd $1
 }
 
 ## Drop into a temp environment
-function mktmp
+mktmp()
 {(
     TMPDIR=$(mktemp -d)
     cd $TMPDIR
@@ -133,7 +133,7 @@ alias grep="grep --color=auto"
 
 ## Suppress and count 'Permission denied' errors when using 'find'
 ## Don't search in ".snapshots" directories
-function find
+find()
 {
     TMPFILE=$(mktemp)
     if [ $? -ne 0 ]; then
@@ -154,12 +154,12 @@ function find
 alias more=less
 
 ## Capture the output of a command
-function cap { tee /tmp/capture-$UID.out; }
-function ret { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
-function rmcap { rm /tmp/capture-$UID.out; }
+cap() { tee /tmp/capture-$UID.out; }
+ret() { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
+rmcap() { rm /tmp/capture-$UID.out; }
 
 ## Change default `lsblk` columns
-function lsblk
+lsblk()
 {
     if echo "$*" | grep -Eq "(\s|^)-";
     then
@@ -170,7 +170,7 @@ function lsblk
 }
 
 ## Extract an archive
-function extract
+extract()
 {
     if [ -f $1 ]; then
         case $1 in
@@ -198,25 +198,25 @@ alias ex=extract
 alias rsync="rsync --info=progress2"
 
 ## Random password
-function rnpw
+rnpw()
 {
     strings /dev/urandom | grep -o '[[:alnum:]]' | head -n ${1:-32} | tr -d '\n' ; echo
 }
 
 ## Print my public IP address
-function ippub
+ippub()
 {
     echo $(curl ifconfig.me 2> /dev/null)
 }
 
 ## Stamp the time and date
-function stamp
+stamp()
 {
     echo $(date +"%y%m%d-%H%M%S")
 }
 
 ## Print colours
-function colours
+colours()
 {
     for j in {4,10};
     do
