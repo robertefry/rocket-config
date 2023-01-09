@@ -35,24 +35,12 @@ function install_system_shells
     install_rocket_system # system_shells requires rocket_config
 
     printf "Installing system shells...\n"
-    __install 644 {system,}/etc/bash.bashrc
     __install 644 {system,}/etc/profile.d/rocket-config.sh
-}
-
-function install_system_skel
-{
-    printf "Installing system skel...\n"
-    __install 644 {system,}/etc/skel/.bash_login
-    __install 644 {system,}/etc/skel/.bash_logout
-    __install 644 {system,}/etc/skel/.bash_profile
-    __install 644 {system,}/etc/skel/.bashrc
-    __install 644 {system,}/etc/skel/.profile
 }
 
 function install_system
 {
     install_system_shells
-    install_system_skel
 }
 
 #
@@ -149,7 +137,7 @@ Install components of my config files
 
 [components]
     rocket: ........... system user
-    system: ........... shells skel
+    system: ........... shells
     system-extra: ..... editors pacman
     user: ............. shells
     user-extra: ....... code
