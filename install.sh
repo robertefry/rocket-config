@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# CD into the directory of this script, henceforth the current-working directory
+cd "$(dirname "$0")"
+
 STAMP=$(date +"%y%m%d%H%M%S")
 
 function __install
