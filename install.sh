@@ -109,6 +109,13 @@ function install_user-extra
 # user-desktop
 #
 
+function install_user-desktop_gtk
+{
+    printf "Installing user-desktop GTK...\n"
+    __install 644 {user/,~/}.config/gtk-3.0/gtk.
+    __install 644 {user/,~/}.config/gtk-4.0/gtk.css
+}
+
 function install_user-desktop_kde
 {
     printf "Installing user-desktop KDE...\n"
