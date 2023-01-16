@@ -1,10 +1,13 @@
 #!/bin/bash
 
+STAMP=$(date +"%y%m%d%H%M%S")
+
 function __install
 {
+    [ "${_arg_backup:-on}" == "off" ] && [ -f $3 ] && mv $3{,.$STAMP~}
+
     printf " -> installing %s... " "$3"
-    [ "${_arg_backup:-on}" == "off" ] && _backup="" || _backup="-b"
-    [ "${_arg_dryrun:-on}" == "off" ] && install -D ${_backup} -m $1 $2 $3
+    [ "${_arg_dryrun:-on}" == "off" ] && install -Dm $1 $2 $3
     printf "Done!\n"
 }
 
@@ -79,30 +82,11 @@ function install_user_shells
     __install 644 {user,~}/.bash_profile
     __install 644 {user,~}/.bashrc
     __install 644 {user,~}/.profile
-    __install 644 {user,~}/.pythonrc
-    __install 644 {user,~}/.gitconfig
-    __install 644 {user,~}/.gitignore
 }
 
 function install_user
 {
     install_user_shells
-}
-
-#
-# user-extra
-#
-
-function install_user-extra_code
-{
-    printf "Installing user-extra code...\n"
-    __install 644 {user,~}/.config/VSCodium/User/settings.json
-    __install 644 {user,~}/.clang-tidy
-}
-
-function install_user-extra
-{
-    install_user-extra_code
 }
 
 #
@@ -128,6 +112,33 @@ function install_user-desktop
 }
 
 ################################################################################
+## HOME COMPONENTS
+################################################################################
+
+function install_home_shells
+{
+    install_user_shells # home_shells requires user_shells
+
+    printf "Installing home shells...\n"
+    __install 644 {home,~}/.profile
+    __install 644 {home,~}/.pythonrc
+    __install 644 {home,~}/.gitconfig
+    __install 644 {home,~}/.gitignore
+}
+
+function install_home_code
+{
+    printf "Installing home code...\n"
+    __install 644 {home,~}/.config/VSCodium/User/settings.json
+    __install 644 {home,~}/.clang-tidy
+}
+
+function install_home
+{
+    install_home_shells
+}
+
+################################################################################
 ## HELP
 ################################################################################
 
@@ -147,13 +158,13 @@ Install components of my config files
     system: ........... shells
     system-extra: ..... editors pacman
     user: ............. shells
-    user-extra: ....... code
     user-desktop: ..... kde
+    home: ............. shells code
 
 Optionally install an entire component category.
 
-For example; to install the entire 'user' category, and only 'code' from the 'user-extra' category
-'$ ./install.sh user user-extra_code'
+For example; to install the entire 'home' category, and only 'kde' from the 'user-desktop' category
+'$ ./install.sh home user-desktop_kde'
     "
 }
 
