@@ -186,6 +186,7 @@ extract()
             *.Z)        uncompress $@   ;;
             *.zip)      unzip $@        ;;
             *.7z)       7z x $@         ;;
+            *.deb)      ar x $@         ;;
             *)      echo "'$1' has an unknown file extension";;
         esac
     else
