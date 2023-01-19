@@ -8,8 +8,8 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"/run/user/$UID"}
 export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNTIME_DIR/bus"}
 
 ## Default editors
-export EDITOR=/usr/bin/nano
-export VISUAL=/usr/bin/gedit
+[ -x /usr/bin/nano  ] && export EDITOR=/usr/bin/nano
+[ -x /usr/bin/gedit ] && export VISUAL=/usr/bin/gedit
 
 # Add $HOME/.local/bin to the path
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
