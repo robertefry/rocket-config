@@ -32,9 +32,6 @@ fi
 ## OpenGL Variables
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 
-## JRE Runtime Options
-export JDK_JAVA_OPTIONS='$JDK_JAVA_OPTIONS -Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-
 ################################################################################
 ## XDG DIRECTORY STRUCTURE
 ################################################################################

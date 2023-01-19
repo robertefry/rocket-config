@@ -4,6 +4,9 @@ ROCKET_CONFIG=~/.config/rocket-config
 [ -r ${ROCKET_CONFIG}/profile.sh ] && . ${ROCKET_CONFIG}/profile.sh
 [ -r ${ROCKET_CONFIG}/fftools.sh ] && . ${ROCKET_CONFIG}/fftools.sh
 
+## JRE Runtime Options
+export JDK_JAVA_OPTIONS='-Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
 ## Use MangoHUD (Vulcan/OpenGL)
 export MANGOHUD=1
 export MANGOHUD_DLSYM=1
