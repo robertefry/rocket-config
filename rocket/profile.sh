@@ -186,6 +186,7 @@ extract()
             *.rar)              unrar x $@      ;;
             *.Z)                uncompress $@   ;;
             *.zip)              unzip $@        ;;
+            *.jar)              unzip $@        ;;
             *.7z)               7z x $@         ;;
             *.deb)              ar x $@         ;;
 
