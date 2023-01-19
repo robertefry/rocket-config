@@ -9,6 +9,12 @@ export MANGOHUD=1
 export MANGOHUD_DLSYM=1
 export ENABLE_VKBASALT=1
 
+# re-source my shell profile
+function reprofile
+{
+    source ~/.profile
+}
+
 ## Python
 if command -v python &> /dev/null
 then
