@@ -12,6 +12,7 @@ export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNT
 [ -x /usr/bin/gedit ] && export VISUAL=/usr/bin/gedit
 
 # Add $HOME/.local/bin to the path
+[ -r "$HOME/.local/bin/path.sh" ] && PATH="$(cat $HOME/.local/bin/path.sh):$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
 ## Libvirt
