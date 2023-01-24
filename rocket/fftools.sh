@@ -2,7 +2,7 @@
 
 fftools.duration()
 {
-    ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 $1
+    ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$1"
 }
 
 fftools.two_pass()
@@ -13,11 +13,11 @@ fftools.two_pass()
     # confirm overwrite destination if already exists
     if [ -f "$dst" ]
     then
-        read -p "The destination file ("$dst") already exists. Overwrite? [y/N] " -n 1 -r
+        read -p "The destination file, "$dst", already exists. Overwrite? [y/N] " -n 1 -r
         echo # move to a new line
         if [ "$REPLY" != "y" ] && [ "$REPLY" != "Y" ]
         then
-             printf "%s\n" "Aborting!"
+            printf "%s\n" "Aborting!"
             return -1
         fi
     fi
