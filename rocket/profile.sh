@@ -126,6 +126,14 @@ mktmp()
     rm -drf $TMPDIR
 )}
 
+## Automatically logout of a docker session
+dockerhub()
+{(
+    docker login
+    $SHELL
+    docker logout
+)}
+
 ## Grep
 alias grep="grep --color=auto"
 
