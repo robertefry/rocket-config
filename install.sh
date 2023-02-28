@@ -93,25 +93,26 @@ function install_user
 }
 
 #
-# user-desktop
+# user-extra
 #
 
-function install_user-desktop_gtk
+function install_user-extra_gtk
 {
-    printf "Installing user-desktop GTK...\n"
-    __install 644 {user/,~/}.config/gtk-3.0/gtk.
+    printf "Installing user-extra GTK...\n"
+    __install 644 {user/,~/}.config/gtk-3.0/gtk.css
     __install 644 {user/,~/}.config/gtk-4.0/gtk.css
 }
 
-function install_user-desktop_kde
+function install_user-extra_kde
 {
-    printf "Installing user-desktop KDE...\n"
+    printf "Installing user-extra KDE...\n"
     __install 644 {user/,~/}.local/share/konsole/Rocket.colorscheme
 }
 
-function install_user-desktop
+function install_user-extra
 {
-    install_user-desktop_kde
+    install_user-extra_gtk
+    install_user-extra_kde
 }
 
 ################################################################################
@@ -129,16 +130,25 @@ function install_home_shells
     __install 644 {home,~}/.gitignore
 }
 
-function install_home_code
+function install_home
+{
+    install_home_shells
+}
+
+#
+# system-extra
+#
+
+function install_home-extra_code
 {
     printf "Installing home code...\n"
     __install 644 {home,~}/.config/VSCodium/User/settings.json
     __install 644 {home,~}/.clang-tidy
 }
 
-function install_home
+function install_home-extra
 {
-    install_home_shells
+    install_home_code
 }
 
 ################################################################################
@@ -161,13 +171,14 @@ Install components of my config files
     system: ........... shells
     system-extra: ..... editors pacman
     user: ............. shells
-    user-desktop: ..... kde
-    home: ............. shells code
+    user-extra: ....... gtk kde
+    home: ............. shells
+    home-extra: ....... code
 
 Optionally install an entire component category.
 
-For example; to install the entire 'home' category, and only 'kde' from the 'user-desktop' category
-'$ ./install.sh home user-desktop_kde'
+For example; to install the entire 'home' category, and only 'kde' from the 'user-extra' category
+'$ ./install.sh home user-extra_kde'
     "
 }
 
