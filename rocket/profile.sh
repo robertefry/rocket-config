@@ -66,11 +66,21 @@ PS1_FMT0="\e[0m"
 [ $EUID = 0 ] && PS1_FMT3="\e[0;1;33m"    || PS1_FMT3="\e[0;1;34m"
 [ $EUID = 0 ] && PS1_ERR="\e[0;1;3;33m"   || PS1_ERR="\e[0;1;3;31m"
 
+## Enter a subshell, keeping track of the shell depth
+subshell()
+{(
+    export PS1_shell_depth=$(($PS1_shell_depth+1))
+    $SHELL
+)}
+
 PS1_prompt_command()
 {
     printf -v EXIT '%02x' $?    # 2-digit hex
 
     PS1="\[$PS1_FMT1\][\[$PS1_FMT2\]\u\[$PS1_FMT1\]@\H \[$PS1_FMT0\]\W\[$PS1_FMT1\]]"
+
+    ## Prepend the shell depth
+    PS1="\[$PS1_FMT3\]$PS1_shell_depth\[$PS1_FMT1\]$PS1"
 
     ## Append Git information
     if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
@@ -122,7 +132,7 @@ mktmp()
 {(
     TMPDIR=$(mktemp -d)
     cd $TMPDIR
-    $SHELL
+    subshell
     rm -drf $TMPDIR
 )}
 
@@ -130,7 +140,7 @@ mktmp()
 dockerhub()
 {(
     docker login
-    $SHELL
+    subshell
     docker logout
 )}
 
