@@ -1,8 +1,8 @@
 [Plasma]
-GLOBAL="Materia Dark"
-PLASMA_STYLE="Layan"
-PLASMA_GTK="Fluent-dark-compact"
-PLASMA_COLORS="Breeze Dark"
+GLOBAL="Fluent Dark"
+PLASMA_STYLE="Fluent"
+PLASMA_GTK="Fluent-Dark-compact"
+PLASMA_COLORS="Fluent Dark"
 PLASMA_WINDOW_DECORATIONS="Midnight (Ribon)"
 ICONS="Fluent dark"
 CURSORS="Bibata-Modern-Ice"
