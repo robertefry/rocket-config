@@ -24,10 +24,11 @@ export VCPKG_DISABLE_METRICS=1
 # Use the fcitx input method framework
 if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
 then
+    export INPUT_METHOD=fcitx
     export GTK_IM_MODULE=fcitx
     export QT_IM_MODULE=fcitx
     export SDL_IM_MODULE=fcitx
-    export XMODIFIERS='@im=fcitx'
+    export XMODIFIERS=@im=fcitx
 fi
 
 ## OpenGL Variables
