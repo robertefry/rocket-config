@@ -26,10 +26,13 @@ then
 fi
 
 ## VSCodium
+if [ "$(flatpak list | grep com.vscodium.codium)" != "" ]
+then
+    alias vscodium='flatpak run com.vscodium.codium'
+fi
 if command -v vscodium &> /dev/null
 then
     alias code=vscodium
-    export VISUAL=$(which vscodium)
 fi
 
 ## Youtube Downloader
