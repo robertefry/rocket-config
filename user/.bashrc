@@ -3,6 +3,9 @@
 shopt -s dotglob
 shopt -s globstar
 
+# Use job control
+set -m
+
 #
 # If not running interactively, don't do anything
 #
