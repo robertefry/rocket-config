@@ -26,7 +26,8 @@ then
 fi
 
 ## VSCodium
-if [ "$(flatpak list | grep com.vscodium.codium)" != "" ]
+if command -v flatpak &> /dev/null \
+    && [ "$(flatpak list | grep com.vscodium.codium)" != "" ]
 then
     alias vscodium='flatpak run com.vscodium.codium'
 fi
