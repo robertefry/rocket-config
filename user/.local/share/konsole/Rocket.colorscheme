@@ -1,11 +1,11 @@
 [Background]
-Color=35,35,42
+Color=35,35,35
 
 [BackgroundFaint]
-Color=35,35,42
+Color=35,35,35
 
 [BackgroundIntense]
-Color=35,35,42
+Color=35,35,35
 
 [Color0]
 Color=57,57,69
@@ -89,8 +89,12 @@ Color=231,251,255
 Color=231,251,255
 
 [General]
+Anchor=0.5,0.5
 Blur=true
 ColorRandomization=false
 Description=Rocket Color Scheme
-Opacity=0.95
+FillStyle=Tile
+Opacity=0.67
 Wallpaper=
+WallpaperFlipType=NoFlip
+WallpaperOpacity=1
