@@ -1,3 +1,4 @@
+
 {
     "workbench.colorTheme": "FlatUI Dark",
     "workbench.colorCustomizations": {
@@ -36,6 +37,9 @@
         "editor.tabSize": 2,
     },
     "[php,html,css]": {
+        "editor.tabSize": 2,
+    },
+    "[json]": {
         "editor.tabSize": 2,
     },
 
