@@ -16,7 +16,7 @@ export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-"unix:path=$XDG_RUNT
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
 ## Libvirt
-export LIBVIRT_DEFAULT_URI="qemu:///user"
+export LIBVIRT_DEFAULT_URI="qemu:///session"
 
 ## Disable vcpkg telemetry
 export VCPKG_DISABLE_METRICS=1
