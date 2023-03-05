@@ -175,15 +175,21 @@ cap() { tee /tmp/capture-$UID.out; }
 ret() { touch /tmp/capture-$UID.out; cat /tmp/capture-$UID.out; }
 rmcap() { rm /tmp/capture-$UID.out; }
 
-## Change default `lsblk` columns
+## List information about block devices
 lsblk()
 {
-    if echo "$*" | grep -Eq "(\s|^)-";
+    if echo "$*" | grep -Eq "(\s|^)-"; # only change the default columns
     then
         "$(which lsblk)" $@
     else
-        "$(which lsblk)" $@ -o NAME,RM,RO,SIZE,FSUSE%,FSTYPE,PTTYPE,TYPE,OWNER,GROUP,MODE,FSROOTS,MOUNTPOINTS
+        "$(which lsblk)" $@ -o NAME,RM,RO,LABEL,UUID,FSTYPE,FSSIZE,FSUSE%
     fi
+}
+
+## List information about mounted block devices
+lsmnt()
+{
+    lsblk -o NAME,LABEL,FSSIZE,FSUSE%,FSUSED,FSAVAIL,FSROOTS,MOUNTPOINTS
 }
 
 ## Extract an archive
