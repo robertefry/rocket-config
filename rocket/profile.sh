@@ -189,7 +189,7 @@ lsblk()
 ## List information about mounted block devices
 lsmnt()
 {
-    lsblk -o NAME,LABEL,FSSIZE,FSUSE%,FSUSED,FSAVAIL,FSROOTS,MOUNTPOINTS
+    lsblk $@ -o NAME,LABEL,FSSIZE,FSUSE%,FSUSED,FSAVAIL,FSROOTS,MOUNTPOINTS
 }
 
 ## Extract an archive
