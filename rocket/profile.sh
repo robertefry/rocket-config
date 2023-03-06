@@ -58,6 +58,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+# bash history
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
+
 # gnupg
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
