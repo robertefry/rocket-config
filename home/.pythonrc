@@ -7,7 +7,7 @@ try:
     import readline
     import atexit
 
-    history = os.path.join(os.environ['XDG_STATE_HOME'], 'python_history')
+    history = os.path.join(os.environ['XDG_STATE_HOME'], 'python/history')
     try:
         readline.read_history_file(history)
     except OSError:
