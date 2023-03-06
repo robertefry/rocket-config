@@ -71,6 +71,12 @@ export LESSKEY="$XDG_CONFIG_HOME/less/keys"
 # mplayer
 export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 
+# subversion
+export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
+
+# rust
+export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
+
 ################################################################################
 ## ENVIRONMENT VARIABLES
 ################################################################################
