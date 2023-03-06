@@ -53,30 +53,28 @@ export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=$XDG_RUNTIME_DIR/bus}"
 
 # XDG home directories
-export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# bash history
+# bash
 export HISTFILE="${XDG_STATE_HOME}/bash/history"
-
 # gnupg
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-
 # ICEauthority
-export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
-
+export ICEAUTHORITY="$XDG_RUNTIME_DIR/ICEauthority"
+# XAuthority
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 # less
-export LESSHISTFILE="$XDG_CONFIG_HOME/less/history"
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/keys"
-
+# gtk
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 # mplayer
 export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
-
 # subversion
 export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
-
 # rust
 export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
 
