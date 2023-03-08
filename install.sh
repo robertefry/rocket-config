@@ -1,161 +1,165 @@
 #!/bin/bash
 
-# CD into the directory of this script, henceforth the current-working directory
+## CD into the directory of this script, henceforth the current-working directory
 cd "$(dirname "$0")"
 
 STAMP=$(date +"%y%m%d%H%M%S")
 
-function __install
+__install()
 {
-    [ "${_arg_backup:-on}" == "off" ] && [ -f $3 ] && mv $3{,.$STAMP~}
+    _arg_pem="$1"
+    _arg_src="$2"
+    _arg_dst="$3"
 
-    printf " -> installing %s... " "$3"
-    [ "${_arg_dryrun:-on}" == "off" ] && install -Dm $1 $2 $3
+    ## backup if necessary
+    [ "${_arg_backup:-on}" == "off" ] && [ -f "$_arg_dst" ] && mv "$_arg_dst"{,.$STAMP~}
+
+    ## install
+    printf " -> installing %s... " "$_arg_dst"
+    [ "${_arg_dryrun:-on}" == "off" ] && install -Dm "$_arg_pem" "$_arg_src" "$_arg_dst"
     printf "Done!\n"
 }
 
-################################################################################
-## ROCKET COMPONENTS
-################################################################################
-
-function install_rocket_system
+__append()
 {
-    printf "Installing rocket system...\n"
-    __install 644 {rocket,/etc/rocket-config}/profile.sh
-    __install 644 {rocket,/etc/rocket-config}/fftools.sh
+    _arg_src="$1"
+    _arg_dst="$2"
+    _arg_num="${3:-+1}"
+
+    ## append
+    printf " -> appending %s... " "$_arg_dst"
+    [ "${_arg_dryrun:-on}" == "off" ] && tail "$_arg_num" "$_arg_src" >> "$_arg_dst"
+    printf "Done!\n"
 }
 
-function install_rocket_user
+__append-heredoc()
 {
-    printf "Installing rocket user...\n"
-    __install 644 {rocket,~/.config/rocket-config}/profile.sh
-    __install 644 {rocket,~/.config/rocket-config}/fftools.sh
+    _arg_dst="$1"
+    _arg_doc="$2"
+
+    ## append
+    printf " -> appending %s... " "$_arg_dst"
+    [ "${_arg_dryrun:-on}" == "off" ] && echo "$_arg_doc" >> "$_arg_dst"
+    printf "Done!\n"
 }
 
 ################################################################################
 ## SYSTEM COMPONENTS
 ################################################################################
 
-function install_system_shells
-{
-    install_rocket_system # system_shells requires rocket_config
+# note: moved to scripts directory
 
-    printf "Installing system shells...\n"
-    __install 644 {system,}/etc/profile.d/rocket-config.sh
-}
-
-function install_system
-{
-    install_system_shells
-}
-
-#
-# system-extra
-#
-
-function install_system-extra_editors
-{
-    printf "Installing system-extra editors...\n"
-    __install 644 {system,}/etc/nanorc
-}
-
-function install_system-extra_pacman
-{
-    printf "Installing system-extra pacman...\n"
-    __install 644 {system,}/etc/pacman.conf
-    __install 644 {system,}/etc/pacman.d/hooks/count-pacnew-files.hook
-    __install 755 {system,}/etc/pacman.d/scripts/count-pacnew-files.sh
-}
-
-function install_system-extra
-{
-    install_system-extra_editors
-    install_system-extra_pacman
-}
+# todo: system-archlinux
+# todo: system-grub
+# todo: system-skel = user-shells
 
 ################################################################################
 ## USER COMPONENTS
 ################################################################################
 
-function install_user_shells
+install-user-shells()
 {
-    install_rocket_user # user_shells requries rocket_user
-
     printf "Installing user shells...\n"
-    __install 644 {user,~}/.bash_profile
-    __install 644 {user,~}/.bashrc
-    __install 644 {user,~}/.profile
+
+    __install 644 {resources/home-user/,~}/.config/rocket-config/profile.sh
+    __install 644 {resources/home-user/,~}/.bash_login
+    __install 644 {resources/home-user/,~}/.bash_logout
+    __install 644 {resources/home-user/,~}/.bash_profile
+    __install 644 {resources/home-user/,~}/.bashrc
 }
 
-function install_user
+install-user-tools()
 {
-    install_user_shells
-}
+    printf "Installing user shell tools...\n"
+
+    __install 644 {scripts/,~/.config/rocket-config/}/tools.editors.sh
+    __install 644 {scripts/,~/.config/rocket-config/}/tools.ffmpeg.sh
+
+    __append-heredoc ~/.bashrc "\
 
 #
-# user-extra
+# home-user tools
 #
-
-function install_user-extra_gtk
-{
-    printf "Installing user-extra GTK...\n"
-    __install 644 {user/,~/}.config/gtk-3.0/gtk.css
-    __install 644 {user/,~/}.config/gtk-4.0/gtk.css
+[[ -r ~/.config/rocket-config/tools.editors.sh ]] && . ~/.config/rocket-config/tools.editors.sh
+[[ -r ~/.config/rocket-config/tools.ffmpeg.sh ]] && . ~/.config/rocket-config/tools.ffmpeg.sh
+"
 }
 
-function install_user-extra_kde
+install-user()
 {
-    printf "Installing user-extra KDE...\n"
-    __install 644 {user/,~/}.local/share/konsole/Rocket.colorscheme
-}
-
-function install_user-extra
-{
-    install_user-extra_gtk
-    install_user-extra_kde
+    install-user-shells
+    install-user-tools
 }
 
 ################################################################################
 ## HOME COMPONENTS
 ################################################################################
 
-function install_home_shells
+install-home-shells()
 {
-    install_user_shells # home_shells requires user_shells
+    install-user-shells # home_shells requires user_shells
+    install-user-tools  # home_shells requires user_tools
 
     printf "Installing home shells...\n"
-    __install 644 {home,~}/.profile
-    __install 644 {home,~}/.pythonrc
-    __install 644 {home,~}/.gitconfig
-    __install 644 {home,~}/.gitignore
+
+    __append {resources/home-home/,~}/.bashrc
+    __install 644 {resources/home-home/,~}/.config/rocket-config/profile-home.sh
+    __install 644 {resources/home-home/,~}/.pythonrc
+    __install 644 {resources/home-home/,~}/.gitconfig
+    __install 644 {resources/home-home/,~}/.gitignore
 }
 
-function install_home
+install-home()
 {
-    install_home_shells
+    install-home-shells
 }
 
 #
-# system-extra
+# home-extra
 #
 
-function install_home-extra_code
+install-home_extra-code()
 {
-    printf "Installing home code...\n"
-    __install 644 {home,~}/.config/VSCodium/User/settings.json
-    __install 644 {home,~}/.clang-tidy
+    printf "Installing home-extra code...\n"
+
+    __install 644 {resources/home-home,~}/.config/VSCodium/User/settings.json
+    __install 644 {resources/home-home,~}/.clang-tidy
 }
 
-function install_home-extra
+install-home_extra()
 {
-    install_home_code
+    install-home_extra-code
+}
+
+#
+# home-desktop 
+#
+
+install-home_desktop-gtk()
+{
+    printf "Installing home-desktop GTK...\n"
+
+    __install 644 {resources/home-home/,~}/.config/gtk-3.0/gtk.css
+    __install 644 {resources/home-home/,~}/.config/gtk-4.0/gtk.css
+}
+
+install-home_desktop-kde()
+{
+    printf "Installing home-extra KDE...\n"
+    __install 644 {resources/home-home/,~}/.local/share/konsole/Rocket.colorscheme
+}
+
+install-home_desktop()
+{
+    install-home_desktop-gtk
+    install-home_desktop-kde
 }
 
 ################################################################################
 ## HELP
 ################################################################################
 
-function print_help
+print_help()
 {
     printf "%s\n" "\
 Install components of my config files
@@ -167,18 +171,15 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
-    rocket: ........... system user
-    system: ........... shells
-    system-extra: ..... editors pacman
-    user: ............. shells
-    user-extra: ....... gtk kde
+    user: ............. shells tools
     home: ............. shells
-    home-extra: ....... code
+    home_extra: ....... code
+    home_desktop: ..... gtk kde
 
 Optionally install an entire component category.
 
-For example; to install the entire 'home' category, and only 'kde' from the 'user-extra' category
-'$ ./install.sh home user-extra_kde'
+For example; to install the entire 'home' category, and only 'kde' from the 'home_desktop' category
+'$ ./install.sh home home_desktop-kde'
     "
 }
 
@@ -193,7 +194,7 @@ _arg_components=()
 _arg_dryrun="off"
 _arg_backup="on"
 
-function parse_commandline
+parse_commandline()
 {
     die()
     {
@@ -283,7 +284,7 @@ function parse_commandline
 
     for component in "${_arg_components[@]}"
     do
-        [ "$(type -t install_$component)" == "function" ] || die "The component '$component' is not recognised."
+        [ "$(type -t install-$component)" == "function" ] || die "The component '$component' is not recognised."
     done
 }
 parse_commandline "$@"
@@ -294,5 +295,5 @@ parse_commandline "$@"
 
 for component in "${_arg_components[@]}"
 do
-    install_$component
+    install-$component
 done

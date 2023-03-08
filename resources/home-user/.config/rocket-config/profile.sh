@@ -3,52 +3,50 @@
 ## TERMINAL PROMPT
 ################################################################################
 
-export PS1_FMT0="\e[0m"
-[ $EUID = 0 ] && export PS1_FMT1="\e[0;1;31m"   || export PS1_FMT1="\e[0;1;36m"
-[ $EUID = 0 ] && export PS1_FMT2="\e[0;1;3;31m" || export PS1_FMT2="\e[0;1;3;36m"
-[ $EUID = 0 ] && export PS1_FMT3="\e[0;1;33m"   || export PS1_FMT3="\e[0;1;34m"
-[ $EUID = 0 ] && export PS1_ERR="\e[0;1;3;33m"  || export PS1_ERR="\e[0;1;3;31m"
-
-## Enter a subshell, keeping track of the shell depth
+# Enter a subshell, keeping track of the shell depth
 subshell()
 {(
     export PS1_shell_depth=$(($PS1_shell_depth+1))
     $SHELL
 )}
-export -f subshell
 
 PS1_prompt_command()
 {
+    PS1_FMT0="\e[0m"
+    [ $(id -u) = 0 ] && PS1_FMT1="\e[0;1;31m"   || PS1_FMT1="\e[0;1;36m"
+    [ $(id -u) = 0 ] && PS1_FMT2="\e[0;1;3;31m" || PS1_FMT2="\e[0;1;3;36m"
+    [ $(id -u) = 0 ] && PS1_FMT3="\e[0;1;33m"   || PS1_FMT3="\e[0;1;34m"
+    [ $(id -u) = 0 ] && PS1_FMTE="\e[0;1;3;33m" || PS1_FMTE="\e[0;1;3;31m"
+
     printf -v EXIT '%02x' $?    # 2-digit hex exit code
 
     PS1="\[$PS1_FMT1\][\[$PS1_FMT2\]\u\[$PS1_FMT1\]@\H \[$PS1_FMT0\]\W\[$PS1_FMT1\]]"
 
-    ## Prepend the shell depth
+    # Prepend the shell depth
     PS1="\[$PS1_FMT3\]$PS1_shell_depth\[$PS1_FMT1\]$PS1"
 
-    ## Append Git information
+    # Append Git information
     if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
     then
         local branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
         PS1="$PS1 \[$PS1_FMT1\](\[$PS1_FMT3\]$branch\[$PS1_FMT1\])"
     fi
 
-    ## Prepend return value (if nonzero)
-    if [ $EXIT != "00" ]
+    # Prepend return value (if nonzero)
+    if [ "$EXIT" != "00" ]
     then
-        PS1="\[$PS1_ERR\]$EXIT $PS1"
+        PS1="\[$PS1_FMTE\]$EXIT $PS1"
     fi
 
     export PS1="$PS1\[$PS1_FMT1\]\\$ \[\$(tput sgr0)\]"
 }
-export -f PS1_prompt_command
 export PROMPT_COMMAND=PS1_prompt_command
 
 ################################################################################
 ## XDG DIRECTORY STRUCTURE
 ################################################################################
 
-## DBUS Session
+# DBUS session
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=$XDG_RUNTIME_DIR/bus}"
 
@@ -58,56 +56,20 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# bash
-export HISTFILE="${XDG_STATE_HOME}/bash/history"
-# gnupg
-export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-# ICEauthority
-export ICEAUTHORITY="$XDG_RUNTIME_DIR/ICEauthority"
-# XAuthority
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-# less
-export LESSHISTFILE="$XDG_STATE_HOME/less/history"
-export LESSKEY="$XDG_CONFIG_HOME/less/keys"
-# gtk
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-# mplayer
-export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
-# subversion
-export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
-# rust
-export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
-
 ################################################################################
 ## ENVIRONMENT VARIABLES
 ################################################################################
 
-## Default editors
+# Default editors
 [ -z "$EDITOR" ] && [ -x "/usr/bin/nano"  ] && export EDITOR="/usr/bin/nano"
 [ -z "$VISUAL" ] && [ -x "/usr/bin/gedit" ] && export VISUAL="/usr/bin/gedit"
 
-# Add $HOME/.local/bin to the path
-[ -r "$HOME/.local/bin/path.sh" ] && PATH="$(cat $HOME/.local/bin/path.sh):$PATH"
-[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+# Add ~/.local/bin to the path
+[ -r ~/.local/bin/path.sh ] && PATH="$(cat ~/.local/bin/path.sh):$PATH"
+[ -d ~/.local/bin ] && PATH="~/.local/bin:$PATH"
 
-## Libvirt
-export LIBVIRT_DEFAULT_URI="qemu:///session"
-
-## Disable vcpkg telemetry
+# Disable vcpkg telemetry
 export VCPKG_DISABLE_METRICS=1
-
-# Use the fcitx input method framework
-if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
-then
-    export INPUT_METHOD=fcitx
-    export GTK_IM_MODULE=fcitx
-    export QT_IM_MODULE=fcitx
-    export SDL_IM_MODULE=fcitx
-    export XMODIFIERS=@im=fcitx
-fi
-
-## OpenGL Variables
-export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 
 ################################################################################
 ## ALIASES & FUNCTIONS

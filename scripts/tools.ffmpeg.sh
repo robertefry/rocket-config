@@ -1,11 +1,11 @@
 #!/bin/bash
 
-fftools.duration()
+tools.ffmpeg.duration()
 {
     ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$1"
 }
 
-fftools.two_pass()
+tools.ffmpeg.two_pass()
 {
     src="$1";shift
     dst="$1";shift

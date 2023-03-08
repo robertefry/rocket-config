@@ -1,8 +1,14 @@
+#
+# home-home
+#
+[[ -r ~/.config/rocket-config/profile-home.sh ]] && . ~/.config/rocket-config/profile-home.sh
 
-## Source rocket
-ROCKET_CONFIG=~/.config/rocket-config
-[ -r ${ROCKET_CONFIG}/profile.sh ] && . ${ROCKET_CONFIG}/profile.sh
-[ -r ${ROCKET_CONFIG}/fftools.sh ] && . ${ROCKET_CONFIG}/fftools.sh
+# Don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+# Set the history length - See HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 ## JRE Runtime Options
 export JDK_JAVA_OPTIONS='-Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
@@ -13,9 +19,9 @@ export MANGOHUD_DLSYM=1
 export ENABLE_VKBASALT=1
 
 # re-source my shell profile
-function reprofile
+reprofile()
 {
-    source ~/.profile
+    source ~/.bash_profile
 }
 
 ## Python
@@ -41,6 +47,8 @@ if command -v yt-dlp &> /dev/null; then
     alias ytdl=yt-dlp
 elif command -v youtube-dl &> /dev/null; then
     alias ytdl=youtube-dl
+else
+    echo ytdl: backend missing, consider installing yt-dlp or youtube-dl
 fi
 
 ## List Steam Games and IDs
