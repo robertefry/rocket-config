@@ -7,6 +7,8 @@
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 # gnupg
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+# gtk
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 check_xdg()
 {
