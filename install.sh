@@ -11,13 +11,27 @@ __install()
     _arg_src="$2"
     _arg_dst="$3"
 
-    ## backup if necessary
-    [ "${_arg_backup:-on}" == "off" ] && [ -f "$_arg_dst" ] && mv "$_arg_dst"{,.$STAMP~}
-
-    ## install
     printf " -> installing %s... " "$_arg_dst"
-    [ "${_arg_dryrun:-on}" == "off" ] && install -Dm "$_arg_pem" "$_arg_src" "$_arg_dst"
+    (
+        ## if in drymode, do nothing
+        if [ "${_arg_dryrun:-on}" == "on" ]
+        then
+            printf "(drymode) "
+            exit
+        fi
+
+        ## backup if necessary
+        if [ "${_arg_backup:-on}" == "on" ]
+        then
+            printf "(backup) "
+            [ -f "$_arg_dst" ] && mv "$_arg_dst"{,.$STAMP~}
+        fi
+
+        ## install
+        install -Dm "$_arg_pem" "$_arg_src" "$_arg_dst"
+    )
     printf "Done!\n"
+
 }
 
 __append()
@@ -26,9 +40,18 @@ __append()
     _arg_dst="$2"
     _arg_num="${3:-+1}"
 
-    ## append
     printf " -> appending %s... " "$_arg_dst"
-    [ "${_arg_dryrun:-on}" == "off" ] && tail "$_arg_num" "$_arg_src" >> "$_arg_dst"
+    (
+        ## if in drymode, do nothing
+        if [ "${_arg_dryrun:-on}" == "on" ]
+        then
+            printf "(drymode) "
+            exit
+        fi
+
+        ## append
+        tail "$_arg_num" "$_arg_src" >> "$_arg_dst"
+    )
     printf "Done!\n"
 }
 
@@ -37,9 +60,18 @@ __append-heredoc()
     _arg_dst="$1"
     _arg_doc="$2"
 
-    ## append
     printf " -> appending %s... " "$_arg_dst"
-    [ "${_arg_dryrun:-on}" == "off" ] && echo "$_arg_doc" >> "$_arg_dst"
+    (
+        ## if in drymode, do nothing
+        if [ "${_arg_dryrun:-on}" == "on" ]
+        then
+            printf "(drymode) "
+            exit
+        fi
+
+        ## append
+        echo "$_arg_doc" >> "$_arg_dst"
+    )
     printf "Done!\n"
 }
 
