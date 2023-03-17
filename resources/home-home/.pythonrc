@@ -4,8 +4,8 @@ try:
     import os
     clear = lambda:os.system("clear")
 
-    import readline
     import atexit
+    import readline
 
     history = os.path.join(os.environ['XDG_STATE_HOME'], 'python/history')
     try:

@@ -5,10 +5,16 @@
 
 # bash
 export HISTFILE="$XDG_STATE_HOME"/bash/history
+# python
+export PYTHONSTARTUP="$HOME"/.pythonrc
 # gnupg
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 # gtk
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+# nvidia
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+# android
+export ANDROID_HOME="$XDG_DATA_HOME"/android
 
 check_xdg()
 {
