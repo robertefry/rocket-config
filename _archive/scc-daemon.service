@@ -5,7 +5,7 @@ Description=Start scc-daemon on login
 ExecStart=/usr/bin/scc-daemon start
 ExecStop=/usr/bin/scc-daemon stop
 RemainAfterExit=yes
-PIDFile=$HOME/.config/scc/daemon.pid
+PIDFile=${$XDG_STATE_HOME:-$HOME/.local/state}/scc/daemon.pid
 
 [Install]
 WantedBy=default.target
