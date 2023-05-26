@@ -104,6 +104,7 @@ install-user-tools()
 {
     printf "Installing user shell tools...\n"
 
+    __install 644 {scripts/,~/.config/rocket-config/}/tools.system.sh
     __install 644 {scripts/,~/.config/rocket-config/}/tools.editors.sh
     __install 644 {scripts/,~/.config/rocket-config/}/tools.ffmpeg.sh
 
@@ -112,6 +113,7 @@ install-user-tools()
 #
 # home-user tools
 #
+[[ -r ~/.config/rocket-config/tools.system.sh ]] && . ~/.config/rocket-config/tools.system.sh
 [[ -r ~/.config/rocket-config/tools.editors.sh ]] && . ~/.config/rocket-config/tools.editors.sh
 [[ -r ~/.config/rocket-config/tools.ffmpeg.sh ]] && . ~/.config/rocket-config/tools.ffmpeg.sh
 "
