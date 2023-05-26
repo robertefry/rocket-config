@@ -21,6 +21,13 @@
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 120,
 
+    "explorer.sortOrder": "default",
+    "explorer.sortOrderLexicographicOptions": "unicode",
+
+    "editor.tokenColorCustomizations": {
+        "comments": "#FF0000"
+    },
+
     "files.enableTrash": false,
     "files.associations": {
         "*.fwd": "cpp",
@@ -67,31 +74,6 @@
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "C_Cpp.autoAddFileAssociations": false,
 
-    // LaTeX
-    "latex.linter.enabled": false,
-    "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.intellisense.package.enabled": true,
-    "latex-workshop.latex.tools": [
-        {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "-xelatex",
-                "-pdf",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
-            ]
-        }
-    ],
-    "latex-workshop.latex.magic.args": [
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "-file-line-error",
-        "%DOC%"
-    ],
-
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Spell-Check Dictionary Definitions
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -115,6 +97,7 @@
         "codomain",
         "coeffs",
         "cofinite",
+        "Color",
         "Colorization",
         "commutability",
         "complementation",
@@ -129,12 +112,14 @@
         "Cryptosystem",
         "cryptosystems",
         "Cryptosystems",
+        "delist",
         "demangled",
         "desynchronize",
         "eigen",
         "epimorphism",
         "epimorphisms",
         "extreemly",
+        "favorite",
         "Functors",
         "GLbitfield",
         "GLboolean",
@@ -198,6 +183,7 @@
         "primality",
         "quantale",
         "quantales",
+        "Reinterpreter",
         "Replacer",
         "repr",
         "robertfry",
@@ -220,6 +206,7 @@
         "totient",
         "Trinomial",
         "Trinomials",
+        "Uncopyable",
         "uncountably",
         "Viktor",
         "vsync",
