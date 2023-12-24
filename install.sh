@@ -166,7 +166,7 @@ install-home_extra()
 }
 
 #
-# home-desktop 
+# home-desktop
 #
 
 install-home_desktop-gtk()

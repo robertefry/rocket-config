@@ -5,7 +5,6 @@
         "editorRuler.foreground": "#323232",
         "editor.background": "#222222",
     },
-    "workbench.editor.untitled.hint": "hidden",
 
     "window.zoomLevel": 1,
 
@@ -25,12 +24,15 @@
     "explorer.sortOrderLexicographicOptions": "unicode",
 
     "editor.tokenColorCustomizations": {
-        "comments": "#FF0000"
+        "comments": "#ff0000"
     },
 
     "files.enableTrash": false,
     "files.associations": {
         "*.fwd": "cpp",
+        "*.clang-tidy": "yaml",
+        ".doxyfile": "shellscript",
+        ".doxyfile-in": "shellscript"
     },
 
     "[cmake]": {
@@ -59,20 +61,38 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
 
+    "sync.quietSync": true,
+    "sync.removeExtensions": false,
+    "sync.syncExtensions": true,
+
+    "browser-preview.chromeExecutable": "/home/robertfry/.local/bin/chromium",
     "browser-preview.startUrl": "https://searx.robertfry.xyz",
+
+    "platformio-ide.autoOpenPlatformIOIniFile": false,
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Language Specific Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
     // CMake
-    "cmake.configureOnOpen": true,
+    "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
     "cmake.buildDirectory": "${workspaceFolder}/.build",
+
+    // Clang-Tidy
+    "clang-tidy.buildPath": "${workspaceFolder}/.build",
 
     // C/C++
     "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "C_Cpp.autoAddFileAssociations": false,
+
+    // Rust
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+    "rust-analyzer.inlayHints.parameterHints.enable": false,
+    "rust-analyzer.inlayHints.renderColons": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Spell-Check Dictionary Definitions
@@ -80,7 +100,14 @@
 
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
+        "-Wconversion",
+        "-Weffc++",
+        "-Werror",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wshadow",
         "abelian",
+        "analyzer",
         "arduino",
         "atmega",
         "automagically",
@@ -89,8 +116,10 @@
         "bibtex",
         "bijective",
         "bijectivity",
+        "bugprone",
         "Cayley",
         "Centered",
+        "chrono",
         "ciphertext",
         "clusterable",
         "CMAKE",
@@ -108,6 +137,7 @@
         "covec",
         "Covector",
         "Covectors",
+        "cppcoreguidelines",
         "cryptosystem",
         "Cryptosystem",
         "cryptosystems",
@@ -115,11 +145,14 @@
         "delist",
         "demangled",
         "desynchronize",
+        "doxyfile",
         "eigen",
+        "elem",
         "epimorphism",
         "epimorphisms",
         "extreemly",
         "favorite",
+        "foobar",
         "Functors",
         "GLbitfield",
         "GLboolean",
@@ -140,7 +173,9 @@
         "GLvoid",
         "groupoid",
         "hashable",
+        "hicpp",
         "homomorphic",
+        "idents",
         "IMGUI",
         "infimum",
         "injective",
@@ -156,7 +191,9 @@
         "Kerbin",
         "keypair",
         "keypairs",
+        "kthxbie",
         "labeled",
+        "lockfree",
         "Maclaurin",
         "malloc",
         "mesg",
@@ -169,13 +206,16 @@
         "Moodle",
         "Morphism",
         "Morphisms",
+        "Nativefier",
         "nodiscard",
         "Noetherian",
+        "NOLINTNEXTLINE",
         "nonumber",
         "numpy",
         "OPENGL",
         "ostr",
         "PAPI",
+        "platformio",
         "poset",
         "posets",
         "prepend",
@@ -183,10 +223,13 @@
         "primality",
         "quantale",
         "quantales",
+        "rect",
         "Reinterpreter",
         "Replacer",
         "repr",
+        "robertefry",
         "robertfry",
+        "rockhopper",
         "Semigroup",
         "Semigroups",
         "Semiring",
@@ -196,6 +239,7 @@
         "stdev",
         "struct",
         "subarray",
+        "subexpr",
         "Subring",
         "Subrings",
         "Sunflare",
@@ -208,6 +252,7 @@
         "Trinomials",
         "Uncopyable",
         "uncountably",
+        "Uninit",
         "Viktor",
         "vsync",
         "Wwindow",
