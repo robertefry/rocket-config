@@ -108,6 +108,21 @@ mktmp()
     rm -drf $TMPDIR
 )}
 
+## Follow a chain of symlinks
+follow()
+{
+    local target="$1"
+    local linked="$target"
+
+    while [ -L "$linked" ];
+    do
+        target=$(readlink "$linked")
+        linked="$target"
+    done
+
+    echo "$target"
+}
+
 ## Automatically logout of a docker session
 dockerhub()
 {(
