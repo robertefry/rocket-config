@@ -3,13 +3,6 @@
 ## TERMINAL PROMPT
 ################################################################################
 
-# Enter a subshell, keeping track of the shell depth
-subshell()
-{(
-    export PS1_shell_depth=$(($PS1_shell_depth+1))
-    $SHELL
-)}
-
 PS1_prompt_command()
 {
     printf -v EXIT '%02x' $?    # 2-digit hex exit code
@@ -22,8 +15,8 @@ PS1_prompt_command()
 
     PS1="\[$PS1_FMT1\][\[$PS1_FMT2\]\u\[$PS1_FMT1\]@\H \[$PS1_FMT0\]\W\[$PS1_FMT1\]]"
 
-    # Prepend the shell depth
-    PS1="\[$PS1_FMT3\]$PS1_shell_depth\[$PS1_FMT1\]$PS1"
+    # Prepend the shell level if inside a subshell
+    [ "$SHLVL" -gt 1 ] && PS1="\[$PS1_FMT3\]$SHLVL\[$PS1_FMT1\]$PS1"
 
     # Append Git information
     if command -v git &>/dev/null && [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]
@@ -110,7 +103,7 @@ mktmp()
 {(
     TMPDIR=$(mktemp -d)
     cd $TMPDIR
-    subshell
+    $SHELL
     rm -drf $TMPDIR
 )}
 
@@ -133,7 +126,7 @@ follow()
 dockerhub()
 {(
     docker login
-    subshell
+    $SHELL
     docker logout
 )}
 
