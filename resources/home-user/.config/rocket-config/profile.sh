@@ -143,12 +143,14 @@ find()
         return 255
     fi
 
-    /usr/bin/find "$@" -not -path "*.snapshots*" 2> "$TMPFILE"
+    /usr/bin/find "$@" -not -path "*/.snapshots/*" 2> "$TMPFILE"
 
     COUNT=$(grep -c "Permission denied" "$TMPFILE")
-    if [ "$COUNT" -ne 0 ]; then
+    if [ "$COUNT" -gt 0 ]; then
         printf "'\e[31m'%s" "Suppressed $COUNT permission errors" >&2
     fi
+
+    printf "'\e[31m'error: %s\n" "$(grep -v "Permission denied" "$TMPFILE" | awk 'NF')"
     rm "$TMPFILE"
 }
 
