@@ -233,7 +233,7 @@ Use: tools.editors.comments <file-in> [arguments] [flags] [patterns]
         local dlm="$_arg_delim"
 
         local _sed_script="${dlm}${ptn}${dlm}s${dlm}${src}${dlm}${dst}${dlm}${flg}"
-        sed -i $_arg_file -e "$_sed_script"
+        sed -i "$_arg_file" -e "$_sed_script"
     }
 
     local pattern=""

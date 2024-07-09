@@ -2,6 +2,6 @@
 # ~/.bash_profile
 #
 
-[[ -f ~/.bash_login ]] && . ~/.bash_login
+[ -f "$HOME/.bash_login" ] && . "$HOME/.bash_login"
 
 # add your custom here

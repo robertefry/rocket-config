@@ -1,37 +1,36 @@
 #!/bin/bash
 
-## CD into the directory of this script, henceforth the current-working directory
-cd "$(dirname "$0")"
+## CD into the directory of this script, henceforth the current working directory
+cd "$(dirname "$0")" || exit
 
 STAMP=$(date +"%y%m%d%H%M%S")
 
 __install()
 {
     _arg_pem="$1"
-    _arg_src="$2"
-    _arg_dst="$3"
+    _arg_src="$2"/"$4"
+    _arg_dst="$3"/"$4"
 
     printf " -> installing %s... " "$_arg_dst"
     (
         ## if in drymode, do nothing
-        if [ "${_arg_dryrun:-on}" == "on" ]
+        if [ "${_arg_dryrun:-on}" = "on" ]
         then
             printf "(drymode) "
             exit
         fi
 
         ## backup if necessary
-        if [ "${_arg_backup:-on}" == "on" ]
+        if [ "${_arg_backup:-on}" = "on" ]
         then
             printf "(backup) "
-            [ -f "$_arg_dst" ] && mv "$_arg_dst"{,.$STAMP~}
+            [ -f "$_arg_dst" ] && mv "$_arg_dst" "$_arg_dst.$STAMP~"
         fi
 
         ## install
         install -Dm "$_arg_pem" "$_arg_src" "$_arg_dst"
     )
     printf "Done!\n"
-
 }
 
 __append()
@@ -43,7 +42,7 @@ __append()
     printf " -> appending %s... " "$_arg_dst"
     (
         ## if in drymode, do nothing
-        if [ "${_arg_dryrun:-on}" == "on" ]
+        if [ "${_arg_dryrun:-on}" = "on" ]
         then
             printf "(drymode) "
             exit
@@ -55,7 +54,7 @@ __append()
     printf "Done!\n"
 }
 
-__append-heredoc()
+__append_heredoc()
 {
     _arg_dst="$1"
     _arg_doc="$2"
@@ -63,7 +62,7 @@ __append-heredoc()
     printf " -> appending %s... " "$_arg_dst"
     (
         ## if in drymode, do nothing
-        if [ "${_arg_dryrun:-on}" == "on" ]
+        if [ "${_arg_dryrun:-on}" = "on" ]
         then
             printf "(drymode) "
             exit
@@ -81,112 +80,112 @@ __append-heredoc()
 
 # note: moved to scripts directory
 
-# todo: system-archlinux
-# todo: system-grub
-# todo: system-skel = user-shells
+# todo: system_archlinux
+# todo: system_grub
+# todo: system_skel = user_shells
 
 ################################################################################
 ## USER COMPONENTS
 ################################################################################
 
-install-user-shells()
+install_user_shells()
 {
     printf "Installing user shells...\n"
 
-    __install 644 {resources/home-user/,~}/.config/rocket-config/profile.sh
-    __install 644 {resources/home-user/,~}/.bash_login
-    __install 644 {resources/home-user/,~}/.bash_logout
-    __install 644 {resources/home-user/,~}/.bash_profile
-    __install 644 {resources/home-user/,~}/.bashrc
+    __install 644 "resources/home-user/" "$HOME/" ".config/rocket-config/profile.sh"
+    __install 644 "resources/home-user/" "$HOME/" ".bash_login"
+    __install 644 "resources/home-user/" "$HOME/" ".bash_logout"
+    __install 644 "resources/home-user/" "$HOME/" ".bash_profile"
+    __install 644 "resources/home-user/" "$HOME/" ".bashrc"
 }
 
-install-user-tools()
+install_user_tools()
 {
     printf "Installing user shell tools...\n"
 
-    __install 644 {scripts/,~/.config/rocket-config/}/tools.system.sh
-    __install 644 {scripts/,~/.config/rocket-config/}/tools.editors.sh
-    __install 644 {scripts/,~/.config/rocket-config/}/tools.ffmpeg.sh
+    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.system.sh"
+    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.editors.sh"
+    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.ffmpeg.sh"
 
-    __append-heredoc ~/.bashrc "\
+    __append_heredoc "$HOME/.bashrc" "\
 
 #
 # home-user tools
 #
-[[ -r ~/.config/rocket-config/tools.system.sh ]] && . ~/.config/rocket-config/tools.system.sh
-[[ -r ~/.config/rocket-config/tools.editors.sh ]] && . ~/.config/rocket-config/tools.editors.sh
-[[ -r ~/.config/rocket-config/tools.ffmpeg.sh ]] && . ~/.config/rocket-config/tools.ffmpeg.sh
+[ -r "$HOME/.config/rocket-config/tools.system.sh" ] && . "$HOME/.config/rocket-config/tools.system.sh"
+[ -r "$HOME/.config/rocket-config/tools.editors.sh" ] && . "$HOME/.config/rocket-config/tools.editors.sh"
+[ -r "$HOME/.config/rocket-config/tools.ffmpeg.sh" ] && . "$HOME/.config/rocket-config/tools.ffmpeg.sh"
 "
 }
 
-install-user()
+install_user()
 {
-    install-user-shells
-    install-user-tools
+    install_user_shells
+    install_user_tools
 }
 
 ################################################################################
 ## HOME COMPONENTS
 ################################################################################
 
-install-home-shells()
+install_home_shells()
 {
-    install-user-shells # home_shells requires user_shells
-    install-user-tools  # home_shells requires user_tools
+    install_user_shells # home_shells requires user_shells
+    install_user_tools  # home_shells requires user_tools
 
     printf "Installing home shells...\n"
 
-    __append {resources/home-home/,~}/.bashrc
-    __install 644 {resources/home-home/,~}/.config/rocket-config/profile-home.sh
-    __install 644 {resources/home-home/,~}/.pythonrc
-    __install 644 {resources/home-home/,~}/.gitconfig
-    __install 644 {resources/home-home/,~}/.gitignore
+    __append      "resources/home-home/" "$HOME/" ".bashrc"
+    __install 644 "resources/home-home/" "$HOME/" ".config/rocket-config/profile-home.sh"
+    __install 644 "resources/home-home/" "$HOME/" ".pythonrc"
+    __install 644 "resources/home-home/" "$HOME/" ".gitconfig"
+    __install 644 "resources/home-home/" "$HOME/" ".gitignore"
 }
 
-install-home()
+install_home()
 {
-    install-home-shells
+    install_home_shells
 }
 
 #
 # home-extra
 #
 
-install-home_extra-code()
+install_home_extra_code()
 {
     printf "Installing home-extra code...\n"
 
-    __install 644 {resources/home-home,~}/.config/VSCodium/User/settings.json
-    __install 644 {resources/home-home,~}/.clang-tidy
+    __install 644 "resources/home-home" "$HOME/" ".config/VSCodium/User/settings.json"
+    __install 644 "resources/home-home" "$HOME/" ".clang-tidy"
 }
 
-install-home_extra()
+install_home_extra()
 {
-    install-home_extra-code
+    install_home_extra_code
 }
 
 #
 # home-desktop
 #
 
-install-home_desktop-gtk()
+install_home_desktop_gtk()
 {
     printf "Installing home-desktop GTK...\n"
 
-    __install 644 {resources/home-home/,~}/.config/gtk-3.0/gtk.css
-    __install 644 {resources/home-home/,~}/.config/gtk-4.0/gtk.css
+    __install 644 "resources/home-home/" "$HOME/" ".config/gtk-3.0/gtk.css"
+    __install 644 "resources/home-home/" "$HOME/" ".config/gtk-4.0/gtk.css"
 }
 
-install-home_desktop-kde()
+install_home_desktop_kde()
 {
     printf "Installing home-extra KDE...\n"
-    __install 644 {resources/home-home/,~}/.local/share/konsole/Rocket.colorscheme
+    __install 644 "resources/home-home/" "$HOME/" ".local/share/konsole/Rocket.colorscheme"
 }
 
-install-home_desktop()
+install_home_desktop()
 {
-    install-home_desktop-gtk
-    install-home_desktop-kde
+    install_home_desktop_gtk
+    install_home_desktop_kde
 }
 
 ################################################################################
@@ -213,7 +212,7 @@ Install components of my config files
 Optionally install an entire component category.
 
 For example; to install the entire 'home' category, and only 'kde' from the 'home_desktop' category
-'$ ./install.sh home home_desktop-kde'
+'$ ./install.sh home home_desktop_kde'
     "
 }
 
@@ -222,7 +221,7 @@ For example; to install the entire 'home' category, and only 'kde' from the 'hom
 ################################################################################
 
 # THE DEFAULTS INITIALIZATION - POSITIONALS
-_arg_components=()
+_arg_components=""
 
 # THE DEFAULTS INITIALIZATION - OPTIONALS
 _arg_dryrun="off"
@@ -232,7 +231,7 @@ parse_commandline()
 {
     die()
     {
-        local _ret="${2:-1}"
+        _ret="${2:-1}"
         printf "%s\n\n" "$1"
         print_help
         exit "${_ret}"
@@ -245,16 +244,29 @@ parse_commandline()
 
     begins_with_short_option()
     {
-        local first_option all_short_options='dh'
-        first_option="${1:0:1}"
-        test "$all_short_options" = "${all_short_options/$first_option/}" && return 1 || return 0
+        _all_short_options='dh'
+        _first_option=$(echo "$1" | cut -c1)
+
+        case "$_all_short_options" in
+            (*"$_first_option"*) return 0 ;;
+            (*) return 1 ;;
+        esac
     }
 
-    local _positionals=()
+    die_if_bad_short_option_chain()
+    {
+        _key="$1"
+        _next="$2"
+
+        _short=$(echo "$_key" | cut -c1-2)
+        begins_with_short_option "$_next" || die "The short option '$_key' cannot be decomposed to '$_short' and '-$_next', because '$_short' doesn't accept a value and '-$_next' doesn't correspond to a short option."
+    }
+
+    _arg_components=""
 
 	while test $# -gt 0
 	do
-		local _key="$1"
+		_key="$1"
 		case "$_key" in
 			-d|--dryrun)
 				_arg_dryrun="on"
@@ -264,7 +276,7 @@ parse_commandline()
 				_next="${_key##-d}"
 				if test -n "$_next" -a "$_next" != "$_key"
 				then
-					{ begins_with_short_option "$_next" && shift && set -- "-d" "-${_next}" "$@"; } || die "The short option '$_key' can't be decomposed to ${_key:0:2} and -${_key:2}, because ${_key:0:2} doesn't accept a value and '-${_key:2:1}' doesn't correspond to a short option."
+                    shift && set -- "-d" "-${_next}" "$@" && die_if_bad_short_option_chain "$_key" "$_next"
 				fi
 				;;
             -B|--no-backup)
@@ -275,7 +287,7 @@ parse_commandline()
 				_next="${_key##-B}"
 				if test -n "$_next" -a "$_next" != "$_key"
 				then
-					{ begins_with_short_option "$_next" && shift && set -- "-B" "-${_next}" "$@"; } || die "The short option '$_key' can't be decomposed to ${_key:0:2} and -${_key:2}, because ${_key:0:2} doesn't accept a value and '-${_key:2:1}' doesn't correspond to a short option."
+                    shift && set -- "-B" "-${_next}" "$@" && die_if_bad_short_option_chain "$_key" "$_next"
 				fi
 				;;
 			-h|--help)
@@ -290,35 +302,15 @@ parse_commandline()
                 die "The key '$_key' doesn't correspond to a short or long option."
 				;;
 			*)
-				_positionals+=("$1")
+				_arg_components="$_arg_components $1"
 				;;
 		esac
 		shift
 	done
 
-    assign_positional_args()
-    {
-        local _positional_name _shift_for=$1
-        _positional_names=""
-        _our_args=$((${#_positionals[@]} - 0))
-        for ((ii = 0; ii < _our_args; ii++))
-        do
-            _positional_names="$_positional_names _arg_components[$((ii + 0))]"
-        done
-
-        shift "$_shift_for"
-        for _positional_name in ${_positional_names}
-        do
-            test $# -gt 0 || break
-            eval "$_positional_name=\${1}" || die "Error during argument parsing, possibly an Argbash bug." 1
-            shift
-        done
-    }
-    assign_positional_args 1 "${_positionals[@]}"
-
-    for component in "${_arg_components[@]}"
+    for component in $_arg_components
     do
-        [ "$(type -t install-$component)" == "function" ] || die "The component '$component' is not recognised."
+        command -v "install_$component" >/dev/null || die "The component '$component' is not recognised."
     done
 }
 parse_commandline "$@"
@@ -327,7 +319,7 @@ parse_commandline "$@"
 ## MAIN
 ################################################################################
 
-for component in "${_arg_components[@]}"
+for component in $_arg_components
 do
-    install-$component
+    install_"$component"
 done

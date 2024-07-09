@@ -19,11 +19,11 @@ export ANDROID_HOME="$XDG_DATA_HOME"/android
 check_xdg()
 {
 # bash
-    [ -f ~/.bash_history ] && printf "%s\n" \
-        'mkdir -p "$XDG_STATE_HOME"/bash && mv ~/.bash_history "$XDG_STATE_HOME"/bash/history'
+    [ -f "$HOME/.bash_history" ] && printf "%s\n" \
+        "mkdir -p \"$XDG_STATE_HOME/bash\" && mv \"$HOME/.bash_history\" \"$XDG_STATE_HOME/bash/history\""
 # gnupg
-    [ -d ~/.gnupg ] && printf "%s\n" \
-        'mv ~/.gnupg "$XDG_CONFIG_HOME"/gnupg'
+    [ -d "$HOME/.gnupg" ] && printf "%s\n" \
+        "mv \"HOME/.gnupg\" \"$XDG_CONFIG_HOME/gnupg\""
 }
 
 ################################################################################

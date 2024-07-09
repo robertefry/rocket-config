@@ -13,12 +13,12 @@ tools.ffmpeg.two_pass()
     # confirm overwrite destination if already exists
     if [ -f "$dst" ]
     then
-        read -p "The destination file, "$dst", already exists. Overwrite? [y/N] " -n 1 -r
+        read -p "The destination file, $dst, already exists. Overwrite? [y/N] " -n 1 -r
         echo # move to a new line
         if [ "$REPLY" != "y" ] && [ "$REPLY" != "Y" ]
         then
             printf "%s\n" "Aborting!"
-            return -1
+            return 255
         fi
     fi
 

@@ -15,17 +15,17 @@ shopt -s globstar
 [ -n "$DISPLAY" ] && shopt -s checkwinsize
 
 # Use bash-completion (if available)
-[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+[ -r "/usr/share/bash-completion/bash_completion" ] && . "/usr/share/bash-completion/bash_completion"
 
 #
 # home-user
 #
-[[ -r ~/.config/rocket-config/profile.sh ]] && . ~/.config/rocket-config/profile.sh
+[ -r "$HOME/.config/rocket-config/profile.sh" ] && . "$HOME/.config/rocket-config/profile.sh"
 
 # re-source my shell profile
 reprofile()
 {
-    source ~/.bash_profile
+    . "$HOME/.bashrc"
 }
 
 # Don't put duplicate lines or lines starting with space in the history.
