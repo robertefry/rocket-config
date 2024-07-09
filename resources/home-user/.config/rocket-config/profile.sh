@@ -83,11 +83,11 @@ alias mv="mv --interactive"
 alias rm="rm"
 
 ## Listing commands
-alias ls="ls --color=auto --group-directories-first --indicator-style=slash"
-alias l="ls -lh --time-style=long-iso"
-alias ll="ls -lAh --time-style=long-iso"
-alias la="ls -lah --time-style=long-iso"
-ldot() {( cd "$1" && ls --group-directories-first -lAhd --time-style=long-iso .* )}
+alias ls="ls --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
+alias l="ls -lh"
+alias ll="ls -lAh"
+alias la="ls -lah"
+ldot() {( cd "$1" && ls -lAhd .* )}
 
 ## Make parent directories with `mkdir`
 alias mkdir="mkdir -p"
