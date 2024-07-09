@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")/../tools/tools.editors.sh"
+. "$(dirname "$0")/tools.editors.sh"
 
 # configuration
 tools.editors.comments "/etc/nanorc" -U "fill" && sed -i "/etc/nanorc" -e '/^set fill/s/-8/80/'

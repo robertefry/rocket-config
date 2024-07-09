@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")/../tools/tools.editors.sh"
+. "$(dirname "$0")/tools.editors.sh"
 
 tools.editors.comments -i "/etc/pacman.conf" -u "Color"
 tools.editors.comments -i "/etc/pacman.conf" -c "NoProgressBar"
