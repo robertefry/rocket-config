@@ -75,6 +75,12 @@ export VCPKG_DISABLE_METRICS=1
 ## ALIASES & FUNCTIONS
 ################################################################################
 
+# re-source my shell profile
+reprofile()
+{
+    source ~/.config/rocket-config/profile.sh
+}
+
 ## Quit the terminal
 alias q="exit"
 

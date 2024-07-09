@@ -11,16 +11,22 @@ shopt -s globstar
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# If running windowed, keep track of the window size
+[ -n "$DISPLAY" ] && shopt -s checkwinsize
+
+# Use bash-completion (if available)
+[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+
 #
 # home-user
 #
 [[ -r ~/.config/rocket-config/profile.sh ]] && . ~/.config/rocket-config/profile.sh
 
-# Use bash-completion (if available)
-[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-
-# If running windowed, keep track of the window size
-[ -n "$DISPLAY" ] && shopt -s checkwinsize
+# re-source my shell profile
+reprofile()
+{
+    source ~/.bash_profile
+}
 
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -28,9 +34,3 @@ HISTCONTROL=ignoreboth
 # Set the history length - See HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# re-source my shell profile
-reprofile()
-{
-    source ~/.bash_profile
-}
