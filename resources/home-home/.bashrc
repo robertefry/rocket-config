@@ -3,13 +3,6 @@
 #
 [[ -r ~/.config/rocket-config/profile-home.sh ]] && . ~/.config/rocket-config/profile-home.sh
 
-# Don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-# Set the history length - See HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 ## JRE Runtime Options
 export JDK_JAVA_OPTIONS='-Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
@@ -17,12 +10,6 @@ export JDK_JAVA_OPTIONS='-Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=
 export MANGOHUD=1
 export MANGOHUD_DLSYM=1
 export ENABLE_VKBASALT=1
-
-# re-source my shell profile
-reprofile()
-{
-    source ~/.bash_profile
-}
 
 ## Python
 if command -v python &> /dev/null
