@@ -36,6 +36,9 @@ export LIBVIRT_DEFAULT_URI="qemu:///session"
 # OpenGL variables
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 
+# Disable vcpkg telemetry
+export VCPKG_DISABLE_METRICS=1
+
 # Use the fcitx input method framework
 if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
 then

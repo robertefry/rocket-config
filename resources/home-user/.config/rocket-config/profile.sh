@@ -61,9 +61,6 @@ export XDG_STATE_HOME="$HOME/.local/state"
 [ -r "$HOME/.local/bin/path.sh" ] && PATH="$(cat "$HOME/.local/bin/path.sh"):$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
-# Disable vcpkg telemetry
-export VCPKG_DISABLE_METRICS=1
-
 ################################################################################
 ## ALIASES & FUNCTIONS
 ################################################################################
