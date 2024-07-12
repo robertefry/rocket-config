@@ -136,7 +136,7 @@ find()
 {
     TMPFILE=$(mktemp)
     if [ $? -ne 0 ]; then
-        printf "'\e[31m'%s" "Failed to allocate tempfile for error suppression"
+        printf "\e[31m%s\n" "Failed to allocate tempfile for error suppression" >&2
         return 255
     fi
 
@@ -144,10 +144,14 @@ find()
 
     COUNT=$(grep -c "Permission denied" "$TMPFILE")
     if [ "$COUNT" -gt 0 ]; then
-        printf "'\e[31m'%s" "Suppressed $COUNT permission errors" >&2
+        printf "\e[31m%s\n" "Suppressed $COUNT permission errors" >&2
     fi
 
-    printf "'\e[31m'error: %s\n" "$(grep -v "Permission denied" "$TMPFILE" | awk 'NF')"
+    ERRORS=$(grep -v "Permission denied" "$TMPFILE" | awk 'NF')
+    if [ -n "$ERRORS" ]; then
+        printf "\e[31m%s\n" "$ERRORS" >&2
+    fi
+
     rm "$TMPFILE"
 }
 
