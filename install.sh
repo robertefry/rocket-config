@@ -35,9 +35,8 @@ __install()
 
 __append()
 {
-    _arg_src="$1"
-    _arg_dst="$2"
-    _arg_num="${3:-+1}"
+    _arg_src="$1"/"$3"
+    _arg_dst="$2"/"$3"
 
     printf " -> appending %s... " "$_arg_dst"
     (
@@ -49,7 +48,7 @@ __append()
         fi
 
         ## append
-        tail "$_arg_num" "$_arg_src" >> "$_arg_dst"
+        cat  "$_arg_src" >> "$_arg_dst"
     )
     printf "Done!\n"
 }
