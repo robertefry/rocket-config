@@ -101,7 +101,7 @@ mktmp()
     TMPDIR="$(mktemp -d)"
     cd "$TMPDIR" || return 255
     $SHELL
-    rm -drf "$TMPDIR"
+    trap 'rm -drf "$TMPDIR"' EXIT
 )}
 
 ## Follow a chain of symlinks
@@ -152,7 +152,7 @@ find()
         printf "\e[31m%s\n" "$ERRORS" >&2
     fi
 
-    rm "$TMPFILE"
+    trap 'rm -f "$TMPFILE"' EXIT
 }
 
 ## Use 'less' inplaceof 'more'
