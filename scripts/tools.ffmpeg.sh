@@ -24,8 +24,12 @@ tools.ffmpeg.two_pass()
         fi
     fi
 
-    ffmpeg -hide_banner -loglevel warning -stats -i "$_src" "$@" -pass 1 -y /dev/null
-    ffmpeg -hide_banner -loglevel warning -stats -i "$_src" "$@" -pass 2 -y "$_dst"
+    logfile=$(mktemp /tmp/XXXXXXXX)
+
+    ffmpeg -hide_banner -loglevel warning -stats -i "$_src" "$@" -pass 1 -passlogfile "$logfile" -y /dev/null
+    ffmpeg -hide_banner -loglevel warning -stats -i "$_src" "$@" -pass 2 -passlogfile "$logfile" -y "$_dst"
+
+    trap 'rm -f "$logfile"' EXIT
 }
 
 tools.ffmpeg.resize()
