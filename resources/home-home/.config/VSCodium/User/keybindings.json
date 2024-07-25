@@ -1,0 +1,33 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+shift+up",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+m",
+        "command": "workbench.action.toggleMaximizedPanel",
+    },
+    {
+        "key": "ctrl+k ctrl+n",
+        "command": "workbench.action.toggleSidebarVisibility",
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.terminal.new",
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.toggleTerminal",
+    },
+]

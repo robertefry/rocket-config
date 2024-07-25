@@ -155,6 +155,7 @@ install_home_extra_code()
     printf "Installing home-extra code...\n"
 
     __install 644 "resources/home-home" "$HOME/" ".config/VSCodium/User/settings.json"
+    __install 644 "resources/home-home" "$HOME/" ".config/VSCodium/User/keybindings.json"
     __install 644 "resources/home-home" "$HOME/" ".clang-tidy"
 }
 
