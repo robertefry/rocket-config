@@ -211,8 +211,8 @@ Install components of my config files
 
 Optionally install an entire component category.
 
-For example; to install the entire 'home' category, and only 'kde' from the 'home_desktop' category
-'$ ./install.sh home home_desktop_kde'
+For example; to install the entire 'user' category, and only 'kde' from the 'home_desktop' category
+'$ ./install.sh user home_desktop_kde'
     "
 }
 
