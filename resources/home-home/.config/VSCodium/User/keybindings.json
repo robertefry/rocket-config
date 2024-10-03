@@ -23,11 +23,51 @@
         "command": "workbench.action.togglePanel"
     },
     {
-        "key": "ctrl+shift+`",
+        "key": "ctrl+shift+'",
         "command": "workbench.action.terminal.new",
     },
     {
-        "key": "ctrl+`",
+        "key": "ctrl+'",
         "command": "workbench.action.terminal.toggleTerminal",
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.nextEditorInGroup",
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.previousEditorInGroup",
+    },
+    {
+        "key": "ctrl+alt+down",
+        "command": "workbench.action.focusNextGroup",
+    },
+    {
+        "key": "ctrl+alt+up",
+        "command": "workbench.action.focusPreviousGroup",
+    },
+    {
+        "key": "ctrl+alt+shift+up",
+        "command": "workbench.action.moveEditorToAboveGroup",
+    },
+    {
+        "key": "ctrl+alt+shift+down",
+        "command": "workbench.action.moveEditorToBelowGroup",
+    },
+    {
+        "key": "ctrl+alt+shift+left",
+        "command": "workbench.action.moveEditorToLeftGroup",
+    },
+    {
+        "key": "ctrl+alt+shift+right",
+        "command": "workbench.action.moveEditorToRightGroup",
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+k ctrl+w",
+        "command": "workbench.action.closeEditorsInGroup",
     },
 ]
