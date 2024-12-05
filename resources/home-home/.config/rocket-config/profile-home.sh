@@ -3,11 +3,11 @@
 ## XDG DIRECTORY STRUCTURE
 ################################################################################
 
-# DBUS session
+## DBUS session
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=$XDG_RUNTIME_DIR/bus}"
 
-# XDG home directories
+## XDG home directories
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -41,19 +41,17 @@ check_xdg()
 }
 
 ################################################################################
-## ENVIRONMENT VARIABLES
+## ENVIRONMENT
 ################################################################################
 
-# Libvirt
+# libvirt
 export LIBVIRT_DEFAULT_URI="qemu:///session"
-
-# OpenGL variables
+# opengl
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
-
-# Disable vcpkg telemetry
+# vcpkg
 export VCPKG_DISABLE_METRICS=1
 
-# Use the fcitx input method framework
+## Use the fcitx input method framework
 if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
 then
     export INPUT_METHOD=fcitx
@@ -67,6 +65,10 @@ fi
 export MANGOHUD=1
 export MANGOHUD_DLSYM=1
 export ENABLE_VKBASALT=1
+
+################################################################################
+## RUNTIME
+################################################################################
 
 ## Python
 if command -v python >/dev/null 2>&1

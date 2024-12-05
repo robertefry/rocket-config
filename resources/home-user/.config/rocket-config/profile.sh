@@ -36,22 +36,22 @@ PS1_prompt_command()
 export PROMPT_COMMAND=PS1_prompt_command
 
 ################################################################################
-## ENVIRONMENT VARIABLES
+## ENVIRONMENT
 ################################################################################
 
-# Default editors
+## Default editors
 [ -z "$EDITOR" ] && [ -x "/usr/bin/nano"  ] && export EDITOR="/usr/bin/nano"
 [ -z "$VISUAL" ] && [ -x "/usr/bin/gedit" ] && export VISUAL="/usr/bin/gedit"
 
-# Add ~/.local/bin to the path
+## Add ~/.local/bin to the path
 [ -r "$HOME/.local/bin/path.sh" ] && PATH="$(cat "$HOME/.local/bin/path.sh"):$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 
 ################################################################################
-## ALIASES & FUNCTIONS
+## RUNTIME
 ################################################################################
 
-# re-source my shell profile
+## re-source my shell profile
 reprofile()
 {
     . "$HOME/.config/rocket-config/profile.sh"
