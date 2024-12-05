@@ -1,4 +1,7 @@
 
+import sys
+print(sys.executable)
+
 # OS
 try:
     import os
