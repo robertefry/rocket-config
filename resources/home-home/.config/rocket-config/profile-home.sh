@@ -103,12 +103,11 @@ fi
 export JDK_JAVA_OPTIONS='-Dsun.java2d.opengl=true -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 ## Youtube Downloader
+if command -v youtube-dl >/dev/null 2>&1; then
+    alias ytdl=youtube-dl
+fi
 if command -v yt-dlp >/dev/null 2>&1; then
     alias ytdl=yt-dlp
-elif command -v youtube-dl >/dev/null 2>&1; then
-    alias ytdl=youtube-dl
-else
-    echo ytdl: backend missing, consider installing yt-dlp or youtube-dl
 fi
 
 ## List Steam Games and IDs
