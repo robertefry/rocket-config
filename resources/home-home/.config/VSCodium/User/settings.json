@@ -1,12 +1,13 @@
 
 {
-    "workbench.colorTheme": "FlatUI Dark",
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#323232",
         "editor.background": "#222222",
     },
+    "workbench.colorTheme": "Visual Studio Dark",
 
     "window.zoomLevel": 1,
+    "terminal.integrated.defaultProfile.linux": "bash",
 
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
