@@ -44,16 +44,19 @@ check_xdg()
 ## ENVIRONMENT
 ################################################################################
 
-## SSH Key Management
-alias keychain="keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain"
-eval $(keychain --eval --quiet ~/.ssh/*.key)
-
 # libvirt
 export LIBVIRT_DEFAULT_URI="qemu:///session"
 # opengl
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 # vcpkg
 export VCPKG_DISABLE_METRICS=1
+
+## Key Management
+if command -v keychain >/dev/null 2>&1
+then
+    alias keychain="keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain"
+    eval $(keychain --eval --quiet ~/.ssh/*.key)
+fi
 
 ## Use the fcitx input method framework
 if command -v fcitx $> /dev/null || command -v fcitx5 $> /dev/null
