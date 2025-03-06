@@ -44,6 +44,10 @@ check_xdg()
 ## ENVIRONMENT
 ################################################################################
 
+## SSH Key Management
+alias keychain="keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain"
+eval $(keychain --eval --quiet ~/.ssh/*.key)
+
 # libvirt
 export LIBVIRT_DEFAULT_URI="qemu:///session"
 # opengl
