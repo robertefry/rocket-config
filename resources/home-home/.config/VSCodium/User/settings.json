@@ -1,13 +1,8 @@
 
 {
-    "workbench.colorCustomizations": {
-        "editorRuler.foreground": "#323232",
-        "editor.background": "#222222",
-    },
-    "workbench.colorTheme": "Visual Studio Dark",
-
-    "window.zoomLevel": 1,
-    "terminal.integrated.defaultProfile.linux": "bash",
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "window.zoomLevel": 0.5,
 
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
@@ -22,15 +17,13 @@
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-
     "editor.inlineSuggest.suppressSuggestions": true,
-
-    "editor.tokenColorCustomizations": {
-        "comments": "#ff0000"
-    },
 
     "[tex][latex][bibtex]": {
         "editor.wordWrap": "on",
+    },
+    "[rust]": {
+        "editor.wordWrapColumn": 120,
     },
 
     "explorer.sortOrder": "default",
@@ -53,6 +46,10 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
 
+    "dateTime.locale": "en-gb",
+    "dateTime.customFormat": "HH:mm",
+
+    // https://open-vsx.org/vscode/item?itemName=rid9.datetime
     "cody.commandCodeLenses": false,
     "cody.autocomplete.enabled": true,
     "cody.chat.defaultLocation": "editor",
@@ -68,7 +65,7 @@
     "platformio-ide.disablePIOHomeStartup": true,
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-    //  Language Specific Settings
+    //  Language Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
     // CMake
@@ -99,6 +96,25 @@
     // LaTeX
     "latex-workshop.latex.outDir": ".build",
     "latex-workshop.intellisense.file.base": "both",
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.docker.image.latex": "texlive/texlive",
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  Colour Customizations
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    "workbench.colorCustomizations": {
+        "editor.foreground": "#BDBDBD", // Material Gray 400
+        "editor.background": "#212121", // Material Gray 900
+        "editorRuler.foreground": "#323232", // Material Gray 850
+        "editorIndentGuide.background1": "#424242", // Material Gray 800
+        "editorIndentGuide.activeBackground1": "#757575", // Material Gray 600
+    },
+    "workbench.colorTheme": "FlatUI Dark",
+
+    "editor.tokenColorCustomizations": {
+        "comments": "#ff2E00", // Material Deep Orange A400 (g*=3/4)
+    },
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Spell-Check Dictionary Definitions
@@ -153,12 +169,14 @@
         "Covector",
         "Covectors",
         "cppcoreguidelines",
+        "crosshairs",
         "cryptosystem",
         "Cryptosystem",
         "cryptosystems",
         "Cryptosystems",
         "delist",
         "demangled",
+        "Deque",
         "despawn",
         "desynchronize",
         "doxyfile",
@@ -173,6 +191,7 @@
         "favorite",
         "Fira",
         "foobar",
+        "functorality",
         "Functors",
         "GLbitfield",
         "GLboolean",
@@ -195,6 +214,7 @@
         "groupoid",
         "hashable",
         "hicpp",
+        "hitscan",
         "homomorphic",
         "idents",
         "IMGUI",
@@ -215,6 +235,7 @@
         "Kerbin",
         "keypair",
         "keypairs",
+        "Kleinberg",
         "kthxbie",
         "labeled",
         "lockfree",
@@ -222,6 +243,7 @@
         "malloc",
         "mapv",
         "mesg",
+        "meshless",
         "modpacks",
         "monic",
         "Monoid",
@@ -249,6 +271,7 @@
         "ostr",
         "PAPI",
         "patheffects",
+        "pdflatex",
         "platformio",
         "poset",
         "posets",
@@ -259,12 +282,14 @@
         "PROGMEM",
         "quantale",
         "quantales",
+        "raycaster",
         "rect",
         "refact",
         "Reinterpreter",
         "Replacer",
         "repr",
         "respawn",
+        "respawned",
         "robertefry",
         "robertfry",
         "rockhopper",
@@ -283,11 +308,13 @@
         "subexpr",
         "Subring",
         "Subrings",
+        "Substep",
         "Sunflare",
         "supremum",
         "surjective",
         "surjectivity",
         "sympy",
+        "texlive",
         "totient",
         "Trinomial",
         "Trinomials",
@@ -296,6 +323,7 @@
         "uncountably",
         "underlong",
         "Uninit",
+        "unital",
         "venv",
         "Viktor",
         "vsync",
