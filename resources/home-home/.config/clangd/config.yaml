@@ -1,0 +1,11 @@
+
+CompileFlags:
+  Add: [-Wall, -Wextra, -Wpedantic, -Wshadow, -Wconversion, -Wsign-conversion, -Wpointer-arith, -Wcast-align, -Wcast-qual, -Wdouble-promotion, -Wnull-dereference, -Wfloat-equal, -Wunused, -Wunused-result, -Wuninitialized, -Wundef, -Wunreachable-code, -fvisibility=hidden]
+
+InlayHints:
+  Enabled: No
+  ParameterNames: No
+  DefaultArguments: No
+  DeducedTypes: No
+  Designators: No
+  BlockEnd: No
