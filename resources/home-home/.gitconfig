@@ -13,6 +13,7 @@
 [core]
     editor = nano
     excludesFile = ~/.gitignore
+	pager = more
 [init]
     defaultBranch = master
 [stash]
