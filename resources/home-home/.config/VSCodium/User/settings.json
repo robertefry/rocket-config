@@ -68,6 +68,9 @@
     //  Language Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+    // LLDB
+    "lldb.library": "/usr/lib64/liblldb.so.19.1",
+
     // CMake
     "cmake.configureOnOpen": false,
     "cmake.configureOnEdit": false,
