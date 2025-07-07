@@ -1,6 +1,10 @@
 // Place your key bindings in this file to override the defaults
 [
     {
+        "key": "ctrl+k z",
+        "command": "workbench.action.toggleZenMode",
+    },
+    {
         "key": "ctrl+shift+up",
         "command": "editor.action.insertCursorAbove",
         "when": "editorTextFocus"
@@ -19,7 +23,7 @@
         "command": "workbench.action.toggleSidebarVisibility",
     },
     {
-        "key": "ctrl+j",
+        "key": "ctrl+k ctrl+j",
         "command": "workbench.action.togglePanel"
     },
     {
@@ -69,5 +73,53 @@
     {
         "key": "ctrl+k ctrl+w",
         "command": "workbench.action.closeEditorsInGroup",
+    },
+    {
+        "key": "ctrl+numpad0",
+        "command": "workbench.action.zoomReset"
+    },
+    {
+        "key": "ctrl+numpad_add",
+        "command": "workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+numpad_subtract",
+        "command": "workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.zoomReset"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+[Minus]",
+        "command": "workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+alt+numpad0",
+        "command": "editor.action.fontZoomReset"
+    },
+    {
+        "key": "ctrl+alt+numpad_add",
+        "command": "editor.action.fontZoomIn"
+    },
+    {
+        "key": "ctrl+alt+numpad_subtract",
+        "command": "editor.action.fontZoomOut"
+    },
+    {
+        "key": "ctrl+alt+0",
+        "command": "editor.action.fontZoomReset"
+    },
+    {
+        "key": "ctrl+alt+=",
+        "command": "editor.action.fontZoomIn"
+    },
+    {
+        "key": "ctrl+alt+[Minus]",
+        "command": "editor.action.fontZoomOut"
     },
 ]

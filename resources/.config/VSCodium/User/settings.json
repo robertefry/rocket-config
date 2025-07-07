@@ -2,7 +2,7 @@
 {
     "window.titleBarStyle": "native",
     "window.customTitleBarVisibility": "never",
-    "window.zoomLevel": 0.5,
+    "window.zoomLevel": 1.0,
 
     "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
@@ -25,6 +25,9 @@
     "[rust]": {
         "editor.wordWrapColumn": 120,
     },
+    "[cmake]": {
+        "editor.tabSize": 2,
+    },
 
     "explorer.sortOrder": "default",
     "explorer.sortOrderLexicographicOptions": "unicode",
@@ -46,10 +49,10 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
 
+    // https://open-vsx.org/vscode/item?itemName=rid9.datetime
     "dateTime.locale": "en-gb",
     "dateTime.customFormat": "HH:mm",
 
-    // https://open-vsx.org/vscode/item?itemName=rid9.datetime
     "cody.commandCodeLenses": false,
     "cody.autocomplete.enabled": true,
     "cody.chat.defaultLocation": "editor",
@@ -70,6 +73,19 @@
 
     // LLDB
     "lldb.library": "/usr/lib64/liblldb.so.19.1",
+
+    // Zig
+    "zig.zls.enabled": "on",
+    "zig.zls.inlayHintsExcludeSingleArgument": false,
+    "zig.zls.inlayHintsShowParameterName": false,
+    "zig.zls.inlayHintsShowBuiltin": false,
+    "zig.zls.inlayHintsShowStructLiteralFieldType": false,
+    "zig.zls.inlayHintsShowVariableTypeHints": false,
+    "zig.zls.warnStyle": true,
+    "[zig]": {
+        // I don't like Zig's default formatting rules, grrrr :[
+        "editor.formatOnSave": false,
+    },
 
     // CMake
     "cmake.configureOnOpen": false,
@@ -151,6 +167,7 @@
         "Centered",
         "chrono",
         "ciphertext",
+        "CLEANLIST",
         "clusterable",
         "CMAKE",
         "codomain",
@@ -187,8 +204,10 @@
         "egui",
         "eigen",
         "elem",
+        "enscoping",
         "epimorphism",
         "epimorphisms",
+        "errdefer",
         "extreemly",
         "facecolor",
         "favorite",
@@ -258,6 +277,7 @@
         "Morphism",
         "Morphisms",
         "nalgebra",
+        "nanos",
         "Nativefier",
         "Navionics",
         "ndarray",

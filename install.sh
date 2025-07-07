@@ -5,11 +5,27 @@ cd "$(dirname "$0")" || exit
 
 STAMP=$(date +"%y%m%d%H%M%S")
 
+__test_and_set()
+{
+    local var="$1"
+
+    if [ -z "${!var+x}" ]; then
+        printf -v "$var" 1
+        return 0
+    else
+        return 1
+    fi
+}
+
 __install()
 {
-    _arg_pem="$1"
-    _arg_src="$2"/"$4"
-    _arg_dst="$3"/"$4"
+    local _arg_pem="$1"
+    local _arg_src="$2"/"$4"
+    local _arg_dst="$3"/"$4"
+
+    # Avoid installing a file more than once
+    local _safe_src=$(echo "$_arg_src" | sed 's/[^a-zA-Z0-9_]/_/g')
+    __test_and_set "_INSTALLED_${_safe_src}" || return 0
 
     printf " -> installing %s... " "$_arg_dst"
     (
@@ -33,159 +49,132 @@ __install()
     printf "Done!\n"
 }
 
-__append()
+################################################################################
+## USER
+################################################################################
+
+install_user_profile()
 {
-    _arg_src="$1"/"$3"
-    _arg_dst="$2"/"$3"
+    printf "Installing shell profile...\n"
 
-    printf " -> appending %s... " "$_arg_dst"
-    (
-        ## if in drymode, do nothing
-        if [ "${_arg_dryrun:-on}" = "on" ]
-        then
-            printf "(drymode) "
-            exit
-        fi
-
-        ## append
-        cat  "$_arg_src" >> "$_arg_dst"
-    )
-    printf "Done!\n"
+    __install 644 "resources/" "$HOME/" ".profile"
+    __install 644 "resources/" "$HOME/" ".environment"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/10-ps1.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/20-local-bin.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/50-file-ops.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/60-alias-editors.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/60-alias-exit.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-block-tools.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-cap.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-extract.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-find.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-grep.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-ippub.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-reprofile.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-rnpw.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-rsync.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.d/90-stamp.sh"
 }
 
-__append_heredoc()
+install_user_bash()
 {
-    _arg_dst="$1"
-    _arg_doc="$2"
+    install_user_profile
 
-    printf " -> appending %s... " "$_arg_dst"
-    (
-        ## if in drymode, do nothing
-        if [ "${_arg_dryrun:-on}" = "on" ]
-        then
-            printf "(drymode) "
-            exit
-        fi
+    printf "Installing bash shell...\n"
 
-        ## append
-        echo "$_arg_doc" >> "$_arg_dst"
-    )
-    printf "Done!\n"
-}
-
-################################################################################
-## SYSTEM COMPONENTS
-################################################################################
-
-# note: moved to scripts directory
-
-# todo: system_archlinux
-# todo: system_grub
-# todo: system_skel = user_shells
-
-################################################################################
-## USER COMPONENTS
-################################################################################
-
-install_user_shells()
-{
-    printf "Installing user shells...\n"
-
-    __install 644 "resources/home-user/" "$HOME/" ".config/rocket-config/profile.sh"
-    __install 644 "resources/home-user/" "$HOME/" ".bash_login"
-    __install 644 "resources/home-user/" "$HOME/" ".bash_logout"
-    __install 644 "resources/home-user/" "$HOME/" ".bash_profile"
-    __install 644 "resources/home-user/" "$HOME/" ".bashrc"
-}
-
-install_user_tools()
-{
-    printf "Installing user shell tools...\n"
-
-    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.system.sh"
-    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.editors.sh"
-    __install 644 "scripts/" "$HOME/.config/rocket-config/" "tools.ffmpeg.sh"
-
-    __append_heredoc "$HOME/.bashrc" "\
-
-#
-# home-user tools
-#
-[ -r "$HOME/.config/rocket-config/tools.system.sh" ] && . "$HOME/.config/rocket-config/tools.system.sh"
-[ -r "$HOME/.config/rocket-config/tools.editors.sh" ] && . "$HOME/.config/rocket-config/tools.editors.sh"
-[ -r "$HOME/.config/rocket-config/tools.ffmpeg.sh" ] && . "$HOME/.config/rocket-config/tools.ffmpeg.sh"
-"
+    __install 644 "resources/" "$HOME/" ".bash_profile"
+    __install 644 "resources/" "$HOME/" ".bash_login"
+    __install 644 "resources/" "$HOME/" ".bash_logout"
+    __install 644 "resources/" "$HOME/" ".bashrc"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/10-system.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/30-display.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/30-globbing.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/50-completion.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/50-history.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/90-reprofile.sh"
 }
 
 install_user()
 {
-    install_user_shells
-    install_user_tools
+    install_user_profile
+    install_user_bash
 }
 
 ################################################################################
-## HOME COMPONENTS
+## HOME
 ################################################################################
 
-install_home_shells()
+install_home_environment()
 {
-    install_user_shells # home_shells requires user_shells
-    install_user_tools  # home_shells requires user_tools
+    printf "Installing home environments...\n"
 
-    printf "Installing home shells...\n"
+    __install 644 "resources/" "$HOME" ".config/environment.d/30-xdg.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/50-jre.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/80-bash.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-android.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-code.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-fcitx.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-gnupg.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-gtk.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-keychain.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-libvirt.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-mangohud.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-nvidia.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-opengl.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-python.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-rust.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-steamapps.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-vcpkg.sh"
+    __install 644 "resources/" "$HOME" ".config/environment.d/90-ytdl.sh"
+}
 
-    __append      "resources/home-home/" "$HOME/" ".bashrc"
-    __install 644 "resources/home-home/" "$HOME/" ".config/rocket-config/profile-home.sh"
-    __install 644 "resources/home-home/" "$HOME/" ".pythonrc"
-    __install 644 "resources/home-home/" "$HOME/" ".gitconfig"
-    __install 644 "resources/home-home/" "$HOME/" ".gitignore"
+install_home_extras()
+{
+    printf "Installing home extras...\n"
+
+    __install 644 "resources/" "$HOME/" ".gitconfig"
+    __install 644 "resources/" "$HOME/" ".gitignore"
+
+    __install 644 "resources/" "$HOME/" ".pythonrc"
+
+    __install 644 "resources/" "$HOME/" ".clang-tidy"
+    __install 644 "resources/" "$HOME/" ".config/clangd/config.yaml"
+
+    __install 644 "resources/" "$HOME/" ".config/VSCodium/product.json"
+    __install 644 "resources/" "$HOME/" ".config/VSCodium/User/settings.json"
+    __install 644 "resources/" "$HOME/" ".config/VSCodium/User/keybindings.json"
 }
 
 install_home()
 {
-    install_home_shells
+    install_user
+    install_home_environment
+    install_home_extras
 }
 
-#
-# home-extra
-#
+################################################################################
+## DESKTOP
+################################################################################
 
-install_home_extra_code()
+install_desktop_gtk()
 {
-    printf "Installing home-extra code...\n"
+    printf "Installing desktop GTK...\n"
 
-    __install 644 "resources/home-home" "$HOME/" ".config/VSCodium/User/settings.json"
-    __install 644 "resources/home-home" "$HOME/" ".config/VSCodium/User/keybindings.json"
-    __install 644 "resources/home-home" "$HOME/" ".clang-tidy"
+    __install 644 "resources/" "$HOME/" ".config/gtk-3.0/gtk.css"
+    __install 644 "resources/" "$HOME/" ".config/gtk-4.0/gtk.css"
 }
 
-install_home_extra()
+install_desktop_kde()
 {
-    install_home_extra_code
-}
+    printf "Installing desktop KDE...\n"
 
-#
-# home-desktop
-#
-
-install_home_desktop_gtk()
-{
-    printf "Installing home-desktop GTK...\n"
-
-    __install 644 "resources/home-home/" "$HOME/" ".config/gtk-3.0/gtk.css"
-    __install 644 "resources/home-home/" "$HOME/" ".config/gtk-4.0/gtk.css"
-}
-
-install_home_desktop_kde()
-{
-    printf "Installing home-extra KDE...\n"
-    __install 644 "resources/home-home/" "$HOME/" ".local/share/konsole/Rocket.colorscheme"
+    __install 644 "resources/" "$HOME/" ".local/share/konsole/Rocket.colorscheme"
 }
 
 install_home_desktop()
 {
-    install_home_desktop_gtk
-    install_home_desktop_kde
+    install_desktop_gtk
+    install_desktop_kde
 }
 
 ################################################################################
@@ -204,15 +193,14 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
-    user: ............. shells tools
-    home: ............. shells
-    home_extra: ....... code
-    home_desktop: ..... gtk kde
+    user: ............. profile bash
+    home: ............. environment extras
+    desktop: .......... gtk kde
 
 Optionally install an entire component category.
 
-For example; to install the entire 'user' category, and only 'kde' from the 'home_desktop' category
-'$ ./install.sh user home_desktop_kde'
+For example; to install the entire 'user' component, and only 'kde' from the 'desktop' component
+'$ ./install.sh user desktop_kde'
     "
 }
 

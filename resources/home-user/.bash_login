@@ -1,5 +1,0 @@
-#
-# ~/.bash_login
-#
-
-[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"

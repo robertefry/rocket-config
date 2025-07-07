@@ -1,0 +1,8 @@
+#
+# ~/.environment
+#
+
+for file in "$HOME"/.config/environment.d/*.sh; do
+    [ -e "$file" ] || continue
+    [ -r "$file" ] && . "$file"
+done

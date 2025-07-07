@@ -1,0 +1,4 @@
+
+reprofile() {
+    . "$HOME"/.profile
+}
