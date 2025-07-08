@@ -94,10 +94,16 @@ install_user_bash()
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/90-reprofile.sh"
 }
 
+install_user_extras()
+{
+    __install 644 "resources/" "$HOME/" ".nanorc"
+}
+
 install_user()
 {
     install_user_profile
     install_user_bash
+    install_user_extras
 }
 
 ################################################################################
@@ -193,7 +199,7 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
-    user: ............. profile bash
+    user: ............. profile bash extras
     home: ............. environment extras
     desktop: .......... gtk kde
 
