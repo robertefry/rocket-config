@@ -6,13 +6,26 @@
 
 __toggle_sudo()
 {
-    local line="${READLINE_LINE}"
+    local command="${READLINE_LINE}"
 
-    if [[ "$line" =~ ^[[:space:]]*sudo[[:space:]]+ ]]; then
-        READLINE_LINE="$(printf '%s' "$line" | sed -E 's/^[[:space:]]*sudo[[:space:]]+//')"
-    else
-        READLINE_LINE="sudo $line"
-    fi
+    local leading_whitespace="${command%%[![:space:]]*}"
+    command="${command#$leading_whitespace}"
+
+    case "$command" in
+        "")
+            # TODO: Parse the previous command and toggle sudo.
+            # For now, let's just prepend sudo and let bash expand the command.
+            command="sudo !!"
+            ;;
+        sudo[[:space:]]*)
+            command="$(printf '%s' "$command" | sed -E 's/^[[:space:]]*sudo[[:space:]]+//')"
+            ;;
+        *)
+            command="sudo $command"
+            ;;
+    esac
+
+    READLINE_LINE="$leading_whitespace$command"
     READLINE_POINT=${#READLINE_LINE}
 }
 
