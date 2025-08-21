@@ -91,6 +91,7 @@ install_user_bash()
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/30-globbing.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/50-completion.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/50-history.sh"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/50-toggle-sudo.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/90-reprofile.sh"
 }
 
