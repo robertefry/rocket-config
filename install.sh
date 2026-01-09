@@ -144,6 +144,7 @@ install_home_extras()
     __install 644 "resources/" "$HOME/" ".config/VSCodium/product.json"
     __install 644 "resources/" "$HOME/" ".config/VSCodium/User/settings.json"
     __install 644 "resources/" "$HOME/" ".config/VSCodium/User/keybindings.json"
+    __install 644 "resources/" "$HOME/" ".config/Visual Studio Code"
 }
 
 install_home()

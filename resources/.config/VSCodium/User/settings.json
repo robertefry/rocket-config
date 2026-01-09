@@ -4,7 +4,7 @@
     "window.customTitleBarVisibility": "never",
     "window.zoomLevel": 1.0,
 
-    "editor.fontSize": 15,
+    "editor.fontSize": 15.5,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.bracketPairColorization.enabled": false,
@@ -70,9 +70,6 @@
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Language Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-
-    // LLDB
-    "lldb.library": "/usr/lib64/liblldb.so.19.1",
 
     // Zig
     "zig.zls.enabled": "on",
