@@ -1,17 +1,17 @@
 
 if command -v python >/dev/null 2>&1
 then
-    alias py=python
     export PYTHONSTARTUP="$HOME"/.pythonrc
 fi
 
-## Python Virtual Environment
-#if command -v pip3 >/dev/null 2>&1
-#then
-#    if [ ! -r "$XDG_DATA_HOME/rocket-config/venv/bin/activate" ]
-#    then
-#        python3 -m venv --system-site-packages "$XDG_DATA_HOME/rocket-config/venv"
-#    fi
-#
-#    . "$XDG_DATA_HOME/rocket-config/venv/bin/activate"
-#fi
+function py()
+{
+    local VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/venv/"
+
+    if [ ! -r "$VENV_DIR/bin/activate" ]
+    then
+        python3 -m venv "$VENV_DIR"
+    fi
+
+    "$VENV_DIR/bin/python3" "$@"
+}
