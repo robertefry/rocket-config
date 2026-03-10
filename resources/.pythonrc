@@ -26,6 +26,19 @@ try:
 except ImportError as err:
     pass
 
+# Exit
+class _Q:
+    def __repr__(self):
+        sys.exit()
+q = _Q()
+
+# Clear
+class _Clear:
+    def __repr__(self):
+        os.system("cls" if os.name == "nt" else "clear")
+        return ""
+clear = _Clear()
+
 # NumPY
 try:
     import numpy as np
