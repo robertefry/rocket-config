@@ -95,10 +95,18 @@ install_user_bash()
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/90-reprofile.sh"
 }
 
+install_user_tools()
+{
+    printf "Installing home tools...\n"
+
+    __install 755 "resources/" "$HOME/" ".local/bin/git-submodule-table"
+}
+
 install_user()
 {
     install_user_profile
     install_user_bash
+    install_user_tools
 }
 
 ################################################################################
@@ -158,15 +166,15 @@ install_home()
 ## EDITORS
 ################################################################################
 
-install_editors_nano()
-{
-    __install 644 "resources/" "$HOME/" ".nanorc"
-}
+# install_editors_nano()
+# {
+#     __install 644 "resources/" "$HOME/" ".nanorc"
+# }
 
-install_editors()
-{
-    install_editors_nano
-}
+# install_editors()
+# {
+#     install_editors_nano
+# }
 
 ################################################################################
 ## DESKTOP
@@ -209,9 +217,8 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
-    user: ............. profile bash
+    user: ............. profile bash tools
     home: ............. environment extras
-    editors: .......... nano
     desktop: .......... gtk kde
 
 Optionally install an entire component category.

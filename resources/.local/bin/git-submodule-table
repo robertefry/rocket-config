@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# List all submodules, sorted by submodule name.
+#
+# Options:
+#   -h, --help        Show this help message.
+#   -u, --url         Show each submodule's resolved remote URL in place of its name.
+#       --remote      Alias for --url.
+#   -s, --short-url   Shorten each submodule's URL according to the origin transform.
+#                     (See ORIGIN_TRANSFORM. Implies --url)
+#   -m, --mismatch    Filter for submodules with mismatching versions.
+#   -r, --recursive   Recurse into nested submodules.
+#   -c, --cached      Show the SHA recorded in the index.
+#
+# Environment:
+#   ORIGIN            The remote name to resolve URLs from (default: origin)
+#   ORIGIN_TRANSFORM  The sed program applied to each URL with --short-url.
+
+help_doc=$(sed -n '2,16{s/^#//;s/^ //;p;}' "$0")
+print_help() { printf "%s\n" "$help_doc"; }
+
+ORIGIN=${ORIGIN:-origin}
+ORIGIN_TRANSFORM=${ORIGIN_TRANSFORM:-''}
+
+show_url=0
+short_url=0
+filter_mismatching=0
+status_args=()
+
+args=()
+for arg in "$@"; do
+    case "$arg" in
+        --*|-) args+=("$arg") ;;
+        -?*) for ((i = 1; i < ${#arg}; i++)); do args+=("-${arg:i:1}"); done ;;
+        *) args+=("$arg") ;;
+    esac
+done
+set -- "${args[@]}"
+
+for arg in "$@"; do
+    case "$arg" in
+        -u|--url|--remote) show_url=1 ;;
+        -s|--short-url) show_url=1; short_url=1 ;;
+        -m|--mismatch) filter_mismatching=1 ;;
+        -r|--recursive) status_args+=("--recursive") ;;
+        -c|--cached) status_args+=("--cached") ;;
+        -h|--help)
+            print_help
+            exit 0 ;;
+        *)
+            printf 'Unknown option: %s\n' "$arg" >&2
+            exit 1 ;;
+    esac
+done
+
+git submodule status "${status_args[@]}" \
+    | awk '{
+        status = substr($0, 1, 1);
+        hash = $1; sub(/^[+\-U]/, "", hash); hash = substr(hash, 1, 7);
+        path = $2;
+        name = path; sub(/.*\//, "", name);
+        desc = substr($0, index($0, $3));
+        printf "%s%s\t%s\t%s\t%s\n", status, hash, name, path, desc;
+    }' \
+    | if [ "$show_url" -eq 1 ]; then
+        while IFS=$'\t' read -r hash name path desc; do
+            url=$(git -C "$path" remote get-url "$ORIGIN" 2>/dev/null)
+            if [ -z "$url" ]; then
+                url="(no $ORIGIN)"
+            else
+                [ "$short_url" -eq 1 ] && url=$(printf '%s\n' "$url" | sed "$ORIGIN_TRANSFORM")
+            fi
+        done
+    else
+        cat
+    fi \
+    | sort -t$'\t' -k2,3 \
+    | column -t -s$'\t'
+    | { [ "$filter_mismatching" -eq 0 ] && cat || awk '{
+        key = $2
+        lines[NR] = $0
+        col2[NR] = $2
+        col4[NR] = $4
+        if (!(key SUBSEP $4 in seen4)) {
+            seen4[key, $4] = 1
+            distinct[key]++
+        }
+        count[key]++
+    }
+    END {
+        for (i = 1; i <= NR; i++) {
+            if (distinct[col2[i]] > 1) {
+                print lines[i]
+            }
+        }
+    }'; }
