@@ -1,356 +1,84 @@
-
 {
-    "window.titleBarStyle": "native",
-    "window.customTitleBarVisibility": "never",
-    "window.zoomLevel": 1.0,
+    "window.titleBarStyle": "custom",
+    "window.commandCenter": false,
+    "window.zoomLevel": 0.33,
 
-    "editor.fontSize": 15.5,
+    "workbench.layoutControl.enabled": false,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+    "explorer.sortOrder": "default",
+    "explorer.sortOrderLexicographicOptions": "unicode",
+
+    "editor.fontSize": 15,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "editor.bracketPairColorization.enabled": false,
 
     "editor.rulers": [80,100,120,128],
-    "editor.wordWrapColumn": 100,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrapIndicator": true,
     "editor.wrappingStrategy": "simple",
-    "editor.wordWrap": "wordWrapColumn",
 
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
+
     "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.quickSuggestions": "off",
 
-    "[tex][latex][bibtex]": {
-        "editor.wordWrap": "on",
-    },
-    "[rust]": {
-        "editor.wordWrapColumn": 120,
-    },
-    "[cmake]": {
-        "editor.tabSize": 2,
-    },
-
-    "explorer.sortOrder": "default",
-    "explorer.sortOrderLexicographicOptions": "unicode",
-
-    "files.enableTrash": false,
-    "files.associations": {
-        "*.fwd": "cpp",
-        "*.clang-tidy": "yaml",
-        ".doxyfile": "shellscript",
-        ".doxyfile-in": "shellscript"
-    },
-
-    "git.confirmSync": false,
+    "git.confirmSync": true,
     "git.suggestSmartCommit": false,
 
-    "gitlens.codeLens.enabled": false,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.graph.showRemoteNames": true,
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.hovers.enabled": false,
-
-    // https://open-vsx.org/vscode/item?itemName=rid9.datetime
-    "dateTime.locale": "en-gb",
-    "dateTime.customFormat": "HH:mm",
-
-    "cody.commandCodeLenses": false,
-    "cody.autocomplete.enabled": true,
-    "cody.chat.defaultLocation": "editor",
-
-    "sync.quietSync": true,
-    "sync.removeExtensions": false,
-    "sync.syncExtensions": true,
-
-    "browser-preview.chromeExecutable": "/home/robertfry/.local/bin/chromium",
-    "browser-preview.startUrl": "https://searx.robertfry.xyz",
-
-    "platformio-ide.autoOpenPlatformIOIniFile": false,
-    "platformio-ide.disablePIOHomeStartup": true,
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-    //  Language Settings
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-
-    // Zig
-    "zig.zls.enabled": "on",
-    "zig.zls.inlayHintsExcludeSingleArgument": false,
-    "zig.zls.inlayHintsShowParameterName": false,
-    "zig.zls.inlayHintsShowBuiltin": false,
-    "zig.zls.inlayHintsShowStructLiteralFieldType": false,
-    "zig.zls.inlayHintsShowVariableTypeHints": false,
-    "zig.zls.warnStyle": true,
-    "[zig]": {
-        // I don't like Zig's default formatting rules, grrrr :[
-        "editor.formatOnSave": false,
-    },
-
-    // CMake
-    "cmake.configureOnOpen": false,
-    "cmake.configureOnEdit": false,
-    "cmake.automaticReconfigure": false,
-    "cmake.buildDirectory": "${workspaceFolder}/.build",
-    "cmake.showOptionsMovedNotification": false,
-
-    // Clang-Tidy
-    "clang-tidy.buildPath": "${workspaceFolder}/.build",
-
-    // C/C++
-    "C_Cpp.default.cppStandard": "c++20",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "C_Cpp.autoAddFileAssociations": false,
-
-    // Rust
-    "rust-analyzer.inlayHints.chainingHints.enable": false,
-    "rust-analyzer.inlayHints.closingBraceHints.enable": false,
-    "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "rust-analyzer.inlayHints.renderColons": false,
-    "rust-analyzer.inlayHints.typeHints.enable": false,
-    "rust-analyzer.inlayHints.genericParameterHints.const.enable": false,
-    "rust-analyzer.inlayHints.genericParameterHints.lifetime.enable": false,
-    "rust-analyzer.inlayHints.genericParameterHints.type.enable": false,
-
-    // LaTeX
-    "latex-workshop.latex.outDir": ".build",
-    "latex-workshop.intellisense.file.base": "both",
-    "latex-workshop.docker.enabled": true,
-    "latex-workshop.docker.image.latex": "texlive/texlive",
+    "chat.disableAIFeatures": true,
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Colour Customizations
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-    "workbench.colorCustomizations": {
-        "editor.foreground": "#BDBDBD", // Material Gray 400
-        "editor.background": "#212121", // Material Gray 900
-        "editorRuler.foreground": "#323232", // Material Gray 850
-        "editorIndentGuide.background1": "#424242", // Material Gray 800
-        "editorIndentGuide.activeBackground1": "#757575", // Material Gray 600
-    },
     "workbench.colorTheme": "FlatUI Dark",
 
     "editor.tokenColorCustomizations": {
-        "comments": "#ff2E00", // Material Deep Orange A400 (g*=3/4)
+        "comments": "#FF3D00", // Material Deep Orange A400
+        "textMateRules": [{
+            "scope": [
+                "comment.block.documentation",
+                "comment.block.documentation punctuation.definition.comment",
+                "comment.block.javadoc",
+                "comment.block.javadoc punctuation.definition.comment"
+            ],
+            // "settings": { "foreground": "#43A047" } // Material Green 600
+            "settings": { "foreground": "#757575" } // Material Grey 600
+        }]
     },
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-    //  Spell-Check Dictionary Definitions
+    //  Language Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    "[tex][latex][bibtex]": {
+        "editor.wordWrap": "on",
+    },
+
+    "zig.zls.inlayHintsExcludeSingleArgument": false,
+    "zig.zls.inlayHintsShowBuiltin": false,
+    "zig.zls.inlayHintsShowParameterName": false,
+    "zig.zls.inlayHintsShowStructLiteralFieldType": false,
+    "zig.zls.inlayHintsShowVariableTypeHints": false,
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  Plugin Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    // "todo-tree.ripgrep.ripgrep": "/opt/homebrew/bin/rg",
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    //  Spell-Check Dictionary
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
     "cSpell.enabled": true,
     "cSpell.language": "en-GB,en-US",
     "cSpell.userWords": [
-        "-Wconversion",
-        "-Weffc++",
-        "-Werror",
-        "-Wextra",
-        "-Wpedantic",
-        "-Wshadow",
-        "-Wunused-value",
-        "abelian",
-        "addto",
-        "analyzer",
-        "arduino",
-        "Arduinos",
-        "atmega",
-        "automagically",
-        "automorphic",
-        "Beamer",
-        "bibtex",
-        "bijective",
-        "bijectivity",
-        "Brizo",
-        "bugprone",
-        "Cayley",
-        "Centered",
-        "chrono",
-        "ciphertext",
-        "CLEANLIST",
-        "clusterable",
-        "CMAKE",
-        "codomain",
-        "coeff",
-        "coeffs",
-        "cofinite",
-        "Color",
-        "Colorization",
-        "colormath",
-        "colors",
-        "commutability",
-        "complementation",
-        "constexpr",
-        "consts",
-        "convolutional",
-        "coprime",
-        "coprimes",
-        "covec",
-        "Covector",
-        "Covectors",
-        "cppcoreguidelines",
-        "crosshairs",
-        "cryptosystem",
-        "Cryptosystem",
-        "cryptosystems",
-        "Cryptosystems",
-        "delist",
-        "demangled",
-        "Deque",
-        "despawn",
-        "desynchronize",
-        "doxyfile",
-        "edgecolor",
-        "egui",
-        "eigen",
-        "elem",
-        "enscoping",
-        "epimorphism",
-        "epimorphisms",
-        "errdefer",
-        "extreemly",
-        "facecolor",
-        "favorite",
-        "Fira",
-        "foobar",
-        "functorality",
-        "Functors",
-        "GLbitfield",
-        "GLboolean",
-        "GLbyte",
-        "GLchar",
-        "GLdouble",
-        "GLenum",
-        "GLfloat",
-        "glfw",
-        "GLint",
-        "GLint64",
-        "GLshort",
-        "GLsync",
-        "GLubyte",
-        "GLuint",
-        "GLuint64",
-        "GLushort",
-        "GLvoid",
-        "GPIO",
-        "groupoid",
-        "hashable",
-        "hicpp",
-        "hitscan",
-        "homomorphic",
-        "idents",
-        "IMGUI",
-        "infimum",
-        "injective",
-        "injectivity",
-        "inplaceof",
-        "invertibility",
-        "iproduct",
-        "isqrt",
-        "iterably",
-        "itertools",
-        "itrtos",
-        "ivisitor",
-        "izip",
-        "Kerbal",
-        "kerbals",
-        "Kerbin",
-        "keypair",
-        "keypairs",
-        "Kleinberg",
-        "kthxbie",
-        "labeled",
-        "lockfree",
-        "Maclaurin",
-        "malloc",
-        "mapv",
-        "mesg",
-        "meshless",
-        "modpacks",
-        "monic",
-        "Monoid",
-        "monoidal",
-        "Monoids",
-        "Monomorphisation",
-        "monomorphism",
-        "Moodle",
-        "Morphism",
-        "Morphisms",
-        "nalgebra",
-        "nanos",
-        "Nativefier",
-        "Navionics",
-        "ndarray",
-        "NMEA",
-        "nodiscard",
-        "Noetherian",
-        "NOLINTNEXTLINE",
-        "nonumber",
-        "ntheorem",
-        "numpad",
-        "numpy",
-        "nums",
-        "OPENGL",
-        "ostr",
-        "PAPI",
-        "patheffects",
-        "pdflatex",
-        "platformio",
-        "poset",
-        "posets",
-        "powi",
-        "prepend",
-        "prepended",
-        "primality",
-        "PROGMEM",
-        "quantale",
-        "quantales",
-        "raycaster",
-        "rect",
-        "refact",
-        "Reinterpreter",
-        "Replacer",
-        "repr",
-        "respawn",
-        "respawned",
-        "robertefry",
-        "robertfry",
-        "rockhopper",
-        "Semigroup",
-        "Semigroups",
-        "Semiring",
-        "Semirings",
-        "setfalse",
-        "settrue",
-        "Skybox",
-        "spdlog",
-        "srgb",
-        "stdev",
-        "struct",
-        "subarray",
-        "subexpr",
-        "Subring",
-        "Subrings",
-        "Substep",
-        "Sunflare",
-        "supremum",
-        "surjective",
-        "surjectivity",
-        "sympy",
-        "texlive",
-        "totient",
-        "Trinomial",
-        "Trinomials",
-        "unconfigured",
-        "Uncopyable",
-        "uncountably",
-        "underlong",
-        "Uninit",
-        "unital",
-        "venv",
-        "Viktor",
-        "vsync",
-        "Wwindow",
-        "xscale",
-        "xticks",
-        "yscale",
-        "yticks"
     ],
+
 }
