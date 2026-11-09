@@ -102,11 +102,18 @@ install_user_tools()
     __install 755 "resources/" "$HOME/" ".local/bin/git-submodule-table"
 }
 
+install_user_python()
+{
+    __install 644 "resources/" "$HOME/" ".pythonrc"
+    __install 644 "resources/" "$HOME/" ".config/environment.d/90-python.sh"
+}
+
 install_user()
 {
     install_user_profile
     install_user_bash
     install_user_tools
+    install_user_python
 }
 
 ################################################################################
@@ -130,7 +137,6 @@ install_home_environment()
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-mangohud.sh"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-nvidia.sh"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-opengl.sh"
-    __install 644 "resources/" "$HOME/" ".config/environment.d/90-python.sh"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-rust.sh"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-steamapps.sh"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-vcpkg.sh"
@@ -217,7 +223,7 @@ Install components of my config files
     -h, --help:         Print this help message
 
 [components]
-    user: ............. profile bash tools
+    user: ............. profile bash tools python
     home: ............. environment extras
     desktop: .......... gtk kde
 
