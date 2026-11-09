@@ -60,7 +60,6 @@ install_user_profile()
 
     __install 644 "resources/" "$HOME/" ".profile"
     __install 644 "resources/" "$HOME/" ".environment"
-    __install 644 "resources/" "$HOME/" ".config/profile.d/10-ps1.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/20-local-bin.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/50-file-ops.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/60-alias-editors.sh"
@@ -87,6 +86,7 @@ install_user_bash()
     __install 644 "resources/" "$HOME/" ".bash_login"
     __install 644 "resources/" "$HOME/" ".bash_logout"
     __install 644 "resources/" "$HOME/" ".bashrc"
+    __install 644 "resources/" "$HOME/" ".config/profile.bash.d/10-ps1.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/10-system.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/30-display.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.bash.d/30-globbing.sh"
