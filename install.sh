@@ -80,7 +80,7 @@ install_user_bash()
 {
     install_user_profile
 
-    printf "Installing bash shell...\n"
+    printf "Installing user's bash...\n"
 
     __install 644 "resources/" "$HOME/" ".bash_profile"
     __install 644 "resources/" "$HOME/" ".bash_login"
@@ -98,13 +98,15 @@ install_user_bash()
 
 install_user_tools()
 {
-    printf "Installing home tools...\n"
+    printf "Installing user's tools...\n"
 
     __install 755 "resources/" "$HOME/" ".local/bin/git-submodule-table"
 }
 
 install_user_python()
 {
+    printf "Installing user's python...\n"
+
     __install 644 "resources/" "$HOME/" ".pythonrc"
     __install 644 "resources/" "$HOME/" ".config/environment.d/90-python.sh"
 }
