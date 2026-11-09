@@ -4,11 +4,8 @@ alias cp="cp --interactive --recursive"
 alias mv="mv --interactive"
 alias rm="rm"
 
-# Make sure `gls` exists: real one if coreutils is installed, else plain ls (GNU on Linux)
-command -v gls &>/dev/null || alias gls='command ls'
-
 # Listing commands
-alias ls="gls --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
+alias ls="ls --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
