@@ -44,7 +44,8 @@ __install()
         fi
 
         ## install
-        install -Dm "$_arg_pem" "$_arg_src" "$_arg_dst"
+        mkdir -p "$(dirname "$_arg_dst")"
+        install -m "$_arg_pem" "$_arg_src" "$_arg_dst"
     )
     printf "Done!\n"
 }
