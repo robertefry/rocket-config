@@ -9,7 +9,7 @@ find()
         return 255
     fi
 
-    $(which find) "$@" -not -path "*/.snapshots/*" 2> "$TMPFILE"
+    command find "$@" -not -path "*/.snapshots/*" 2> "$TMPFILE"
 
     COUNT=$(grep -c "Permission denied" "$TMPFILE")
     if [ "$COUNT" -gt 0 ]; then
