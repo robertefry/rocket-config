@@ -5,7 +5,7 @@ alias mv="mv --interactive"
 alias rm="rm"
 
 # Listing commands
-alias ls="$(command -v gls &>/dev/null && echo "gls" || echo "ls") \
+alias ls="$(command -v gls >/dev/null 2>&1 && echo "gls" || echo "ls") \
     --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
 alias l="ls -lh"
 alias ll="ls -lAh"

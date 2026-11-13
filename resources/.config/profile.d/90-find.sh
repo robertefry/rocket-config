@@ -3,8 +3,7 @@
 # Don't search in .snapshots directories
 find()
 {
-    TMPFILE=$(mktemp)
-    if [ $? -ne 0 ]; then
+    if ! TMPFILE=$(mktemp); then
         printf "\e[31m%s\n" "Failed to allocate tempfile for error suppression" >&2
         return 255
     fi

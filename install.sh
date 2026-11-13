@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## CD into the directory of this script, henceforth the current working directory
 cd "$(dirname "$0")" || exit
@@ -7,10 +7,10 @@ STAMP=$(date +"%y%m%d%H%M%S")
 
 __test_and_set()
 {
-    local var="$1"
+    var="$1"
 
-    if [ -z "${!var+x}" ]; then
-        printf -v "$var" 1
+    if eval "[ -z \"\${$var+x}\" ]"; then
+        eval "$var=1"
         return 0
     else
         return 1
@@ -19,12 +19,12 @@ __test_and_set()
 
 __install()
 {
-    local _arg_pem="$1"
-    local _arg_src="$2"/"$4"
-    local _arg_dst="$3"/"$4"
+    _arg_pem="$1"
+    _arg_src="$2"/"$4"
+    _arg_dst="$3"/"$4"
 
     # Avoid installing a file more than once
-    local _safe_src=$(echo "$_arg_src" | sed 's/[^a-zA-Z0-9_]/_/g')
+    _safe_src=$(echo "$_arg_src" | sed 's/[^a-zA-Z0-9_]/_/g')
     __test_and_set "_INSTALLED_${_safe_src}" || return 0
 
     printf " -> installing %s... " "$_arg_dst"

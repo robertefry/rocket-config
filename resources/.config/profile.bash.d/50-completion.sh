@@ -1,6 +1,6 @@
 
 # Enable bash completion
-ENABLE_BASH_COMPLETION=1
+export ENABLE_BASH_COMPLETION=1
 
 # Enable remote cvs completion
 #COMP_CVS_REMOTE=

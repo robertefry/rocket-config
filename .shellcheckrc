@@ -1,0 +1,10 @@
+
+shell=sh
+
+# SC1091: Not following sourced file. Sourced paths like "$HOME"/.profile
+# can't be resolved statically, so shellcheck can't check them anyway.
+disable=SC1091
+
+# SC2139: Alias expands at definition time, not use time. We want that:
+# the alias picks the binary (e.g. gls vs ls) once, when the file is sourced.
+disable=SC2139

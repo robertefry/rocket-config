@@ -4,10 +4,10 @@ then
     export PYTHONSTARTUP="$HOME"/.pythonrc
 fi
 
-function py()
+py()
 {
-    local VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/venv/"
-    local VENV_PYTHON="$VENV_DIR/bin/python3"
+    VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/venv/"
+    VENV_PYTHON="$VENV_DIR/bin/python3"
 
     if [ ! -r "$VENV_PYTHON" ]
     then
