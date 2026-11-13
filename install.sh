@@ -60,7 +60,6 @@ install_user_profile()
 
     __install 644 "resources/" "$HOME/" ".profile"
     __install 644 "resources/" "$HOME/" ".environment"
-    __install 644 "resources/" "$HOME/" ".config/profile.d/10-coreutils.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/20-local-bin.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/50-file-ops.sh"
     __install 644 "resources/" "$HOME/" ".config/profile.d/60-alias-editors.sh"
