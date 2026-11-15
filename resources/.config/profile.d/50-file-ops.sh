@@ -1,12 +1,11 @@
 
 # Confirm before overwriting something
-alias cp="cp --interactive --recursive"
-alias mv="mv --interactive"
-alias rm="rm"
+alias cp="$(gnu_coreutils cp) --interactive --recursive"
+alias mv="$(gnu_coreutils mv) --interactive"
+alias rm="$(gnu_coreutils rm)"
 
 # Listing commands
-alias ls="$(command -v gls >/dev/null 2>&1 && echo "gls" || echo "ls") \
-    --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
+alias ls="$(gnu_coreutils ls) --color=auto --group-directories-first --indicator-style=slash --time-style=long-iso"
 alias l="ls -lh"
 alias ll="ls -lAh"
 alias la="ls -lah"
