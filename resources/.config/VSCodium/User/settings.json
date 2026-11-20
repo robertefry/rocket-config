@@ -32,6 +32,10 @@
 
     "chat.disableAIFeatures": true,
 
+    "terminal.integrated.env.linux":   { "GIT_EDITOR": "code --wait" },
+    "terminal.integrated.env.osx":     { "GIT_EDITOR": "code --wait" },
+    "terminal.integrated.env.windows": { "GIT_EDITOR": "code --wait" },
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     //  Colour Customizations
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
